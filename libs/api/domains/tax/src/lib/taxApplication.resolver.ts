@@ -9,12 +9,9 @@ import { ApiScope } from '@island.is/auth/scopes'
 import { TaxApplicationService } from './taxApplication.service'
 import { UseGuards } from '@nestjs/common'
 import type { User } from '@island.is/auth-nest-tools'
-import { GetMyUserInfoResponse } from '../models/getUserInvolvedParties.response'
+import { GetMyUserInfoResponse } from '../models/getMyUserInfo.response'
 import { OJOIAIdInput } from '../models/id.input'
 import { OJOIAApplicationCaseResponse } from '../models/applicationCase.response'
-import { OJOIApplicationAdvertTemplateTypesResponse } from '../models/applicationAdvertTemplateTypes.response'
-import { OJOIApplicationAdvertTemplateResponse } from '../models/applicationAdvertTemplate.response'
-import { GetAdvertTemplateInput } from '../models/getAdvertTemplate.input'
 
 @Scopes(ApiScope.internal)
 @UseGuards(IdsUserGuard, ScopesGuard)
@@ -22,9 +19,6 @@ import { GetAdvertTemplateInput } from '../models/getAdvertTemplate.input'
 export class TaxApplicationResolver {
   constructor(private readonly taxApplicationService: TaxApplicationService) {}
 
-  @Query(() => OJOIApplicationAdvertTemplateResponse, {
-    name: 'TaxApplicationAdvertTemplate',
-  })
   @Query(() => GetMyUserInfoResponse, {
     name: 'TaxApplicationGetMyUserInfo',
   })

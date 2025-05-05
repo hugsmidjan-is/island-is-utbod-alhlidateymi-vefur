@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql'
 
-@InputType('OfficialJournalOfIcelandApplicationPostApplicationInput', {
+@InputType('TaxPostApplicationInput', {
   description: 'Submit application input',
 })
 export class PostApplicationInput {

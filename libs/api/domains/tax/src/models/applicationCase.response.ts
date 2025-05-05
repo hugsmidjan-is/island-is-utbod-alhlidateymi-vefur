@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 
-@ObjectType('OJOIAApplicationCaseResponse')
+@ObjectType('TaxApplicationCaseResponse')
 export class OJOIAApplicationCaseResponse {
   @Field()
   department!: string

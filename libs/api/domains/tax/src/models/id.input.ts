@@ -1,6 +1,6 @@
 import { Field, InputType, ID } from '@nestjs/graphql'
 
-@InputType('OJOIAIdInput', {
+@InputType('TaxIdInput', {
   description: 'Input dto that represents the id of the application',
 })
 export class OJOIAIdInput {
