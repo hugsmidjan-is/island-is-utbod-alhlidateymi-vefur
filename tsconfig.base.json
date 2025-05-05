@@ -173,6 +173,9 @@
       "@island.is/api/domains/official-journal-of-iceland-application": [
         "libs/api/domains/official-journal-of-iceland-application/src/index.ts"
       ],
+      "@island.is/api/domains/tax-application": [
+        "libs/api/domains/tax-application/src/index.ts"
+      ],
       "@island.is/api/domains/passport": [
         "libs/api/domains/passport/src/index.ts"
       ],
@@ -765,6 +768,9 @@
       ],
       "@island.is/clients/official-journal-of-iceland/application": [
         "libs/clients/official-journal-of-iceland/application/src/index.ts"
+      ],
+      "@island.is/clients/tax/application": [
+        "libs/clients/tax/application/src/index.ts"
       ],
       "@island.is/clients/p-card": ["libs/clients/p-card/src/index.ts"],
       "@island.is/clients/passports": ["libs/clients/passports/src/index.ts"],
