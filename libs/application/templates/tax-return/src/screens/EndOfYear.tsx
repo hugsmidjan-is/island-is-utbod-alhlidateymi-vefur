@@ -17,7 +17,7 @@ export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
       title={f(tax.lastIncomeTitle)}
       intro={f(tax.lastIncomeIntro)}
     >
-      <p>EndOfYearScreen</p>
+      <p>End of year screen</p>
     </FormScreen>
   )
 }

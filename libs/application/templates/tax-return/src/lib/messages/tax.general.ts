@@ -19,11 +19,27 @@ export const tax = defineMessages({
   },
   lastIncomeTitle: {
     id: 'taxReturn.application:lastIncome.title',
-    defaultMessage: 'Tekjur ársins 2024',
+    defaultMessage: 'Tekjur ársins',
   },
   lastIncomeIntro: {
     id: 'taxReturn.application:lastIncome.intro',
     defaultMessage: 'Lorem ipsum',
+  },
+  lastIncomeLabel: {
+    id: 'taxReturn.application:lastIncome.label',
+    defaultMessage: '2.1 Launatekjur og stafstengdar greiðslur',
+  },
+  extraIncomeLabel: {
+    id: 'taxReturn.application:extraIncome.label',
+    defaultMessage: '2.2 Ökutækjastyrkur, Dagpeningar, Hlunnindi',
+  },
+  pensionIncomeLabel: {
+    id: 'taxReturn.application:pensionIncomeLabel.label',
+    defaultMessage: '2.3 Lífeyrisgreiðslur, Greiðslur úr Tryggingastofnun.',
+  },
+  pensionIncomeLabelTwo: {
+    id: 'taxReturn.application:pensionIncomeLabelTwo.label',
+    defaultMessage: 'Aðrar bótagreiðslur, styrkir o.fl',
   },
   capitalIncomeTitle: {
     id: 'taxReturn.application:capitalIncome.title',

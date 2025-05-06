@@ -2,9 +2,7 @@ import { Input, SkeletonLoader } from '@island.is/island-ui/core'
 import { useLocale } from '@island.is/localization'
 import { MessageDescriptor } from 'react-intl'
 import { OJOI_INPUT_HEIGHT } from '../../lib/constants'
-import { useApplication } from '../../hooks/useUpdateApplication'
-import set from 'lodash/set'
-import { useFormContext } from 'react-hook-form'
+import NumberFormat from 'react-number-format'
 
 type Props = {
   name: string
@@ -12,10 +10,11 @@ type Props = {
   placeholder?: string | MessageDescriptor
   defaultValue?: string
   loading?: boolean
-  applicationId: string
   disabled?: boolean
   textarea?: boolean
   maxLength?: number
+  type?: 'text' | 'number'
+  suffix?: string
   onChange?: (value: string) => void
 }
 
@@ -25,17 +24,13 @@ export const OJOIInputController = ({
   placeholder,
   defaultValue,
   loading,
-  applicationId,
   disabled,
   textarea,
   maxLength,
-  onChange,
+  type = 'text',
+  suffix,
 }: Props) => {
   const { formatMessage: f } = useLocale()
-  const { debouncedOnUpdateApplicationHandler, application } = useApplication({
-    applicationId,
-  })
-  const { setValue } = useFormContext()
 
   const placeholderText = placeholder
     ? typeof placeholder === 'string'
@@ -44,14 +39,6 @@ export const OJOIInputController = ({
     : ''
 
   const labelText = typeof label === 'string' ? label : f(label)
-
-  const handleChange = (value: string) => {
-    const currentAnswers = structuredClone(application.answers)
-    const newAnswers = set(currentAnswers, name, value)
-
-    setValue(name, value)
-    return newAnswers
-  }
 
   if (loading) {
     return (
@@ -63,6 +50,30 @@ export const OJOIInputController = ({
     )
   }
 
+  if (type === 'number') {
+    return (
+      <NumberFormat
+        size={'sm'}
+        customInput={Input}
+        disabled={disabled}
+        rightAlign={true}
+        readOnly={false}
+        backgroundColor={'blue'}
+        placeholder={placeholderText}
+        label={labelText}
+        suffix={suffix ?? 'kr'}
+        value={defaultValue}
+        //format={format}
+        maxLength={maxLength}
+        autoComplete={'off'}
+        loading={loading}
+        inputMode={'numeric'}
+        name={name}
+        decimalSeparator={','}
+        thousandSeparator={'.'}
+      />
+    )
+  }
   return (
     <Input
       id={name}
@@ -77,12 +88,6 @@ export const OJOIInputController = ({
       rows={4}
       maxLength={maxLength}
       required={false}
-      onChange={(e) =>
-        debouncedOnUpdateApplicationHandler(
-          handleChange(e.target.value),
-          onChange && (() => onChange(e.target.value)),
-        )
-      }
     />
   )
 }
