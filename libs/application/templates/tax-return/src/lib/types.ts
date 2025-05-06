@@ -3,6 +3,9 @@ import { Routes } from './constants'
 import { applicationSchema } from './dataSchema'
 
 export const InputFields = {
+  [Routes.REQUIREMENTS]: {
+    approveExternalData: 'requirements.approveExternalData',
+  },
   [Routes.GENERAL_INFO]: {
     user: 'generalInfo.user',
     contact: {
@@ -14,6 +17,10 @@ export const InputFields = {
     salary: 'incomeLastYear.salary',
     benefits: 'incomeLastYear.benefits',
     compensation: 'incomeLastYear.compensation',
+  },
+  [Routes.END_OF_YEAR]: {
+    housing: 'endOfYear.housing',
+    vehicles: 'endOfYear.vehicles',
   },
   // [Routes.ADVERT]: {
   //   department: 'advert.department',

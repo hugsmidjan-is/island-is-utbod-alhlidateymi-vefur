@@ -68,35 +68,35 @@ const OJOITemplate: ApplicationTemplate<
     },
   },
   stateMachineConfig: {
-    initial: ApplicationStates.DRAFT,
+    initial: ApplicationStates.REQUIREMENTS,
     states: {
-      // [ApplicationStates.REQUIREMENTS]: {
-      //   meta: {
-      //     name: tax.applicationName.defaultMessage,
-      //     status: 'draft',
-      //     lifecycle: pruneAfterDays(90),
-      //     progress: 0.33,
-      //     roles: [
-      //       {
-      //         id: Roles.APPLICANT,
-      //         read: 'all',
-      //         write: 'all',
-      //         delete: true,
-      //         formLoader: () =>
-      //           import('../forms/Requirements').then((val) =>
-      //             Promise.resolve(val.Requirements),
-      //           ),
-      //       },
-      //     ],
-      //   },
-      //   on: {
-      //     [DefaultEvents.SUBMIT]: [
-      //       {
-      //         target: ApplicationStates.DRAFT,
-      //       },
-      //     ],
-      //   },
-      // },
+      [ApplicationStates.REQUIREMENTS]: {
+        meta: {
+          name: 'Gagnaöflun',
+          status: 'draft',
+          lifecycle: pruneAfterDays(90),
+          progress: 0.33,
+          roles: [
+            {
+              id: Roles.APPLICANT,
+              read: 'all',
+              write: 'all',
+              delete: true,
+              formLoader: () =>
+                import('../forms/Requirements').then((val) =>
+                  Promise.resolve(val.Requirements),
+                ),
+            },
+          ],
+        },
+        on: {
+          [DefaultEvents.SUBMIT]: [
+            {
+              target: ApplicationStates.DRAFT,
+            },
+          ],
+        },
+      },
       [ApplicationStates.DRAFT]: {
         entry: 'assignToInstitution',
         meta: {

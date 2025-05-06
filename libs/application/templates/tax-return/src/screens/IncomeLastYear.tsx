@@ -14,8 +14,6 @@ import {
   Row,
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
-import { TaxReturnInputController } from '../components/input/TaxReturnInputController'
-import { InputController } from '@island.is/shared/form-fields'
 import { BaseInputController } from '../components/input/BaseInputController'
 export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
@@ -24,54 +22,48 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
     applicationId: props.application.id,
   })
 
-  useEffect(() => {
-    updateApplicationV2({
-      path: InputFields.incomeLastYear.salary,
-      value: [
-        {
-          title: 'Norðurljós Software ehf',
-          value: '9360000',
-        },
-        {
-          title: 'Mús og merki',
-          value: '960000',
-        },
-      ],
-    })
-    updateApplicationV2({
-      path: InputFields.incomeLastYear.benefits,
-      value: [
-        {
-          title: 'Ökutækjastyrkur',
-          value: '0',
-        },
-        {
-          title: 'Dagpeningar',
-          value: '120000',
-        },
-        {
-          title: 'Húsnæðishlunnindi',
-          value: '0',
-        },
-      ],
-    })
-    updateApplicationV2({
-      path: InputFields.incomeLastYear.compensation,
-      value: [
-        {
-          title: 'Norðurljós Software ehf',
-          value: '12000',
-          details: 'Íþróttastyrkur',
-        },
-      ],
-    })
-  }, [])
-
-  console.log('props', props)
-  console.log(
-    'InputFields.incomeLastYear.compensation',
-    InputFields.incomeLastYear.compensation,
-  )
+  // useEffect(() => {
+  //   updateApplicationV2({
+  //     path: InputFields.incomeLastYear.salary,
+  //     value: [
+  //       {
+  //         title: 'Norðurljós Software ehf',
+  //         value: '9360000',
+  //       },
+  //       {
+  //         title: 'Mús og merki',
+  //         value: '960000',
+  //       },
+  //     ],
+  //   })
+  //   updateApplicationV2({
+  //     path: InputFields.incomeLastYear.benefits,
+  //     value: [
+  //       {
+  //         title: 'Ökutækjastyrkur',
+  //         value: '0',
+  //       },
+  //       {
+  //         title: 'Dagpeningar',
+  //         value: '120000',
+  //       },
+  //       {
+  //         title: 'Húsnæðishlunnindi',
+  //         value: '0',
+  //       },
+  //     ],
+  //   })
+  //   updateApplicationV2({
+  //     path: InputFields.incomeLastYear.compensation,
+  //     value: [
+  //       {
+  //         title: 'Norðurljós Software ehf',
+  //         value: '12000',
+  //         details: 'Íþróttastyrkur',
+  //       },
+  //     ],
+  //   })
+  // }, [])
 
   return (
     <FormScreen
@@ -94,9 +86,8 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
                 name={item.title}
                 type="input"
                 value={item.value}
-                // inputName={InputFields.incomeLastYear.benefits[i]}
-                id={`incomeLastYear.salary[${i}].value`}
-                inputName={`incomeLastYear.salary[${i}].value`}
+                id={`${InputFields.incomeLastYear.salary}[${i}].value`}
+                inputName={`${InputFields.incomeLastYear.salary}[${i}].value`}
               />
             ),
           )}
@@ -114,7 +105,7 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
               <Property
                 key={item.title}
                 name={item.title}
-                inputName={`incomeLastYear.benefits[${i}].value`}
+                inputName={`${InputFields.incomeLastYear.benefits}[${i}].value`}
                 type="input"
                 value={item.value}
               />
@@ -155,19 +146,19 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
             <Body>
               {props.application?.answers?.incomeLastYear?.compensation?.map(
                 (item, i) => (
-                  <Row>
+                  <Row key={item.title}>
                     <Data>{item.title}</Data>
                     <Data size={16}>{item.details}</Data>
                     <Data width={228} style={{ paddingRight: 0 }}>
                       <BaseInputController
-                        name={`incomeLastYear.compensation[0].value`}
                         label={''}
                         defaultValue={item.value}
                         textarea={false}
                         maxLength={180}
                         type={'number'}
                         suffix=" kr."
-                        id={`incomeLastYear.compensation[0].value`}
+                        name={`${InputFields.incomeLastYear.compensation}[${i}].value`}
+                        id={`${InputFields.incomeLastYear.compensation}[${i}].value`}
                       />
                     </Data>
                   </Row>

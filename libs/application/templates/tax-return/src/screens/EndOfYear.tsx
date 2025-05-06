@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
 import { useLocale } from '@island.is/localization'
+import { useApplication } from '../hooks/useUpdateApplication'
 import { FormScreen } from '../components/form/FormScreen'
 import { taxEndOfYear, tax } from '../lib/messages'
-import { OJOIFieldBaseProps } from '../lib/types'
+import { InputFields, OJOIFieldBaseProps } from '../lib/types'
 import { Box, Stack, Text } from '@island.is/island-ui/core'
 import {
   Body,
@@ -11,10 +13,41 @@ import {
   Row,
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
-import { TaxReturnInputController } from '../components/input/TaxReturnInputController'
 import { BaseInputController } from '../components/input/BaseInputController'
+import { amountFormat, sumOfBaseEntity } from '../lib/utils'
 export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
+  const { updateApplicationV2 } = useApplication({
+    applicationId: props.application.id,
+  })
+
+  // useEffect(() => {
+  //   updateApplicationV2({
+  //     path: InputFields.endOfYear.housing,
+  //     value: [
+  //       {
+  //         title: '210-9876',
+  //         details: 'Bláfjallagata 12',
+  //         value: '52000000',
+  //       },
+  //     ],
+  //   })
+  //   updateApplicationV2({
+  //     path: InputFields.endOfYear.vehicles,
+  //     value: [
+  //       {
+  //         title: 'KB-521',
+  //         details: '2021',
+  //         value: '3100000',
+  //       },
+  //       {
+  //         title: 'JU-329',
+  //         details: '2012',
+  //         value: '450000',
+  //       },
+  //     ],
+  //   })
+  // }, [])
 
   return (
     <FormScreen
@@ -50,25 +83,26 @@ export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
               </Row>
             </Head>
             <Body>
-              <Row>
-                <Data>
-                  <Text variant="medium">210-9876</Text>
-                </Data>
-                <Data>
-                  <Text variant="medium">Bláfjallagata 12</Text>
-                </Data>
-                <Data width={204} style={{ paddingRight: 0 }}>
-                  <BaseInputController
-                    name={'name'}
-                    label={''}
-                    defaultValue={'123'}
-                    textarea={false}
-                    maxLength={180}
-                    type={'number'}
-                    suffix=" kr."
-                  />
-                </Data>
-              </Row>
+              {props.application?.answers?.endOfYear?.housing?.map(
+                (item, i) => (
+                  <Row key={item.title}>
+                    <Data>{item.title}</Data>
+                    <Data size={16}>{item.details}</Data>
+                    <Data width={228} style={{ paddingRight: 0 }}>
+                      <BaseInputController
+                        label={''}
+                        defaultValue={item.value}
+                        textarea={false}
+                        maxLength={180}
+                        type={'number'}
+                        suffix=" kr."
+                        name={`${InputFields.endOfYear.housing}[${i}].value`}
+                        id={`${InputFields.endOfYear.housing}[${i}].value`}
+                      />
+                    </Data>
+                  </Row>
+                ),
+              )}
             </Body>
           </Table>
         </Stack>
@@ -101,48 +135,26 @@ export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
               </Row>
             </Head>
             <Body>
-              <Row>
-                <Data>
-                  <Text variant="medium">KB-521</Text>
-                </Data>
-                <Data>
-                  <Text variant="medium">2021</Text>
-                </Data>
-                <Data width={204} style={{ paddingRight: 0 }}>
-                  <BaseInputController
-                    id={'id'}
-                    name={'id'}
-                    defaultValue={'id'}
-                    label={''}
-                    textarea={false}
-                    maxLength={180}
-                    placeholder="0 kr."
-                    type={'number'}
-                    suffix=" kr."
-                  />
-                </Data>
-              </Row>
-              <Row>
-                <Data>
-                  <Text variant="medium">JU-329</Text>
-                </Data>
-                <Data>
-                  <Text variant="medium">2012</Text>
-                </Data>
-                <Data width={204} style={{ paddingRight: 0 }}>
-                  <BaseInputController
-                    id={'id'}
-                    name={'id'}
-                    defaultValue={'id'}
-                    label={''}
-                    textarea={false}
-                    maxLength={180}
-                    placeholder="0 kr."
-                    type={'number'}
-                    suffix=" kr."
-                  />
-                </Data>
-              </Row>
+              {props.application?.answers?.endOfYear?.vehicles?.map(
+                (item, i) => (
+                  <Row key={item.title}>
+                    <Data>{item.title}</Data>
+                    <Data size={16}>{item.details}</Data>
+                    <Data width={228} style={{ paddingRight: 0 }}>
+                      <BaseInputController
+                        label={''}
+                        defaultValue={item.value}
+                        textarea={false}
+                        maxLength={180}
+                        type={'number'}
+                        suffix=" kr."
+                        name={`${InputFields.endOfYear.vehicles}[${i}].value`}
+                        id={`${InputFields.endOfYear.vehicles}[${i}].value`}
+                      />
+                    </Data>
+                  </Row>
+                ),
+              )}
               <Row>
                 <Data style={{ borderBottom: 'none' }}>
                   <Text variant="medium" fontWeight="semiBold">
@@ -156,7 +168,9 @@ export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
                     fontWeight="semiBold"
                     textAlign="right"
                   >
-                    3.530.000 kr.
+                    {sumOfBaseEntity(
+                      props.application?.answers?.endOfYear?.vehicles,
+                    )}
                   </Text>
                 </Data>
               </Row>

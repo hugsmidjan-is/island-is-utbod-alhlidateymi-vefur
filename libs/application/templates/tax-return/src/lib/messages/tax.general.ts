@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
 export const tax = defineMessages({
+  dataRequirements: {
+    id: 'taxReturn.application:general.dataRequirements',
+    defaultMessage: 'Gagnaöflun',
+  },
   applicationName: {
     id: 'taxReturn.application:general.applicationName',
     defaultMessage: 'Skil á skattaframtali',
@@ -160,3 +164,43 @@ export const taxInterestCharges = defineMessages({
       '5.2 Lán vegna kaupa eða byggingar íbúðarhúsnæðis til eigin nota.',
   },
 })
+
+export const requirements = {
+  general: defineMessages({
+    title: {
+      id: 'taxReturn.application:requirements.general.title',
+      defaultMessage: 'Gagnaöflun',
+      description: 'Title of requirements form',
+    },
+    intro: {
+      id: 'taxReturn.application:requirements.general.intro',
+      defaultMessage: `Upplýsingar frá Þjóðskrá, RSK og Útlendingarstofnun{br}
+      Upplýsingar um þig, maka og börn. Upplýsingar um búsetu.
+      {brbr}
+      Upplýsingar af frá Skattinum{br}
+      Upplýsingar fyrir skattframtal 2024.
+      {brbr}
+      Upplýsingar af mínum síðum Ísland.is{br}
+      Upplýsingar um netfang, símanúmer og bankareikning eru sóttar á mínar síður á Ísland.is. 
+      `,
+      description: 'Description of requirements form',
+    },
+  }),
+  buttons: defineMessages({
+    continue: {
+      id: 'taxReturn.application:requirements.buttons.continue',
+      defaultMessage: 'Halda áfram',
+    },
+  }),
+  inputs: defineMessages({
+    accept: {
+      id: 'taxReturn.application:requirements.inputs.accept',
+      defaultMessage:
+        'Ég skil að ofangreindra upplýsinga verður aflað í umsóknarferlinu',
+    },
+    required: {
+      id: 'taxReturn.application:error.dataGathering',
+      defaultMessage: 'Samþykkja þarf gagnaöflun til að halda áfram',
+    },
+  }),
+}

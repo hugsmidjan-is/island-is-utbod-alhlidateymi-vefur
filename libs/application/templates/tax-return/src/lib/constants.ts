@@ -36,6 +36,7 @@ export enum Routes {
   REJECTED = 'rejected',
   MISC = 'misc',
 
+  REQUIREMENTS = 'requirements',
   GENERAL_INFO = 'generalInfo',
   INCOME_LAST_YEAR = 'incomeLastYear',
   CAPITAL_INCOME = 'capitalIncome',

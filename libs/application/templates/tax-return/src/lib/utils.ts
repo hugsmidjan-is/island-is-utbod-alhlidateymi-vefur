@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { FAST_TRACK_DAYS } from './constants'
 import { MessageDescriptor } from 'react-intl'
+import { BaseEntityType } from './dataSchema'
 
 export const countDaysAgo = (date: Date) => {
   const now = new Date()
@@ -84,4 +85,24 @@ export const capitalizeText = (text?: string | null): string => {
   }
 
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+}
+
+export const numberFormat = (value: number): string =>
+  value
+    .toString()
+    .split('.')[0] // remove decimals
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+export const amountFormat = (value?: number | null): string =>
+  typeof value === 'number' ? numberFormat(value) + ' kr.' : ''
+
+export const sumOfBaseEntity = (baseEntities?: BaseEntityType[]) => {
+  if (!baseEntities) {
+    return ''
+  }
+  return amountFormat(
+    baseEntities?.reduce((acc, item) => {
+      return acc + (Number(item.value) || 0)
+    }, 0) || 0,
+  )
 }

@@ -77,6 +77,7 @@ export const GeneralInfoScreen = (props: OJOIFieldBaseProps) => {
               label={f(taxGeneralInfo.email)}
               backgroundColor="blue"
               placeholder="nafn@netfang.is"
+              defaultValue=""
             />
           </GridColumn>
           <GridColumn span={['1/1', '1/1', '1/1', '1/2']} paddingBottom={2}>
@@ -86,6 +87,7 @@ export const GeneralInfoScreen = (props: OJOIFieldBaseProps) => {
               label={f(taxGeneralInfo.phone)}
               backgroundColor="blue"
               placeholder="123 4567"
+              defaultValue=""
             />
           </GridColumn>
         </GridRow>
