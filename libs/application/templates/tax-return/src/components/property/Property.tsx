@@ -4,16 +4,21 @@ import { OJOI_INPUT_HEIGHT } from '../../lib/constants'
 import { TaxReturnInputController } from '../input/TaxReturnInputController'
 
 import cn from 'classnames'
+import { InputController } from '@island.is/shared/form-fields'
 
 type Props = {
   name: string
+  id?: string
   value?: string
   loading?: boolean
+  inputName?: string
   type?: 'input' | 'text'
 }
 
 export const Property = ({
   name,
+  id,
+  inputName,
   value,
   loading = false,
   type = 'text',
@@ -49,13 +54,26 @@ export const Property = ({
 
           {type === 'input' && (
             <Box className={styles.inputProperty}>
-              <TaxReturnInputController
-                name={name}
+              {/* <TaxReturnInputController
+                name={inputName ?? name}
                 label={''}
+                id={id ?? name}
                 defaultValue={value}
                 textarea={false}
                 maxLength={180}
                 type={'number'}
+              /> */}
+              <InputController
+                id={id ?? name}
+                name={inputName ?? name}
+                defaultValue={value}
+                label={''}
+                textarea={false}
+                maxLength={180}
+                placeholder="0 kr."
+                type={'number'}
+                suffix=" kr."
+                backgroundColor="blue"
               />
             </Box>
           )}

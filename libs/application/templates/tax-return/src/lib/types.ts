@@ -1,6 +1,6 @@
 import { Application, FieldBaseProps } from '@island.is/application/types'
 import { Routes } from './constants'
-import { partialSchema2 } from './dataSchema'
+import { applicationSchema } from './dataSchema'
 
 export const InputFields = {
   [Routes.GENERAL_INFO]: {
@@ -9,6 +9,11 @@ export const InputFields = {
       email: 'generalInfo.contact.email',
       phone: 'generalInfo.contact.phone',
     },
+  },
+  [Routes.INCOME_LAST_YEAR]: {
+    salary: 'incomeLastYear.salary',
+    benefits: 'incomeLastYear.benefits',
+    compensation: 'incomeLastYear.compensation',
   },
   // [Routes.ADVERT]: {
   //   department: 'advert.department',
@@ -61,12 +66,12 @@ export type NestedType<T> = {
 
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 
-export type ErrorSchema = NestedType<partialSchema2>
+export type ErrorSchema = NestedType<applicationSchema>
 
 export type OJOIApplication = Override<
   Application,
   {
-    answers: partialSchema2
+    answers: applicationSchema
   }
 >
 

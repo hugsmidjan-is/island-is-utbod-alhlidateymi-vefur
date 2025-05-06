@@ -6,6 +6,7 @@ import NumberFormat from 'react-number-format'
 
 type Props = {
   name: string
+  id: string
   label: string | MessageDescriptor
   placeholder?: string | MessageDescriptor
   defaultValue?: string
@@ -21,6 +22,7 @@ type Props = {
 export const TaxReturnInputController = ({
   name,
   label,
+  id,
   placeholder,
   defaultValue,
   loading,
@@ -60,10 +62,10 @@ export const TaxReturnInputController = ({
         readOnly={false}
         backgroundColor={'blue'}
         placeholder={placeholderText}
+        id={id}
         label={labelText}
         suffix={suffix ?? ' kr.'}
-        value={defaultValue}
-        //format={format}
+        defaultValue={defaultValue}
         maxLength={maxLength}
         autoComplete={'off'}
         loading={loading}

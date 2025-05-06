@@ -11,7 +11,7 @@ import {
   InstitutionNationalIds,
   defineTemplateApi,
 } from '@island.is/application/types'
-import { partialSchema2 } from './dataSchema'
+import { applicationSchema } from './dataSchema'
 import { tax } from './messages'
 import { TemplateApiActions } from './types'
 import { assign } from 'xstate'
@@ -51,7 +51,7 @@ const OJOITemplate: ApplicationTemplate<
   translationNamespaces: [
     ApplicationConfigurations.OfficialJournalOfIceland.translation,
   ],
-  dataSchema: partialSchema2,
+  dataSchema: applicationSchema,
   // allowMultipleApplicationsInDraft: false,
   allowMultipleApplicationsInDraft: true,
   stateMachineOptions: {

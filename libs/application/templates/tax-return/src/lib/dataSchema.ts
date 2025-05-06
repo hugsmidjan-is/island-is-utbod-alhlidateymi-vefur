@@ -1,60 +1,16 @@
 import { z } from 'zod'
 
-export const additionSchema = z.array(
-  z
-    .object({
-      id: z.string().optional(),
-      title: z.string().optional(),
-      content: z.string().optional(),
-      type: z.enum(['html', 'file']).optional(),
-    })
-    .partial(),
-)
-
-export const memberItemSchema = z
-  .object({
-    name: z.string().optional(),
-    before: z.string().optional(),
-    below: z.string().optional(),
-    above: z.string().optional(),
-    after: z.string().optional(),
-  })
-  .partial()
-
-export const membersSchema = z.array(memberItemSchema).optional()
-
-const signatureRecordItemSchema = z.object({
-  institution: z.string().optional(),
-  signatureDate: z.string().optional(),
-  chairman: memberItemSchema.optional(),
-  members: membersSchema.optional(),
-  additional: z.string().optional(),
-})
-
-const signatureRecordSchema = z.object({
-  records: z.array(signatureRecordItemSchema).optional(),
-})
-
-export const regularSignatureItemSchema = z
-  .object({
-    date: z.string().optional(),
-    institution: z.string().optional(),
-    members: membersSchema.optional(),
-    html: z.string().optional(),
-  })
-  .partial()
-
 export const baseEntitySchema = z.object({
-  id: z.string(),
   title: z.string(),
-  slug: z.string(),
+  value: z.string(),
+  details: z.string().optional(),
 })
 
-export const channelSchema = z
+const lastYearIncomeSchema = z
   .object({
-    name: z.string(),
-    email: z.string(),
-    phone: z.string(),
+    salary: z.array(baseEntitySchema).optional(),
+    benefits: z.array(baseEntitySchema).optional(),
+    compensation: z.array(baseEntitySchema).optional(),
   })
   .partial()
 
@@ -73,20 +29,9 @@ const generalInfoSchema = z
   })
   .partial()
 
-export const partialSchema2 = z.object({
+export const applicationSchema = z.object({
   generalInfo: generalInfoSchema.optional(),
+  incomeLastYear: lastYearIncomeSchema.optional(),
 })
 
-// export type partialSchema = z.infer<typeof partialSchema>
-export type partialSchema2 = z.infer<typeof partialSchema2>
-
-export type SignatureMemberKey = keyof z.infer<typeof memberItemSchema>
-export type SignatureInstitutionKey = keyof Pick<
-  z.infer<typeof signatureRecordItemSchema>,
-  'institution' | 'signatureDate' | 'additional'
->
-
-export type SignatureRecordSchema = z.infer<typeof signatureRecordItemSchema>
-
-export type SignatureMemberSchema = z.infer<typeof memberItemSchema>
-export type SignatureSchema = z.infer<typeof signatureRecordSchema>
+export type applicationSchema = z.infer<typeof applicationSchema>

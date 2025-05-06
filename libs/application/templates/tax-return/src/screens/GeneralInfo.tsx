@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
-import { useFormContext } from 'react-hook-form'
 import { useApplication } from '../hooks/useUpdateApplication'
 import { tax, taxGeneralInfo } from '../lib/messages'
 import { InputFields, OJOIFieldBaseProps } from '../lib/types'
@@ -36,7 +35,6 @@ export const GeneralInfoScreen = (props: OJOIFieldBaseProps) => {
     })
   }, [])
 
-  console.log('GeneralInfoScreen', props)
   return (
     <FormScreen goToScreen={props.goToScreen} title={f(tax.generalInfoTitle)}>
       <Box>
