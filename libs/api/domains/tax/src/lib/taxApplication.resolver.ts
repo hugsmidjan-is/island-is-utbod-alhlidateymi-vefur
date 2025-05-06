@@ -9,9 +9,7 @@ import { ApiScope } from '@island.is/auth/scopes'
 import { TaxApplicationService } from './taxApplication.service'
 import { UseGuards } from '@nestjs/common'
 import type { User } from '@island.is/auth-nest-tools'
-import { GetMyUserInfoResponse } from '../models/getMyUserInfo.response'
-import { OJOIAIdInput } from '../models/id.input'
-import { OJOIAApplicationCaseResponse } from '../models/applicationCase.response'
+import { PrefilledIncomeResponse } from '../models/prefilled.response'
 
 @Scopes(ApiScope.internal)
 @UseGuards(IdsUserGuard, ScopesGuard)
@@ -19,24 +17,14 @@ import { OJOIAApplicationCaseResponse } from '../models/applicationCase.response
 export class TaxApplicationResolver {
   constructor(private readonly taxApplicationService: TaxApplicationService) {}
 
-  @Query(() => GetMyUserInfoResponse, {
-    name: 'TaxApplicationGetMyUserInfo',
+  @Query(() => PrefilledIncomeResponse, {
+    name: 'TaxApplicationGetPrefilled',
   })
-  getMyUserInfo(@CurrentUser() user: User) {
-    return this.taxApplicationService.getMyUserInfo(user)
+  getPrefilled(@CurrentUser() user: User) {
+    return this.taxApplicationService.getPrefilled(user)
   }
 
-  @Query(() => OJOIAApplicationCaseResponse, {
-    name: 'OJOIAGetApplicationCase',
-  })
-  getApplicationCase(
-    @Args('input') input: OJOIAIdInput,
-    @CurrentUser() user: User,
-  ) {
-    return this.taxApplicationService.getApplicationCase(input.id, user)
-  }
-
-  @Mutation(() => Boolean, {
+  /*@Mutation(() => Boolean, {
     name: 'OJOIAPostApplication',
   })
   postApplication(
@@ -44,5 +32,5 @@ export class TaxApplicationResolver {
     @CurrentUser() user: User,
   ) {
     return this.taxApplicationService.postApplication(input, user)
-  }
+  }*/
 }

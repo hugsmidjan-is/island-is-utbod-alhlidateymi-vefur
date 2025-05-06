@@ -16,44 +16,16 @@ export class TaxApplicationService {
     private readonly taxApplicationService: TaxApplicationClientService,
   ) {}
 
-  async getMyUserInfo(user: User) {
-    return this.taxApplicationService.getMyUserInfo(user)
+  async getPrefilled(user: User) {
+    return this.taxApplicationService.getPrefilled(user)
   }
 
-  async getApplicationCase(
-    id: string,
-    user: User,
-  ): Promise<OJOIAApplicationCaseResponse> {
-    const { applicationCase } =
-      await this.taxApplicationService.getApplicationCase(
-        {
-          id,
-        },
-        user,
-      )
-
-    let title = 'Óþekkt'
-
-    if ('title' in applicationCase.status) {
-      title = applicationCase.status.title as string
-    }
-
-    const mapped: OJOIAApplicationCaseResponse = {
-      department: applicationCase.department.title,
-      type: applicationCase.type.title,
-      categories: applicationCase.categories.map((c) => c.title),
-      html: applicationCase.html,
-      status: title,
-      communicationStatus: applicationCase.communicationStatus.title,
-    }
-
-    return mapped
-  }
-
+  /*
   async postApplication(
     input: PostApplicationInput,
     user: User,
   ): Promise<boolean> {
     return this.taxApplicationService.postApplication(input, user)
   }
+    */
 }
