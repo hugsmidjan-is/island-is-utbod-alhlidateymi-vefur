@@ -70,9 +70,13 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
             </Head>
             <Body>
               <Row>
-                <Data>Norðurljós Software ehf</Data>
-                <Data size={16}>Íþróttastyrkur</Data>
-                <Data width={228}>
+                <Data>
+                  <Text variant="medium">Norðurljós Software ehf</Text>
+                </Data>
+                <Data>
+                  <Text variant="medium">Íþróttastyrkur</Text>
+                </Data>
+                <Data width={204} style={{ paddingRight: 0 }}>
                   <TaxReturnInputController
                     name={'name'}
                     label={''}

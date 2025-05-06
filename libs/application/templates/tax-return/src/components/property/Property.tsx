@@ -34,7 +34,12 @@ export const Property = ({
       ) : (
         <>
           <Box className={styles.property}>
-            <Text fontWeight="semiBold">{name}</Text>
+            <Text
+              variant={type === 'input' ? 'medium' : undefined}
+              fontWeight={type === 'input' ? 'regular' : 'semiBold'}
+            >
+              {name}
+            </Text>
           </Box>
           {type === 'text' && (
             <Box className={styles.property}>
