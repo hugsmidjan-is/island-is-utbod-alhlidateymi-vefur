@@ -1,32 +1,30 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { TaxReturnPublicAPIApi } from '../../gen/fetch'
+import { NationalRegistryApi } from '../../gen/fetch'
 import { LOGGER_PROVIDER } from '@island.is/logging'
 import type { Logger } from '@island.is/logging'
 import { Auth, AuthMiddleware } from '@island.is/auth-nest-tools'
 
-const LOG_CATEGORY = 'tax-application-client-service'
+const LOG_CATEGORY = 'tax-national-registry-client-service'
 
 @Injectable()
-export class TaxApplicationClientService {
+export class TaxNationalRegistryClientService {
   constructor(
-    private readonly taxApplicationApi: TaxReturnPublicAPIApi,
-
+    private readonly taxNationalRegistryApi: NationalRegistryApi,
     @Inject(LOGGER_PROVIDER)
     private logger: Logger,
   ) {}
 
-  private taxApplicationApiWithAuth(auth: Auth) {
-    return this.taxApplicationApi.withMiddleware(new AuthMiddleware(auth))
+  private taxNationalRegistryApiWithAuth(auth: Auth) {
+    return this.taxNationalRegistryApi.withMiddleware(new AuthMiddleware(auth))
   }
 
-  async getPrefilled(auth: Auth) {
+  async getUserInfo(auth: Auth) {
     try {
-      const data = await this.taxApplicationApiWithAuth(
+      const data = await this.taxNationalRegistryApiWithAuth(
         auth,
-      ).getTaxReturnPrefillByNationalIdAndYear({
+      ).getPersonByNationalId({
         // nationalId: auth.nationalId ?? '1203894569',
         nationalId: '1203894569',
-        year: new Date().getFullYear().toString(),
       })
       return data
     } catch (error) {

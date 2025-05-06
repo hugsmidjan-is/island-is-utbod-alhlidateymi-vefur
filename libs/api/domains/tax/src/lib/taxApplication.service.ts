@@ -3,8 +3,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { LOGGER_PROVIDER } from '@island.is/logging'
 import type { Logger } from '@island.is/logging'
 import { User } from '@island.is/auth-nest-tools'
-import { OJOIAApplicationCaseResponse } from '../models/applicationCase.response'
-import { PostApplicationInput } from '../models/postApplication.input'
+import { TaxNationalRegistryClientService } from '@island.is/clients/tax/national-registry'
 
 const LOG_CATEGORY = 'tax-application'
 
@@ -14,10 +13,15 @@ export class TaxApplicationService {
     @Inject(LOGGER_PROVIDER)
     private logger: Logger,
     private readonly taxApplicationService: TaxApplicationClientService,
+    private readonly taxNationalRegistryClientService: TaxNationalRegistryClientService,
   ) {}
 
   async getPrefilled(user: User) {
-    return this.taxApplicationService.getPrefilled(user)
+    const prefilled = await this.taxApplicationService.getPrefilled(user)
+    const userInfo = await this.taxNationalRegistryClientService.getUserInfo(
+      user,
+    )
+    return { prefilled, userInfo }
   }
 
   /*

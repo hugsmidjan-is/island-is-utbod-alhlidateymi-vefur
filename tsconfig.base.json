@@ -817,6 +817,9 @@
       "@island.is/clients/tax/application": [
         "libs/clients/tax/application/src/index.ts"
       ],
+      "@island.is/clients/tax/national-registry": [
+        "libs/clients/tax/national-registry/src/index.ts"
+      ],
       "@island.is/clients/transport-authority/digital-tachograph-drivers-card": [
         "libs/clients/transport-authority/digital-tachograph-drivers-card/src/index.ts"
       ],
