@@ -184,6 +184,14 @@ export const requirements = {
       id: 'taxReturn.application:requirements.general.taxProviderSubTitle',
       defaultMessage: 'Upplýsingar fyrir skattframtal 2024.',
     },
+    taxNatRegProviderTitle: {
+      id: 'taxReturn.application:requirements.general.taxNatRegProviderTitle',
+      defaultMessage: 'Upplýsingar frá Þjóðskrá',
+    },
+    taxNatRegProviderSubTitle: {
+      id: 'taxReturn.application:requirements.general.taxNatRegProviderSubTitle',
+      defaultMessage: 'Upplýsingar frá Þjóðskrá íslands.',
+    },
     intro: {
       id: 'taxReturn.application:requirements.general.intro',
       defaultMessage: `Upplýsingar frá Þjóðskrá, RSK og Útlendingarstofnun{br}

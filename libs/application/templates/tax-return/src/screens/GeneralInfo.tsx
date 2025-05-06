@@ -15,11 +15,16 @@ import {
   InputController,
   PhoneInputController,
 } from '@island.is/shared/form-fields'
-export const GeneralInfoScreen = (props: OJOIFieldBaseProps) => {
+export const GeneralInfoScreen = ({
+  application,
+  errors,
+  setSubmitButtonDisabled,
+}: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
+  const { externalData } = application
   return (
-    <FormScreen goToScreen={props.goToScreen} title={f(tax.generalInfoTitle)}>
+    <FormScreen title={f(tax.generalInfoTitle)}>
       <Box>
         <Box marginBottom={2}>
           <Text fontWeight="semiBold" variant="h4">
@@ -29,19 +34,24 @@ export const GeneralInfoScreen = (props: OJOIFieldBaseProps) => {
         <Stack space={0} dividers>
           <Property
             name={f(taxGeneralInfo.name)}
-            value={props.application.answers.generalInfo?.user?.name}
+            value={externalData.getTaxNationalRegistryData.data.person.name}
           />
           <Property
             name={f(taxGeneralInfo.nationalId)}
-            value={props.application.answers.generalInfo?.user?.nationalId}
+            value={
+              externalData.getTaxNationalRegistryData.data.person.nationalId
+            }
           />
           <Property
             name={f(taxGeneralInfo.address)}
-            value={props.application.answers.generalInfo?.user?.address}
+            value={
+              externalData.getTaxNationalRegistryData.data.person.address
+                ?.address
+            }
           />
           <Property
             name={f(taxGeneralInfo.city)}
-            value={props.application.answers.generalInfo?.user?.city}
+            value={`${externalData.getTaxNationalRegistryData.data.person.address?.postalCode} ${externalData.getTaxNationalRegistryData.data.person.address?.city}`}
           />
           <Divider />
         </Stack>
