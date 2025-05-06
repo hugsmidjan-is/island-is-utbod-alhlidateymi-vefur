@@ -20,6 +20,8 @@ import { ComplaintsToAlthingiOmbudsmanTemplateModule } from './complaints-to-alt
 import { ComplaintsToAlthingiOmbudsmanTemplateService } from './complaints-to-althingi-ombudsman/complaints-to-althingi-ombudsman.service'
 import { CriminalRecordSubmissionModule } from './criminal-record-submission/criminal-record-submission.module'
 import { CriminalRecordSubmissionService } from './criminal-record-submission/criminal-record-submission.service'
+import { TaxReturnStatusModule } from './tax-return-status/tax-return-status.module'
+import { TaxReturnStatusService } from './tax-return-status/tax-return-status.service'
 import { DataProtectionComplaintModule } from './data-protection-complaint/data-protection-complaint.module'
 import { DataProtectionComplaintService } from './data-protection-complaint/data-protection-complaint.service'
 import { DocumentProviderOnboardingModule } from './document-provider-onboarding/document-provider-onboarding.module'
@@ -178,6 +180,7 @@ export const modules = [
   DrivingLicenseSubmissionModule,
   AccidentNotificationModule,
   CriminalRecordSubmissionModule,
+  TaxReturnStatusModule,
   PSignSubmissionModule,
   AnnouncementOfDeathModule,
   ComplaintsToAlthingiOmbudsmanTemplateModule,
@@ -260,6 +263,7 @@ export const services = [
   AccidentNotificationService,
   GeneralPetitionService,
   CriminalRecordSubmissionService,
+  TaxReturnStatusService,
   PSignSubmissionService,
   AnnouncementOfDeathService,
   ComplaintsToAlthingiOmbudsmanTemplateService,
