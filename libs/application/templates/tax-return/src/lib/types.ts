@@ -1,6 +1,7 @@
 import { Application, FieldBaseProps } from '@island.is/application/types'
 import { Routes } from './constants'
 import { applicationSchema } from './dataSchema'
+import { TaxApplicationPerson } from '@island.is/api/schema'
 
 export const InputFields = {
   [Routes.REQUIREMENTS]: {
@@ -79,6 +80,13 @@ export type OJOIApplication = Override<
   Application,
   {
     answers: applicationSchema
+    externalData: {
+      getTaxNationalRegistryData: {
+        data: {
+          person: TaxApplicationPerson
+        }
+      }
+    }
   }
 >
 

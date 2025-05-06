@@ -1,6 +1,6 @@
 import { Field, ObjectType, Int, Float } from '@nestjs/graphql'
 
-@ObjectType('DebtType')
+@ObjectType('TaxApplicationDebtType')
 export class DebtType {
   @Field({ description: 'The ID of the debt type' })
   id!: string
@@ -9,7 +9,7 @@ export class DebtType {
   name!: string
 }
 
-@ObjectType('DebtLine')
+@ObjectType('TaxApplicationDebtLine')
 export class DebtLine {
   @Field({ description: 'The ID of the debt line' })
   id!: string
@@ -48,7 +48,7 @@ export class DebtLine {
   currency!: string
 }
 
-@ObjectType('Debt')
+@ObjectType('TaxApplicationDebt')
 export class Debt {
   @Field({ description: 'The ID of the debt' })
   id!: string
@@ -60,7 +60,7 @@ export class Debt {
   debtLines!: DebtLine[]
 }
 
-@ObjectType('IncomeType')
+@ObjectType('TaxApplicationIncomeType')
 export class IncomeType {
   @Field({ description: 'The ID of the income type' })
   id!: string
@@ -72,7 +72,7 @@ export class IncomeType {
   name!: string
 }
 
-@ObjectType('IncomeLine')
+@ObjectType('TaxApplicationIncomeLine')
 export class IncomeLine {
   @Field({ description: 'The ID of the income line' })
   id!: string
@@ -90,7 +90,7 @@ export class IncomeLine {
   payer?: string
 }
 
-@ObjectType('Income')
+@ObjectType('TaxApplicationIncome')
 export class Income {
   @Field({ description: 'The ID of the income' })
   id!: string
@@ -102,7 +102,7 @@ export class Income {
   incomeLines!: IncomeLine[]
 }
 
-@ObjectType('PropertyLine')
+@ObjectType('TaxApplicationPropertyLine')
 export class PropertyLine {
   @Field({ description: 'The ID of the property line' })
   id!: string
@@ -128,7 +128,7 @@ export class PropertyLine {
   propertyTypeId!: string
 }
 
-@ObjectType('Property')
+@ObjectType('TaxApplicationProperty')
 export class Property {
   @Field({ description: 'The ID of the property' })
   id!: string
@@ -140,7 +140,7 @@ export class Property {
   propertyLines!: PropertyLine[]
 }
 
-@ObjectType('Prefill')
+@ObjectType('TaxApplicationPrefill')
 export class Prefill {
   @Field(() => Int, { description: 'The national ID of the user' })
   nationalId!: number
@@ -158,10 +158,10 @@ export class Prefill {
   property!: Property
 }
 
-@ObjectType('Address')
+@ObjectType('TaxApplicationAddress')
 export class Address {
   @Field({ description: 'The street address' })
-  street!: string
+  address!: string
 
   @Field({ description: 'The city of the address' })
   city!: string
@@ -173,7 +173,7 @@ export class Address {
   country!: string
 }
 
-@ObjectType('Person')
+@ObjectType('TaxApplicationPerson')
 export class Person {
   @Field({ description: 'Name of the person' })
   name!: string

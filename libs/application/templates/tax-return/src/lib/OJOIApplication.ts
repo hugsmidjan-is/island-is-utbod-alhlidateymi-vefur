@@ -12,7 +12,7 @@ import {
   defineTemplateApi,
 } from '@island.is/application/types'
 
-import { TaxReturnApi } from '../dataProviders'
+import { TaxReturnApi, TaxNationalRegistryApi } from '../dataProviders'
 import { applicationSchema } from './dataSchema'
 import { tax } from './messages'
 import { TemplateApiActions } from './types'
@@ -88,7 +88,7 @@ const OJOITemplate: ApplicationTemplate<
                 import('../forms/Requirements').then((val) =>
                   Promise.resolve(val.Requirements),
                 ),
-              api: [TaxReturnApi],
+              api: [TaxReturnApi, TaxNationalRegistryApi],
             },
           ],
         },

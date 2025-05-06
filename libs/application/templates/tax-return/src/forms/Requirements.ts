@@ -9,7 +9,7 @@ import {
   buildSubmitField,
   getValueViaPath,
 } from '@island.is/application/core'
-import { TaxReturnApi } from '../dataProviders'
+import { TaxReturnApi, TaxNationalRegistryApi } from '../dataProviders'
 import {
   Comparators,
   DefaultEvents,
@@ -51,6 +51,11 @@ export const Requirements: Form = buildForm({
               provider: TaxReturnApi,
               title: requirements.general.taxProviderTitle,
               subTitle: requirements.general.taxProviderSubTitle,
+            }),
+            buildDataProviderItem({
+              provider: TaxNationalRegistryApi,
+              title: requirements.general.taxNatRegProviderTitle,
+              subTitle: requirements.general.taxNatRegProviderSubTitle,
             }),
           ],
         }),

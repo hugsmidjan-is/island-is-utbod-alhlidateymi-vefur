@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { SharedTemplateApiService } from '../../shared'
 import { TemplateApiModuleActionProps } from '../../../types'
 import { TaxApplicationClientService } from '@island.is/clients/tax/application'
+import { TaxNationalRegistryClientService } from '@island.is/clients/tax/national-registry'
 import {
   ApplicationTypes,
   ApplicationWithAttachments as Application,
@@ -17,6 +18,7 @@ export class TaxReturnStatusService extends BaseTemplateApiService {
   constructor(
     // private readonly sharedTemplateAPIService: SharedTemplateApiService,
     private readonly taxApplicationService: TaxApplicationClientService,
+    private readonly taxNatRegService: TaxNationalRegistryClientService,
   ) {
     super(ApplicationTypes.TAX_RETURN)
   }
@@ -67,5 +69,9 @@ export class TaxReturnStatusService extends BaseTemplateApiService {
 
   async getTestTaxData({ auth }: TemplateApiModuleActionProps) {
     return await this.taxApplicationService.getPrefilled(auth)
+  }
+
+  async getTaxNationalRegistryData({ auth }: TemplateApiModuleActionProps) {
+    return await this.taxNatRegService.getUserInfo(auth)
   }
 }
