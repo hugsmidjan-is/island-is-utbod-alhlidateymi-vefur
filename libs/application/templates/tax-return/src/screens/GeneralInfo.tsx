@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
-import { useApplication } from '../hooks/useUpdateApplication'
 import { tax, taxGeneralInfo } from '../lib/messages'
 import { InputFields, OJOIFieldBaseProps } from '../lib/types'
 import {
@@ -19,21 +17,6 @@ import {
 } from '@island.is/shared/form-fields'
 export const GeneralInfoScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
-  const { updateApplicationV2 } = useApplication({
-    applicationId: props.application.id,
-  })
-
-  useEffect(() => {
-    updateApplicationV2({
-      path: InputFields.generalInfo.user,
-      value: {
-        name: 'Jökull Þórðarson',
-        nationalId: '120389-4569',
-        address: 'Bláfjallagata 12',
-        city: '105 Reykjavík',
-      },
-    })
-  }, [])
 
   return (
     <FormScreen goToScreen={props.goToScreen} title={f(tax.generalInfoTitle)}>

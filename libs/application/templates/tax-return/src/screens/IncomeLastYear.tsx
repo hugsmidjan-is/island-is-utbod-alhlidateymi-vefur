@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
 import { useLocale } from '@island.is/localization'
-import { useApplication } from '../hooks/useUpdateApplication'
 import { FormScreen } from '../components/form/FormScreen'
 import { tax } from '../lib/messages'
 import { InputFields, OJOIFieldBaseProps } from '../lib/types'
@@ -17,53 +15,6 @@ import {
 import { BaseInputController } from '../components/input/BaseInputController'
 export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
-
-  const { updateApplicationV2 } = useApplication({
-    applicationId: props.application.id,
-  })
-
-  // useEffect(() => {
-  //   updateApplicationV2({
-  //     path: InputFields.incomeLastYear.salary,
-  //     value: [
-  //       {
-  //         title: 'Norðurljós Software ehf',
-  //         value: '9360000',
-  //       },
-  //       {
-  //         title: 'Mús og merki',
-  //         value: '960000',
-  //       },
-  //     ],
-  //   })
-  //   updateApplicationV2({
-  //     path: InputFields.incomeLastYear.benefits,
-  //     value: [
-  //       {
-  //         title: 'Ökutækjastyrkur',
-  //         value: '0',
-  //       },
-  //       {
-  //         title: 'Dagpeningar',
-  //         value: '120000',
-  //       },
-  //       {
-  //         title: 'Húsnæðishlunnindi',
-  //         value: '0',
-  //       },
-  //     ],
-  //   })
-  //   updateApplicationV2({
-  //     path: InputFields.incomeLastYear.compensation,
-  //     value: [
-  //       {
-  //         title: 'Norðurljós Software ehf',
-  //         value: '12000',
-  //         details: 'Íþróttastyrkur',
-  //       },
-  //     ],
-  //   })
-  // }, [])
 
   return (
     <FormScreen

@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
 import { useLocale } from '@island.is/localization'
-import { useApplication } from '../hooks/useUpdateApplication'
 import { FormScreen } from '../components/form/FormScreen'
 import { taxEndOfYear, tax } from '../lib/messages'
 import { InputFields, OJOIFieldBaseProps } from '../lib/types'
@@ -14,40 +12,9 @@ import {
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { BaseInputController } from '../components/input/BaseInputController'
-import { amountFormat, sumOfBaseEntity } from '../lib/utils'
+import { sumOfBaseEntity } from '../lib/utils'
 export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
-  const { updateApplicationV2 } = useApplication({
-    applicationId: props.application.id,
-  })
-
-  // useEffect(() => {
-  //   updateApplicationV2({
-  //     path: InputFields.endOfYear.housing,
-  //     value: [
-  //       {
-  //         title: '210-9876',
-  //         details: 'Bláfjallagata 12',
-  //         value: '52000000',
-  //       },
-  //     ],
-  //   })
-  //   updateApplicationV2({
-  //     path: InputFields.endOfYear.vehicles,
-  //     value: [
-  //       {
-  //         title: 'KB-521',
-  //         details: '2021',
-  //         value: '3100000',
-  //       },
-  //       {
-  //         title: 'JU-329',
-  //         details: '2012',
-  //         value: '450000',
-  //       },
-  //     ],
-  //   })
-  // }, [])
 
   return (
     <FormScreen
