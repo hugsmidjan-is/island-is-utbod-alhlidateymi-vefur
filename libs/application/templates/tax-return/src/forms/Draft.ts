@@ -2,6 +2,7 @@ import {
   buildCustomField,
   buildForm,
   buildSection,
+  buildSubmitField,
 } from '@island.is/application/core'
 import { Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
@@ -58,8 +59,12 @@ export const Draft: Form = buildForm({
       title: tax.interestChargesTitle,
       children: [
         buildCustomField({
-          id: 'original',
+          id: Routes.INTEREST_CHARGES,
           component: 'InterestChargesScreen',
+        }),
+        buildCustomField({
+          id: Routes.SECOND_INTEREST_CHARGES,
+          component: 'SecondInterestChargesScreen',
         }),
       ],
     }),

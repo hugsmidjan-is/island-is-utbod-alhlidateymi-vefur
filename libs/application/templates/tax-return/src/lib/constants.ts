@@ -41,6 +41,7 @@ export enum Routes {
   CAPITAL_INCOME = 'capitalIncome',
   END_OF_YEAR = 'endOfYear',
   INTEREST_CHARGES = 'interestCharges',
+  SECOND_INTEREST_CHARGES = 'secondInterestCharges',
 }
 
 // this will be replaced with correct values once the api is ready

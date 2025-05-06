@@ -148,3 +148,15 @@ export const taxEndOfYear = defineMessages({
     defaultMessage: 'Verð',
   },
 })
+
+export const taxInterestCharges = defineMessages({
+  interestChargesTitle: {
+    id: 'taxReturn.application:interestCharges.title',
+    defaultMessage: 'Skuldir og vaxtagjöld',
+  },
+  interestChargesIntro: {
+    id: 'taxReturn.application:interestCharges.intro',
+    defaultMessage:
+      '5.2 Lán vegna kaupa eða byggingar íbúðarhúsnæðis til eigin nota.',
+  },
+})
