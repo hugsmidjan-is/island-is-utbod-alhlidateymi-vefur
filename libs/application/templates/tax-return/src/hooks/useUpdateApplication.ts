@@ -6,7 +6,7 @@ import {
   CREATE_APPLICATION,
 } from '@island.is/application/graphql'
 import { useLocale } from '@island.is/localization'
-import { partialSchema2 } from '../lib/dataSchema'
+import { applicationSchema } from '../lib/dataSchema'
 import { OJOIApplication } from '../lib/types'
 import { DEBOUNCE_INPUT_TIMER } from '../lib/constants'
 import { ApplicationTypes } from '@island.is/application/types'
@@ -68,7 +68,7 @@ export const useApplication = ({ applicationId }: OJOIUseApplicationParams) => {
   ] = useMutation(POST_APPLICATION_MUTATION)
 
   const updateApplication = async (
-    input: Partial<partialSchema2>,
+    input: Partial<applicationSchema>,
     cb?: () => void,
   ) => {
     await updateApplicationMutation({
@@ -166,7 +166,7 @@ export const useApplication = ({ applicationId }: OJOIUseApplicationParams) => {
   )
 
   const debouncedOnUpdateApplicationHandler = (
-    input: partialSchema2,
+    input: applicationSchema,
     cb?: () => void,
   ) => {
     debouncedUpdateApplication.cancel()

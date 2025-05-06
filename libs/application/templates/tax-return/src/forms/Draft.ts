@@ -18,7 +18,7 @@ export const Draft: Form = buildForm({
       title: tax.generalInfoTitle,
       children: [
         buildCustomField({
-          id: 'generalInfo',
+          id: Routes.GENERAL_INFO,
           component: 'GeneralInfoScreen',
         }),
       ],
@@ -28,7 +28,7 @@ export const Draft: Form = buildForm({
       title: tax.lastIncomeTitle,
       children: [
         buildCustomField({
-          id: 'advert',
+          id: Routes.INCOME_LAST_YEAR,
           component: 'IncomeLastYearScreen',
         }),
       ],

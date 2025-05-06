@@ -1,10 +1,6 @@
 import { z } from 'zod'
-import { additionSchema, baseEntitySchema } from './dataSchema'
 import { FAST_TRACK_DAYS } from './constants'
 import { MessageDescriptor } from 'react-intl'
-import { v4 as uuid } from 'uuid'
-import { getHolidays } from 'fridagar'
-import { toISODate } from '@island.is/regulations'
 
 export const countDaysAgo = (date: Date) => {
   const now = new Date()
@@ -13,29 +9,8 @@ export const countDaysAgo = (date: Date) => {
   return Math.floor(diff / (1000 * 3600 * 24))
 }
 
-const isWeekday = (date: Date) => {
-  const day = date.getDay()
-  return day !== 0 && day !== 6
-}
-
 type IsHolidayMap = Record<string, true | undefined>
 const holidayCache: Record<number, IsHolidayMap | undefined> = {}
-
-const getHolidayMap = (year: number): IsHolidayMap => {
-  let yearHolidays = holidayCache[year]
-  if (!yearHolidays) {
-    const holidayMap: IsHolidayMap = {}
-    getHolidays(year).forEach((holiday) => {
-      holidayMap[toISODate(holiday.date)] = true
-    })
-    yearHolidays = holidayCache[year] = holidayMap
-  }
-  return yearHolidays
-}
-
-const getDateString = (date: Date) => {
-  return date.toISOString().split('T')[0]
-}
 
 export const getEmptyMember = () => ({
   name: '',
@@ -49,29 +24,6 @@ export enum TitlePrefix {
   Appendix = 'Viðauki',
   Attachment = 'Fylgiskjal',
 }
-
-export const getAddition = (
-  titlePrefix: TitlePrefix,
-  index: number,
-  roman = true,
-): z.infer<typeof additionSchema>[number] => ({
-  id: uuid(),
-  title: roman
-    ? `${titlePrefix} ${convertNumberToRoman(index)}`
-    : `${titlePrefix} ${index}`,
-  content: '',
-  type: 'html',
-})
-
-export const isBaseEntity = (
-  entity: unknown,
-): entity is z.infer<typeof baseEntitySchema> =>
-  baseEntitySchema.safeParse(entity).success
-
-export const isAddition = (
-  addition: unknown,
-): addition is z.infer<typeof additionSchema> =>
-  additionSchema.safeParse(addition).success
 
 export const parseZodIssue = (issue: z.ZodCustomIssue) => {
   const path = issue.path.join('.')
