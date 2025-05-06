@@ -1,18 +1,16 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
-import { error, summary, tax, taxGeneralInfo } from '../lib/messages'
+import { tax, taxGeneralInfo } from '../lib/messages'
 import { OJOIFieldBaseProps } from '../lib/types'
 import {
   Box,
   Divider,
   GridColumn,
   GridRow,
-  Input,
   Stack,
   Text,
 } from '@island.is/island-ui/core'
 import { Property } from '../components/property/Property'
-import { m } from '@island.is/react-spa/shared'
 import {
   InputController,
   PhoneInputController,

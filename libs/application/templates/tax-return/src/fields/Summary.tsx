@@ -14,7 +14,6 @@ import { useUserInfo } from '@island.is/react-spa/bff'
 import { useEffect } from 'react'
 import { ZodCustomIssue } from 'zod'
 import { Property } from '../components/property/Property'
-import { usePrice } from '../hooks/usePrice'
 import { useApplication } from '../hooks/useUpdateApplication'
 import { Routes } from '../lib/constants'
 import {
@@ -38,10 +37,6 @@ export const Summary = ({
   })
 
   const user = useUserInfo()
-
-  const { price, loading: loadingPrice } = usePrice({
-    applicationId: application.id,
-  })
 
   const selectedCategories = application.answers?.advert?.categories
 
@@ -242,11 +237,6 @@ export const Summary = ({
               )}
             </Tag>
           }
-        />
-        <Property
-          loading={loadingPrice}
-          name={f(summary.properties.estimatedPrice)}
-          value={`${formatNumber(price)}. kr`}
         />
         <Property
           name={f(summary.properties.classification)}

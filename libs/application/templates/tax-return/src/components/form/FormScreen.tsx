@@ -2,15 +2,11 @@ import {
   AlertMessage,
   AlertMessageProps,
   Box,
-  Button,
-  Inline,
-  LinkV2,
   SkeletonLoader,
   Text,
 } from '@island.is/island-ui/core'
 import * as styles from './FormScreen.css'
 import { useLocale } from '@island.is/localization'
-import { general } from '../../lib/messages'
 import { OJOI_INPUT_HEIGHT, Routes } from '../../lib/constants'
 
 type WarningProps = {
@@ -42,7 +38,7 @@ export const FormScreen = ({
 
   const warningTitle = warning?.title
     ? warning.title
-    : formatMessage(general.warningTitle)
+    : formatMessage('Viðvörun')
 
   if (!title && !intro && !children) return null
 

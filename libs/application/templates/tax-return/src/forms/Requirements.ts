@@ -3,26 +3,14 @@ import {
   buildForm,
   buildMultiField,
   buildSection,
-  buildSubmitField,
 } from '@island.is/application/core'
-import { DefaultEvents, Form, FormModes } from '@island.is/application/types'
+import { Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
-import {
-  attachments,
-  general,
-  advert,
-  original,
-  requirements,
-  preview,
-  publishing,
-  summary,
-  involvedParty,
-  tax,
-} from '../lib/messages'
+import { tax } from '../lib/messages'
 
 export const Requirements: Form = buildForm({
   id: 'OfficialJournalOfIcelandApplication',
-  title: general.applicationName,
+  title: tax.applicationName,
   mode: FormModes.DRAFT,
   children: [
     buildSection({

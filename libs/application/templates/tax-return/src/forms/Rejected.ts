@@ -6,7 +6,6 @@ import {
 import { Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
 import { tax } from '../lib/messages'
-import { rejected } from '../lib/messages'
 export const Rejected: Form = buildForm({
   id: 'OfficialJournalOfIcelandAdvertOfIcelandApplication',
   title: 'Skilyrði',
@@ -41,7 +40,7 @@ export const Rejected: Form = buildForm({
     }),
     buildSection({
       id: Routes.REJECTED,
-      title: rejected.general.section,
+      title: 'Umsókn hafnað',
       children: [
         buildCustomField({
           id: 'rejected',

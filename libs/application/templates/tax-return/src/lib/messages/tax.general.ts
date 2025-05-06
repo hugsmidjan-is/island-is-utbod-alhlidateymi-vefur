@@ -37,6 +37,18 @@ export const tax = defineMessages({
     id: 'taxReturn.application:interestCharges.title',
     defaultMessage: 'Skuldir og vaxtagjöld',
   },
+  draftStatusLabel: {
+    id: 'taxReturn.application:general.draftStatusLabel',
+    defaultMessage: 'Í vinnslu hjá innsendanda',
+  },
+  sendApplication: {
+    id: 'taxReturn.application:general.sendApplication',
+    defaultMessage: 'Senda umsókn',
+  },
+  submittedStatusLabel: {
+    id: 'taxReturn.application:general.submittedStatusLabel',
+    defaultMessage: 'Framtal sent til Skattsins',
+  },
 })
 
 export const taxGeneralInfo = defineMessages({

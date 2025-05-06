@@ -7,7 +7,6 @@ import {
 import { Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
 import { tax } from '../lib/messages'
-import { submitted } from '../lib/messages/submitted'
 export const Submitted: Form = buildForm({
   id: 'OfficialJournalOfIcelandApplication',
   mode: FormModes.IN_PROGRESS,
@@ -39,7 +38,7 @@ export const Submitted: Form = buildForm({
     }),
     buildSection({
       id: Routes.COMPLETE,
-      title: submitted.general.section,
+      title: 'Umsókn lokið',
       children: [
         buildMultiField({
           children: [
