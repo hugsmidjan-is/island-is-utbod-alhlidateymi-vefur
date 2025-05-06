@@ -61,7 +61,7 @@ export const OJOIInputController = ({
         backgroundColor={'blue'}
         placeholder={placeholderText}
         label={labelText}
-        suffix={suffix ?? 'kr'}
+        suffix={suffix ?? ' kr.'}
         value={defaultValue}
         //format={format}
         maxLength={maxLength}
@@ -71,6 +71,7 @@ export const OJOIInputController = ({
         name={name}
         decimalSeparator={','}
         thousandSeparator={'.'}
+        style={{ paddingRight: 0, paddingLeft: '8' }}
       />
     )
   }

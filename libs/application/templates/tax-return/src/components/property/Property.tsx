@@ -7,7 +7,7 @@ import cn from 'classnames'
 
 type Props = {
   name: string
-  value?: string | React.ReactNode
+  value?: string
   loading?: boolean
   type?: 'input' | 'text'
 }
@@ -47,7 +47,7 @@ export const Property = ({
               <OJOIInputController
                 name={name}
                 label={''}
-                defaultValue={'123'}
+                defaultValue={value}
                 textarea={false}
                 maxLength={180}
                 type={'number'}

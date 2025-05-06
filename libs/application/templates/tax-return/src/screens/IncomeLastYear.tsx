@@ -19,27 +19,28 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
             {f(tax.lastIncomeLabel)}
           </Text>
         </Box>
+
+        <Stack space={0} dividers>
+          <Property
+            name={'Norðurljós Software ehf'}
+            type={'input'}
+            value="9360000"
+          />
+          <Property name={'Mús og merki'} type={'input'} value="960000" />
+        </Stack>
       </Box>
-      <Stack space={0} dividers>
-        <Property
-          name={'Norðurljós Software ehf'}
-          type={'input'}
-          value="9360000"
-        />
-        <Property name={'Mús og merki'} type={'input'} value="960000" />
-      </Stack>
       <Box>
         <Box marginBottom={2}>
           <Text fontWeight="semiBold" variant="h4">
             {f(tax.extraIncomeLabel)}
           </Text>
         </Box>
+        <Stack space={0} dividers>
+          <Property name={'Ökutækjastyrkur'} type={'input'} value="0" />
+          <Property name={'Dagpeningar'} type={'input'} value="120000" />
+          <Property name={'Húsnæðishlunnindi'} type={'input'} value="0" />
+        </Stack>
       </Box>
-      <Stack space={0} dividers>
-        <Property name={'Ökutækjastyrkur'} type={'input'} value="0" />
-        <Property name={'Dagpeningar'} type={'input'} value="120000" />
-        <Property name={'Húsnæðishlunnindi'} type={'input'} value="0" />
-      </Stack>
       <Box>
         <Box marginBottom={2}>
           <Text fontWeight="semiBold" variant="h4">
@@ -49,10 +50,10 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
             {f(tax.pensionIncomeLabelTwo)}
           </Text>
         </Box>
+        <Stack space={0} dividers>
+          <p>Insert table</p>
+        </Stack>
       </Box>
-      <Stack space={0} dividers>
-        <p>Insert table</p>
-      </Stack>
     </FormScreen>
   )
 }
