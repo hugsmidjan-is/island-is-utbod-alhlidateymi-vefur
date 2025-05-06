@@ -91,6 +91,7 @@ import {
   SyslumennDefaultHeader,
   SyslumennFooter,
 } from './Themes/SyslumennTheme'
+import { SkatturinnFooter } from './Themes/Tax'
 import { UniversityStudiesHeader } from './Themes/UniversityStudiesTheme'
 import UniversityStudiesFooter from './Themes/UniversityStudiesTheme/UniversityStudiesFooter'
 import { UtlendingastofnunFooter } from './Themes/UtlendingastofnunTheme'
@@ -579,7 +580,6 @@ export const OrganizationFooter: React.FC<
   let OrganizationFooterComponent = null
 
   const { isServiceWeb } = useContext(GlobalContext)
-
   switch (organization?.slug) {
     case 'syslumenn':
     case 'district-commissioner':
@@ -813,6 +813,16 @@ export const OrganizationFooter: React.FC<
             links={n('digitalIcelandFooterLinks', [])}
           />
         </GridContainer>
+      )
+      break
+
+    case 'skatturinn':
+      OrganizationFooterComponent = (
+        <SkatturinnFooter
+          footerItems={organization.footerItems}
+          namespace={namespace}
+          organizationSlug={organization.slug}
+        />
       )
       break
     default: {
