@@ -294,6 +294,20 @@ export const MY_USER_INFO_QUERY = gql`
   }
 `
 
+export const TEST_QUERY_TH = gql`
+  query MyTestInfo {
+    TaxApplicationGetPrefilled {
+      prefill {
+        nationalId
+        income {
+          id
+          type
+        }
+      }
+    }
+  }
+`
+
 export const CATEGORIES_QUERY = gql`
   query AdvertCategories($params: OfficialJournalOfIcelandQueryInput!) {
     officialJournalOfIcelandCategories(params: $params) {

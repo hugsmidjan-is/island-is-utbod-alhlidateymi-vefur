@@ -112,6 +112,7 @@ import {
   OfficialJournalOfIcelandClientConfig,
   OfficialJournalOfIcelandClientModule,
 } from '@island.is/clients/official-journal-of-iceland'
+import { TaxApplicationModule } from '@island.is/api/domains/tax-application'
 import { OfficialJournalOfIcelandApplicationClientConfig } from '@island.is/clients/official-journal-of-iceland/application'
 import { HmsLoansClientConfig } from '@island.is/clients/hms-loans'
 import { HousingBenefitCalculatorClientConfig } from '@island.is/clients/housing-benefit-calculator'
@@ -300,6 +301,7 @@ const environment = getConfig
     DisabilityLicenseModule,
     FiskistofaModule,
     WatsonAssistantChatModule,
+    TaxApplicationModule,
     IcelandicGovernmentInstitutionVacanciesModule,
     AircraftRegistryModule,
     ShipRegistryModule,

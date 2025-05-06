@@ -173,9 +173,6 @@
       "@island.is/api/domains/official-journal-of-iceland-application": [
         "libs/api/domains/official-journal-of-iceland-application/src/index.ts"
       ],
-      "@island.is/api/domains/tax-application": [
-        "libs/api/domains/tax-application/src/index.ts"
-      ],
       "@island.is/api/domains/passport": [
         "libs/api/domains/passport/src/index.ts"
       ],
@@ -223,6 +220,9 @@
       ],
       "@island.is/api/domains/syslumenn": [
         "libs/api/domains/syslumenn/src/index.ts"
+      ],
+      "@island.is/api/domains/tax-application": [
+        "libs/api/domains/tax/src/index.ts"
       ],
       "@island.is/api/domains/temporary-voter-registry": [
         "libs/api/domains/temporary-voter-registry/src/index.ts"
@@ -769,9 +769,6 @@
       "@island.is/clients/official-journal-of-iceland/application": [
         "libs/clients/official-journal-of-iceland/application/src/index.ts"
       ],
-      "@island.is/clients/tax/application": [
-        "libs/clients/tax/application/src/index.ts"
-      ],
       "@island.is/clients/p-card": ["libs/clients/p-card/src/index.ts"],
       "@island.is/clients/passports": ["libs/clients/passports/src/index.ts"],
       "@island.is/clients/payment-schedule": [
@@ -814,6 +811,9 @@
       ],
       "@island.is/clients/statistics": ["libs/clients/statistics/src/index.ts"],
       "@island.is/clients/syslumenn": ["libs/clients/syslumenn/src/index.ts"],
+      "@island.is/clients/tax/application": [
+        "libs/clients/tax/application/src/index.ts"
+      ],
       "@island.is/clients/transport-authority/digital-tachograph-drivers-card": [
         "libs/clients/transport-authority/digital-tachograph-drivers-card/src/index.ts"
       ],
