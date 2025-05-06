@@ -172,6 +172,18 @@ export const requirements = {
       defaultMessage: 'Gagnaöflun',
       description: 'Title of requirements form',
     },
+    subTitle: {
+      id: 'taxReturn.application:requirements.general.subTitle',
+      defaultMessage: 'Eftirfarandi upplýsingar verða sóttar rafrænt',
+    },
+    taxProviderTitle: {
+      id: 'taxReturn.application:requirements.general.taxProviderTitle',
+      defaultMessage: 'Upplýsingar frá Skattinum',
+    },
+    taxProviderSubTitle: {
+      id: 'taxReturn.application:requirements.general.taxProviderSubTitle',
+      defaultMessage: 'Upplýsingar fyrir skattframtal 2024.',
+    },
     intro: {
       id: 'taxReturn.application:requirements.general.intro',
       defaultMessage: `Upplýsingar frá Þjóðskrá, RSK og Útlendingarstofnun{br}
