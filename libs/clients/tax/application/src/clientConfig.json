@@ -1,61 +1,11 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/v1/person/{nationalId}": {
-      "get": {
-        "operationId": "getPersonByNationalId",
-        "summary": "",
-        "parameters": [
-          {
-            "name": "nationalId",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/GetPersonResponse" }
-              }
-            }
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/BadRequestResponse" }
-              }
-            }
-          },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/NotFoundResponse" }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InternalServerErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["National Registry"]
-      }
-    },
     "/api/v1/tax-return/prefill/{nationalId}/{year}": {
       "get": {
         "operationId": "getTaxReturnPrefillByNationalIdAndYear",
-        "summary": "",
+        "summary": "Get tax return prefill for a person",
+        "description": "Given a national ID and year, returns the tax return prefill.\n\nThis endpoint is used by the tax return frontend to get prefilled data for the tax return form.\n\nIf no prefill is found, returns 404.",
         "parameters": [
           {
             "name": "nationalId",
@@ -108,13 +58,80 @@
             }
           }
         },
-        "tags": ["Tax Return"]
+        "tags": ["Tax Return public API"]
+      }
+    },
+    "/api/v1/tax-return/submit/{nationalId}/{year}": {
+      "post": {
+        "operationId": "submitTaxReturnByNationalIdAndYear",
+        "summary": "",
+        "parameters": [
+          {
+            "name": "nationalId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "year",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SubmitTaxReturnBody" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostPersonSubmitResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BadRequestResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NotFoundResponse" }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Tax Return public API"]
       }
     }
   },
   "info": {
-    "title": "Project API",
-    "description": "API for the project.",
+    "title": "Digitial Iceland 2025 tender API project",
+    "description": "Single API for all the projects in Digital Iceland 2025 tender.",
     "version": "1.0",
     "contact": {}
   },
@@ -122,74 +139,305 @@
   "servers": [],
   "components": {
     "schemas": {
-      "Address": {
+      "TaxReturnIncomeType": {
         "type": "object",
         "properties": {
-          "address": {
+          "id": {
             "type": "string",
-            "description": "Street address",
-            "example": "Lækjargata 1",
+            "description": "ID of the income return type",
             "nullable": false
           },
-          "postalCode": {
+          "name": {
             "type": "string",
-            "description": "Postal code",
-            "example": "101",
-            "nullable": false
-          },
-          "city": {
-            "type": "string",
-            "description": "City",
-            "example": "Reykjavík",
+            "description": "Name of the income return type",
             "nullable": false
           }
         },
-        "required": ["address", "postalCode", "city"]
+        "required": ["id", "name"]
       },
-      "Person": {
+      "TaxReturnIncomeLine": {
         "type": "object",
         "properties": {
-          "name": {
+          "id": {
             "type": "string",
-            "description": "Name of the person",
-            "example": "Jón Jónsson",
+            "description": "ID of the income return line",
             "nullable": false
           },
+          "incomeType": {
+            "description": "Income type of the income return, references the income type list.",
+            "nullable": false,
+            "allOf": [{ "$ref": "#/components/schemas/TaxReturnIncomeType" }]
+          },
+          "label": {
+            "type": "string",
+            "description": "Label of the income return line",
+            "nullable": false
+          },
+          "payer": {
+            "type": "string",
+            "description": "Optional payer of the income return line",
+            "nullable": true
+          },
+          "value": {
+            "type": "number",
+            "description": "Value of the income return line",
+            "nullable": false
+          }
+        },
+        "required": ["id", "incomeType", "label", "payer", "value"]
+      },
+      "TaxReturnIncome": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the income return",
+            "nullable": false
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the income return, either `prefill` or `submit`",
+            "example": "prefill",
+            "enum": ["prefill", "submit"],
+            "nullable": false
+          },
+          "incomeLines": {
+            "description": "Income lines",
+            "nullable": false,
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxReturnIncomeLine" }
+          }
+        },
+        "required": ["id", "type", "incomeLines"]
+      },
+      "TaxReturnDebtType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the debt type",
+            "nullable": false
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the debt type",
+            "nullable": false
+          }
+        },
+        "required": ["id", "name"]
+      },
+      "TaxReturnDebtLine": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the debt return line",
+            "nullable": false
+          },
+          "debtType": {
+            "description": "Debt type of the debt return, references the debt type list.",
+            "nullable": false,
+            "allOf": [{ "$ref": "#/components/schemas/TaxReturnDebtType" }]
+          },
+          "label": {
+            "type": "string",
+            "description": "Label of the debt return line",
+            "nullable": false
+          },
+          "originationDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Optional originating date of the debt return line"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Optional identifier of the debt return line"
+          },
+          "term": {
+            "type": "number",
+            "description": "Term of the debt return line"
+          },
+          "outstandingPrincipal": {
+            "type": "number",
+            "description": "Outstanding principal of the debt return line",
+            "nullable": false
+          },
+          "interestAmount": {
+            "type": "number",
+            "description": "Optional interest amount of the debt return line"
+          },
+          "annualTotalPayment": {
+            "type": "number",
+            "description": "Optional annual total payment of the debt return line"
+          },
+          "annualTotalPrincipalPayment": {
+            "type": "number",
+            "description": "Optional annual total interest payment of the debt return line"
+          },
+          "creditorId": {
+            "type": "string",
+            "description": "Optional creditor id of the debt return line"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Optional currency of the debt return line",
+            "default": "ISK"
+          }
+        },
+        "required": [
+          "id",
+          "debtType",
+          "label",
+          "originationDate",
+          "identifier",
+          "term",
+          "outstandingPrincipal",
+          "interestAmount",
+          "annualTotalPayment",
+          "annualTotalPrincipalPayment",
+          "creditorId",
+          "currency"
+        ]
+      },
+      "TaxReturnDebt": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the debt return",
+            "nullable": false
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the debt return, either `prefill` or `submit`",
+            "example": "prefill",
+            "enum": ["prefill", "submit"],
+            "nullable": false
+          },
+          "debtLines": {
+            "description": "Debt lines",
+            "nullable": false,
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxReturnDebtLine" }
+          }
+        },
+        "required": ["id", "type", "debtLines"]
+      },
+      "TaxReturnPropertyLine": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the property line",
+            "nullable": false
+          },
+          "propertyId": {
+            "type": "string",
+            "description": "ID of the property this line belongs to",
+            "nullable": false
+          },
+          "label": {
+            "type": "string",
+            "description": "Label of the property line",
+            "nullable": false
+          },
+          "identifier": {
+            "type": "string",
+            "description": "Identifier of the property line",
+            "nullable": false
+          },
+          "value": {
+            "type": "number",
+            "description": "Value of the property line",
+            "nullable": false
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency of the property line",
+            "default": "ISK"
+          },
+          "propertyTypeId": {
+            "type": "string",
+            "description": "ID of the property type this line belongs to",
+            "nullable": false
+          }
+        },
+        "required": [
+          "id",
+          "propertyId",
+          "label",
+          "identifier",
+          "value",
+          "currency",
+          "propertyTypeId"
+        ]
+      },
+      "TaxReturnProperty": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the property return",
+            "nullable": false
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the property return, either `prefill` or `submit`",
+            "example": "prefill",
+            "enum": ["prefill", "submit"],
+            "nullable": false
+          },
+          "propertyLines": {
+            "description": "Property lines",
+            "nullable": false,
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxReturnPropertyLine" }
+          }
+        },
+        "required": ["id", "type", "propertyLines"]
+      },
+      "PersonPrefill": {
+        "type": "object",
+        "properties": {
           "nationalId": {
             "type": "string",
             "description": "National ID of the person",
             "example": "1234567890",
             "nullable": false
           },
-          "email": {
-            "type": "string",
-            "description": "Email address of the person",
-            "example": "nn@example.org",
-            "nullable": true
+          "year": {
+            "type": "number",
+            "description": "Year of the tax return prefill",
+            "example": 2025,
+            "nullable": false
           },
-          "phoneNumber": {
-            "type": "string",
-            "description": "Phone number of the person",
-            "example": "+354 333 4567",
-            "nullable": true
+          "income": {
+            "description": "Income part of the tax return prefill",
+            "nullable": false,
+            "allOf": [{ "$ref": "#/components/schemas/TaxReturnIncome" }]
           },
-          "address": {
-            "description": "Address of the person",
-            "nullable": true,
-            "allOf": [{ "$ref": "#/components/schemas/Address" }]
+          "debt": {
+            "description": "Debt part of the tax return prefill",
+            "nullable": false,
+            "allOf": [{ "$ref": "#/components/schemas/TaxReturnDebt" }]
+          },
+          "property": {
+            "description": "Property part of the tax return prefill",
+            "nullable": false,
+            "allOf": [{ "$ref": "#/components/schemas/TaxReturnProperty" }]
           }
         },
-        "required": ["name", "nationalId"]
+        "required": ["nationalId", "year", "income", "debt", "property"]
       },
-      "GetPersonResponse": {
+      "GetPersonPrefillResponse": {
         "type": "object",
         "properties": {
-          "person": {
-            "description": "Person",
-            "allOf": [{ "$ref": "#/components/schemas/Person" }]
+          "prefill": {
+            "description": "Tax return prefill for a person",
+            "allOf": [{ "$ref": "#/components/schemas/PersonPrefill" }]
           }
         },
-        "required": ["person"]
+        "required": ["prefill"]
       },
       "BadRequestResponse": {
         "type": "object",
@@ -227,50 +475,27 @@
         },
         "required": ["message"]
       },
-      "TaxReturnIncome": {
+      "SubmitTaxReturnBody": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "ID of the income return",
-            "nullable": false
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the income return, either `prefill` or `submit`",
-            "example": "prefill",
-            "enum": ["prefill", "submit"],
-            "nullable": false
-          }
-        },
-        "required": ["id", "type"]
-      },
-      "PersonPrefill": {
-        "type": "object",
-        "properties": {
-          "nationalId": {
-            "type": "string",
-            "description": "National ID of the person",
-            "example": "1234567890",
-            "nullable": false
-          },
-          "income": {
-            "description": "Income part of the tax return prefill",
+          "incomeLines": {
+            "description": "Income lines",
             "nullable": false,
-            "allOf": [{ "$ref": "#/components/schemas/TaxReturnIncome" }]
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxReturnIncomeLine" }
           }
         },
-        "required": ["nationalId", "income"]
+        "required": ["incomeLines"]
       },
-      "GetPersonPrefillResponse": {
+      "PostPersonSubmitResponse": {
         "type": "object",
         "properties": {
-          "prefill": {
-            "description": "PersonPrefill",
+          "submit": {
+            "description": "Tax return submit response for a person",
             "allOf": [{ "$ref": "#/components/schemas/PersonPrefill" }]
           }
         },
-        "required": ["prefill"]
+        "required": ["submit"]
       }
     }
   }

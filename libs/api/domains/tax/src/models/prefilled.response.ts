@@ -1,5 +1,65 @@
 import { Field, ObjectType, Int, Float } from '@nestjs/graphql'
 
+@ObjectType('DebtType')
+export class DebtType {
+  @Field({ description: 'The ID of the debt type' })
+  id!: string
+
+  @Field({ description: 'The name of the debt type' })
+  name!: string
+}
+
+@ObjectType('DebtLine')
+export class DebtLine {
+  @Field({ description: 'The ID of the debt line' })
+  id!: string
+
+  @Field(() => DebtType, { description: 'The type of debt' })
+  debtType!: DebtType
+
+  @Field({ description: 'The label of the debt line' })
+  label!: string
+
+  @Field(() => Float, { description: 'The outstanding principal amount' })
+  outstandingPrincipal!: number
+
+  @Field({ nullable: true, description: 'The origination date of the debt' })
+  originationDate?: string
+
+  @Field({ nullable: true, description: 'The identifier of the debt' })
+  identifier?: string
+
+  @Field({ nullable: true, description: 'The term of the debt in months' })
+  term?: number
+
+  @Field(() => Float, { description: 'The interest amount' })
+  interestAmount!: number
+
+  @Field({ nullable: true, description: 'The annual total payment' })
+  annualTotalPayment?: number
+
+  @Field({ nullable: true, description: 'The annual total principal payment' })
+  annualTotalPrincipalPayment?: number
+
+  @Field({ nullable: true, description: 'The creditor ID' })
+  creditorId?: string
+
+  @Field({ description: 'The currency of the debt' })
+  currency!: string
+}
+
+@ObjectType('Debt')
+export class Debt {
+  @Field({ description: 'The ID of the debt' })
+  id!: string
+
+  @Field({ description: 'The type of the debt' })
+  type!: string
+
+  @Field(() => [DebtLine], { description: 'The list of debt lines' })
+  debtLines!: DebtLine[]
+}
+
 @ObjectType('IncomeType')
 export class IncomeType {
   @Field({ description: 'The ID of the income type' })
@@ -42,13 +102,60 @@ export class Income {
   incomeLines!: IncomeLine[]
 }
 
+@ObjectType('PropertyLine')
+export class PropertyLine {
+  @Field({ description: 'The ID of the property line' })
+  id!: string
+
+  @Field({ description: 'The label of the property line' })
+  label!: string
+
+  @Field({ description: 'The identifier of the property line' })
+  identifier!: string
+
+  @Field(() => Float, { description: 'The value of the property line' })
+  value!: number
+
+  @Field({ description: 'The currency of the property line' })
+  currency!: string
+
+  @Field({ description: 'The property ID associated with the property line' })
+  propertyId!: string
+
+  @Field({
+    description: 'The property type ID associated with the property line',
+  })
+  propertyTypeId!: string
+}
+
+@ObjectType('Property')
+export class Property {
+  @Field({ description: 'The ID of the property' })
+  id!: string
+
+  @Field({ description: 'The type of the property' })
+  type!: string
+
+  @Field(() => [PropertyLine], { description: 'The list of property lines' })
+  propertyLines!: PropertyLine[]
+}
+
 @ObjectType('Prefill')
 export class Prefill {
   @Field(() => Int, { description: 'The national ID of the user' })
   nationalId!: number
 
+  @Field(() => Int, { description: 'The year of the prefill data' })
+  year!: number
+
   @Field(() => Income, { description: 'The income details' })
   income!: Income
+
+  @Field(() => Debt, { description: 'The debt details' })
+  debt!: Debt
+
+  @Field(() => Property, { description: 'The property details' })
+  property!: Property
 }
 
 @ObjectType('PrefilledIncomeResponse')

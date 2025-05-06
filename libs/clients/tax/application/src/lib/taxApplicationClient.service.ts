@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { TaxReturnApi } from '../../gen/fetch'
+import { TaxReturnPublicAPIApi } from '../../gen/fetch'
 import { LOGGER_PROVIDER } from '@island.is/logging'
 import type { Logger } from '@island.is/logging'
 import { Auth, AuthMiddleware } from '@island.is/auth-nest-tools'
@@ -9,7 +9,7 @@ const LOG_CATEGORY = 'tax-application-client-service'
 @Injectable()
 export class TaxApplicationClientService {
   constructor(
-    private readonly taxApplicationApi: TaxReturnApi,
+    private readonly taxApplicationApi: TaxReturnPublicAPIApi,
     @Inject(LOGGER_PROVIDER)
     private logger: Logger,
   ) {}
