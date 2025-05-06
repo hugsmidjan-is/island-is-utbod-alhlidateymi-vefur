@@ -33,7 +33,7 @@ export const Draft: Form = buildForm({
         }),
       ],
     }),
-    buildSection({
+    /*buildSection({
       id: Routes.CAPITAL_INCOME,
       title: tax.capitalIncomeTitle,
       children: [
@@ -42,7 +42,7 @@ export const Draft: Form = buildForm({
           component: 'CapitalIncomeScreen',
         }),
       ],
-    }),
+    }),*/
     buildSection({
       id: Routes.END_OF_YEAR,
       title: tax.endOfYearTitle,

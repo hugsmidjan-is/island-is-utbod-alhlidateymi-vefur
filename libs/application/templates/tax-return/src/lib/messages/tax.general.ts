@@ -27,7 +27,7 @@ export const tax = defineMessages({
   },
   lastIncomeLabel: {
     id: 'taxReturn.application:lastIncome.label',
-    defaultMessage: '2.1 Launatekjur og stafstengdar greiðslur',
+    defaultMessage: '2.1 Launatekjur og starfstengdar greiðslur',
   },
   extraIncomeLabel: {
     id: 'taxReturn.application:extraIncome.label',
@@ -111,5 +111,40 @@ export const taxGeneralInfo = defineMessages({
   phone: {
     id: 'taxReturn.application:generalInfo.phone',
     defaultMessage: 'Símanúmer',
+  },
+})
+
+export const taxEndOfYear = defineMessages({
+  fasteignLabel: {
+    id: 'taxReturn.application:endOfYear.fasteignLabel',
+    defaultMessage: '4.1 Innlendar fasteignir',
+  },
+  fastanumer: {
+    id: 'taxReturn.application:endOfYear.fasteign.fastanumer',
+    defaultMessage: 'Fastanúmer',
+  },
+  fasteign: {
+    id: 'taxReturn.application:endOfYear.fasteign.fasteign',
+    defaultMessage: 'Fasteign',
+  },
+  fasteignamat: {
+    id: 'taxReturn.application:endOfYear.fasteign.fasteignamat',
+    defaultMessage: 'Fasteignamat',
+  },
+  vehicleLabel: {
+    id: 'taxReturn.application:endOfYear.vehicleLabel',
+    defaultMessage: '4.3 Bifreiðir',
+  },
+  numer: {
+    id: 'taxReturn.application:endOfYear.vehicle.numer',
+    defaultMessage: 'Númer',
+  },
+  kaupar: {
+    id: 'taxReturn.application:endOfYear.vehicle.kaupar',
+    defaultMessage: 'Kaupár',
+  },
+  verd: {
+    id: 'taxReturn.application:endOfYear.vehicle.verd',
+    defaultMessage: 'Verð',
   },
 })

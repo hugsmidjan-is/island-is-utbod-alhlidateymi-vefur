@@ -63,9 +63,21 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
           <Table>
             <Head>
               <Row>
-                <HeadData>{f(tax.launagreidandi)}</HeadData>
-                <HeadData>{f(tax.fyrirhvad)}</HeadData>
-                <HeadData align="right">{f(tax.upphaed)}</HeadData>
+                <HeadData>
+                  <Text variant="medium" fontWeight="semiBold">
+                    {f(tax.launagreidandi)}
+                  </Text>
+                </HeadData>
+                <HeadData>
+                  <Text variant="medium" fontWeight="semiBold">
+                    {f(tax.fyrirhvad)}
+                  </Text>
+                </HeadData>
+                <HeadData align="right">
+                  <Text variant="medium" fontWeight="semiBold">
+                    {f(tax.upphaed)}
+                  </Text>
+                </HeadData>
               </Row>
             </Head>
             <Body>
