@@ -1,0 +1,7 @@
+export * from './IncomeLastYear'
+export * from './CapitalIncome'
+export * from './EndOfYear'
+export * from './InterestCharges'
+export * from './GeneralInfo'
+export * from './SecondInterestCharges'
+export * from './Requirements'

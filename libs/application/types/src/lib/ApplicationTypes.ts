@@ -85,6 +85,7 @@ export enum ApplicationTypes {
   SEMINAR_REGISTRATION = 'SeminarRegistration',
   TRAINING_LICENSE_ON_A_WORK_MACHINE = 'TrainingLicenseOnAWorkMachine',
   SECONDARY_SCHOOL = 'SecondarySchool',
+  TAX_RETURN = 'TaxReturn',
 }
 
 export const ApplicationConfigurations = {
@@ -399,6 +400,10 @@ export const ApplicationConfigurations = {
   [ApplicationTypes.OFFICIAL_JOURNAL_OF_ICELAND]: {
     slug: 'stjornartidindi',
     translation: 'ojoi.application',
+  },
+  [ApplicationTypes.TAX_RETURN]: {
+    slug: 'skattframtal',
+    translation: 'taxes.application',
   },
   [ApplicationTypes.ID_CARD]: {
     slug: 'nafnskirteini',

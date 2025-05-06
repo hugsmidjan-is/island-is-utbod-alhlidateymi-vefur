@@ -1,0 +1,91 @@
+import { Application, FieldBaseProps } from '@island.is/application/types'
+import { Routes } from './constants'
+import { applicationSchema } from './dataSchema'
+
+export const InputFields = {
+  [Routes.REQUIREMENTS]: {
+    approveExternalData: 'requirements.approveExternalData',
+  },
+  [Routes.GENERAL_INFO]: {
+    user: 'generalInfo.user',
+    contact: {
+      email: 'generalInfo.contact.email',
+      phone: 'generalInfo.contact.phone',
+    },
+  },
+  [Routes.INCOME_LAST_YEAR]: {
+    salary: 'incomeLastYear.salary',
+    benefits: 'incomeLastYear.benefits',
+    compensation: 'incomeLastYear.compensation',
+  },
+  [Routes.END_OF_YEAR]: {
+    housing: 'endOfYear.housing',
+    vehicles: 'endOfYear.vehicles',
+  },
+  // [Routes.ADVERT]: {
+  //   department: 'advert.department',
+  //   mainType: 'advert.mainType',
+  //   type: 'advert.type',
+  //   title: 'advert.title',
+  //   html: 'advert.html',
+  //   requestedDate: 'advert.requestedDate',
+  //   categories: 'advert.categories',
+  //   channels: 'advert.channels',
+  //   message: 'advert.message',
+  //   involvedPartyId: 'advert.involvedPartyId',
+  //   additions: 'advert.additions',
+  // },
+  // [Routes.SIGNATURE]: {
+  //   regular: 'signature.regular',
+  //   committee: 'signature.committee',
+  // },
+  // [Routes.MISC]: {
+  //   signatureType: 'misc.signatureType',
+  //   selectedTemplate: 'misc.selectedTemplate',
+  //   asDocument: 'misc.asDocument',
+  //   titlePrefix: 'misc.titlePrefix',
+  //   asRoman: 'misc.asRoman',
+  // },
+}
+
+// export const RequiredInputFieldsNames = {
+//   [Routes.ADVERT]: {
+//     department: 'Deild',
+//     type: 'Tegund',
+//     title: 'Titill',
+//     html: 'Auglýsing',
+//     requestedDate: 'Útgáfudagur',
+//     categories: 'Efnisflokkar',
+//   },
+// }
+
+export enum TemplateApiActions {
+  departments = 'getDepartments',
+  types = 'getAdvertTypes',
+  postApplication = 'postApplication',
+}
+
+export type NestedType<T> = {
+  [K in keyof T]: T[K] extends Record<string, unknown>
+    ? NestedType<T[K]>
+    : string
+}
+
+export type Override<T1, T2> = Omit<T1, keyof T2> & T2
+
+export type ErrorSchema = NestedType<applicationSchema>
+
+export type OJOIApplication = Override<
+  Application,
+  {
+    answers: applicationSchema
+  }
+>
+
+export type OJOIFieldBaseProps = Override<
+  FieldBaseProps,
+  {
+    application: OJOIApplication
+    errors: ErrorSchema
+  }
+>
