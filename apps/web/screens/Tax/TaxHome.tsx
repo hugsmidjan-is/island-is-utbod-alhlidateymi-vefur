@@ -38,78 +38,128 @@ import SidebarLayout from '../Layouts/SidebarLayout'
 const TaxHome: CustomScreen<TaxProps> = ({ title, article }) => {
   const inStepperView = false
   const breadcrumbItems: Array<BreadCrumbItem> = [
+    { title: 'Ísland.is', href: '/' },
     { title: 'Skatturinn', href: '/skattur' },
-    { title: 'Skattaskýrsla', href: '/skattaskyrsla', isCurrentPage: true },
+    { title: 'Skattaframtal', href: '/skattaskyrsla', isCurrentPage: true },
   ]
   const processEntry = {
     processLink: '/umsoknir/skattaskyrsla',
-    processTitle: 'Skila skattaskýrslu',
-    buttonText: 'Skattaskýrsla',
+    processTitle: 'Skila skattframtali',
+    buttonText: 'Opna framtal',
     newTab: false,
   }
   const subArticle = undefined
   const activeSlug = 'skatturinn'
 
   const content = (
-    <Box paddingTop={subArticle ? 2 : 4}>
-      <Text as="h2" variant="h2" paddingBottom={4}>
-        Skattaskýrsla er snilld
+    <Box paddingTop={subArticle ? 2 : 4} paddingBottom={30}>
+      <Text as="h2" variant="h2" paddingBottom={4} paddingTop={6}>
+        Skilafrestur skattframtals einstaklinga er til þriðjudagsins 10. mars
       </Text>
-      <Text>
-        Skattar eru lögbundin gjöld sem ríki leggja á einstaklinga og fyrirtæki
-        til að fjármagna opinbera þjónustu, innviði og samfélagsleg verkefni,
-        sem tryggja velferð og stöðugleika. Þeir eru nauðsynlegir til að
-        viðhalda samfélagslegri uppbyggingu, svo sem heilbrigðisþjónustu,
-        menntakerfi, samgöngum og öryggismálum. Skattar geta verið mismunandi
-        eftir löndum og innihalda oft tekjuskatt, virðisaukaskatt,
-        fasteignaskatt og fyrirtækjaskatt. Með því að greiða skatta stuðlum við
-        að betra samfélagi fyrir alla.
+      <Text paddingBottom={8}>
+        Unnt er að sækja um lengri frest á þjónustuvef ríkisskattstjóra,
+        skattur.is, og getur hann lengstur orðið til 13. mars. Framtal barns
+        skal fylgja framtali framfæranda. Framtölum dánarbúa manna, sem létust á
+        árinu 2018 eða fyrr, skal skila í framtalsfresti lögaðila, sem er til
+        31. maí, ef skiptum var ekki lokið í árslok 2018. Þeir sem hafa atvinnu
+        af framtalsaðstoð hafa rýmri tímamörk til skila samkvæmt sérstöku
+        samkomulagi. Heimilt er að beita álagi á skattstofna ef framtali er ekki
+        skilað á réttum tíma og eins ef framteljandi gefur rangar upplýsingar á
+        framtali eða í fylgiskjölum.
       </Text>
-      <Text as="h2" variant="h2" paddingBottom={4} paddingTop={4}>
-        Spurt & svarað
+      <Text as="h2" variant="h2" paddingBottom={2}>
+        Leiðbeiningar og aðstoð við skattframtal
       </Text>
+      <Text paddingBottom={6}>
+        Leiðbeiningar um útfyllingu skattframtals einstaklinga eru nær eingöngu
+        sóttar á netið. Hægt er að fá leiðbeiningarnar á pappír með því að sækja
+        þær í næstu starfsstöð Skattsins.
+      </Text>
+      <Text as="h3" variant="h3" paddingBottom={2}>
+        Þjónustuvefur Skattsins
+      </Text>
+      <Text paddingBottom={4}>
+        Á <a href="https://www.skattur.is">þjónustuvef Skattsins</a> er hægt að
+        skila skattframtali rafrænt. Þar eru einnig aðgengilegar leiðbeiningar
+        um hvernig á að fylla út framtalið og hvaða upplýsingar þarf að hafa við
+        höndina.
+      </Text>
+
+      <Text as="h3" variant="h3" paddingBottom={2}>
+        Spjallmennið Askur
+      </Text>
+      <Text paddingBottom={4}>
+        Á þjónustuvefnum er einnig spjallmenni, Askur, sem getur svarað ýmsum
+        spurningum um skattframtalið. Askur getur veitt aðstoð á íslensku og
+        ensku.
+      </Text>
+
+      <Text as="h3" variant="h3" paddingBottom={2}>
+        Framtalsaðstoð
+      </Text>
+      <Text paddingBottom={8}>
+        Ef frekari aðstoðar er þörf, er hægt að hafa samband við Skattinn í síma{' '}
+        <a href="tel:44211414">442 1414</a> eða senda tölvupóst á netfangið{' '}
+        <NextLink href="mailto:framtal@skatturinn.is">
+          framtal@skatturinn.is
+        </NextLink>
+        .
+      </Text>
+
       <Accordion>
         <AccordionItem
           id="income-tax"
           label={
-            <Text variant="h3" as="h3">
-              Tekjuskattur
+            <Text variant="h4" as="h3">
+              Hvenær þarf að skila skattframtali?
             </Text>
           }
         >
-          Tekjuskattur er skattur sem er lagður á tekjur einstaklinga og
-          fyrirtækja.
+          Skilafrestur skattframtals einstaklinga er til þriðjudagsins 10. mars
         </AccordionItem>
         <AccordionItem
           id="vat"
           label={
-            <Text variant="h3" as="h3">
-              Virðisaukaskattur (VSK)
+            <Text variant="h4" as="h3">
+              Er hægt að skila skattframtali með maka?
             </Text>
           }
         >
-          Virðisaukaskattur er neysluskattur sem er lagður á vörur og þjónustu.
+          Já það er hægt.
         </AccordionItem>
         <AccordionItem
           id="property-tax"
           label={
-            <Text variant="h3" as="h3">
-              Fasteignaskattur
+            <Text variant="h4" as="h3">
+              Hverjir þurfa að skila skattframtali?
             </Text>
           }
         >
-          Fasteignaskattur er skattur sem er lagður á fasteignir og er reiknaður
-          út frá fasteignamati.
+          Allir sem hafa náð 16 ára aldri í lok tekjuársins þurfa að skila
+          skattframtali.
         </AccordionItem>
         <AccordionItem
           id="corporate-tax"
           label={
-            <Text variant="h3" as="h3">
-              Fyrirtækjaskattur
+            <Text variant="h4" as="h3">
+              Hvernig skila ég skattframtali?
             </Text>
           }
         >
-          Fyrirtækjaskattur er skattur sem fyrirtæki greiða af hagnaði sínum.
+          Skattframtali er skilað rafrænt á þjónustuvef Skattsins með rafrænum
+          skilríkjum eða veflykli.
+        </AccordionItem>
+        <AccordionItem
+          id="corporate-tax"
+          label={
+            <Text variant="h4" as="h3">
+              Hvað ef ég er búsettur erlendis?
+            </Text>
+          }
+        >
+          Erlendis búsettir einstaklingar sem hafa tekjur eða eignir á Íslandi
+          þurfa einnig að skila skattframtali. Ef viðkomandi hefur ekki rafræn
+          skilríki eða veflykil, er hægt að sækja um nýjan veflykil.
         </AccordionItem>
       </Accordion>
     </Box>
@@ -141,7 +191,7 @@ const TaxHome: CustomScreen<TaxProps> = ({ title, article }) => {
                       variant="text"
                       truncate
                     >
-                      {article.category.title}
+                      Til baka
                     </Button>
                   </Link>
                 </Box>
@@ -173,21 +223,63 @@ const TaxHome: CustomScreen<TaxProps> = ({ title, article }) => {
                     )
                   }}
                   items={[
-                    {
-                      title: article.shortTitle || article.title,
-                      typename: article.__typename,
-                      slug: [article.slug],
-                      active: true,
-                    },
                     ...article.subArticles.map((item) => ({
                       title: item.title,
                       typename: item.__typename,
                       slug: item.slug.split('/'),
-                      active: false,
+                      active: item.slug === 'skatturinn',
                     })),
                   ]}
                 />
               )}
+              <Box
+                background="purple100"
+                borderRadius="large"
+                padding={[3, 3, 4]}
+              >
+                <Stack space={[1, 1, 2]}>
+                  <Text variant="eyebrow" as="h2">
+                    Tengt efni
+                  </Text>
+
+                  <Link
+                    key={'url-1'}
+                    href={'https://www.skatturinn.is'}
+                    underline="normal"
+                  >
+                    <Text key={'url-1'} as="span">
+                      Reiknivélar
+                    </Text>
+                  </Link>
+                  <Link
+                    key={'url-2'}
+                    href={'https://www.skatturinn.is'}
+                    underline="normal"
+                  >
+                    <Text key={'url-2'} as="span">
+                      Staðgreiðsla
+                    </Text>
+                  </Link>
+                  <Link
+                    key={'url-3'}
+                    href={'https://www.skatturinn.is'}
+                    underline="normal"
+                  >
+                    <Text key={'url-3'} as="span">
+                      Vaxtabætur og barnabætur
+                    </Text>
+                  </Link>
+                  <Link
+                    key={'url-4'}
+                    href={'https://www.skatturinn.is'}
+                    underline="normal"
+                  >
+                    <Text key={'url-4'} as="span">
+                      Nýting séreignasparnaðar
+                    </Text>
+                  </Link>
+                </Stack>
+              </Box>
             </Stack>
           </Sticky>
         }
@@ -409,39 +501,12 @@ const TaxHome: CustomScreen<TaxProps> = ({ title, article }) => {
           {!inStepperView && subArticle && (
             <Text variant="h2" as="h2" paddingTop={7}>
               <span id={'Skatturinn'} className="rs_read">
-                Skatturinn
+                Skattaframtal
               </span>
             </Text>
           )}
         </Box>
         {content}
-        {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error make web strict
-          article.organization.length > 0 && (
-            <Box
-              marginTop={[3, 3, 3, 10, 20]}
-              marginBottom={[3, 3, 3, 10, 20]}
-              printHidden
-            >
-              <InstitutionsPanel
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-expect-error make web strict
-                img={article.organization[0].logo?.url ?? ''}
-                institution={{
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-expect-error make web strict
-                  title: article.organization[0].title,
-                  label: 'Þjónustuaðili',
-
-                  href: 'https://www.skattur.is',
-                }}
-                locale={'is'}
-                contactText="Hafa samband"
-              />
-            </Box>
-          )
-        }
       </SidebarLayout>
       <div>
         <OrganizationFooter
@@ -487,7 +552,7 @@ interface TaxProps {
 
 TaxHome.getProps = async () => {
   const article: SkatturArticle = {
-    title: 'Skattur',
+    title: 'Skattaframtal',
     category: { slug: 'skattur', title: 'Skattur' },
     intro:
       'Skattur er nauðsynlegur þáttur í samfélaginu okkar. Hann er notaður til að fjármagna opinberar þjónustur og verkefni sem eru mikilvæg fyrir velferð okkar allra.',
@@ -502,25 +567,14 @@ TaxHome.getProps = async () => {
     organization: [
       {
         email: 'Skattur@skattur.is',
-        slug: 'skatturinn',
+        slug: 'skatturinnn',
         phone: '+354 123 4567',
         id: 'skatturinn',
         title: 'Skatturinn',
         shortTitle: 'Skatturinn',
         tag: [],
         publishedMaterialSearchFilterGenericTags: [],
-        footerItems: [
-          {
-            title: 'Skattur',
-            id: '123',
-            link: {
-              text: 'Skattur',
-              id: '123',
-              date: '123',
-              url: 'https://www.skattur.is',
-            },
-          },
-        ],
+        footerItems: [],
         logo: {
           url: 'https://www.skatturinn.is/skin/v2/i/fav.png',
           width: 120,
@@ -538,15 +592,47 @@ TaxHome.getProps = async () => {
       {
         __typename: 'SubArticle',
         slug: 'sub-article-1',
-        title: 'Undirflokkur 1',
+        title: 'Álagningarseðill og forsendur',
         signLanguageVideo: {
           url: undefined,
         },
       },
       {
         __typename: 'SubArticle',
-        slug: 'sub-article-2',
-        title: 'Undirflokkur 2',
+        slug: 'skatturinn',
+        title: 'Framtalsleiðbeiningar',
+        signLanguageVideo: {
+          url: undefined,
+        },
+      },
+      {
+        __typename: 'SubArticle',
+        slug: 'skatturinn-2',
+        title: 'Rafræn skilríki og veflyklar',
+        signLanguageVideo: {
+          url: undefined,
+        },
+      },
+      {
+        __typename: 'SubArticle',
+        slug: 'skatturinn-3',
+        title: 'Staðfest afrit framtals',
+        signLanguageVideo: {
+          url: undefined,
+        },
+      },
+      {
+        __typename: 'SubArticle',
+        slug: 'skatturinn-4',
+        title: 'Niðurstöður álagningar',
+        signLanguageVideo: {
+          url: undefined,
+        },
+      },
+      {
+        __typename: 'SubArticle',
+        slug: 'skatturinn-5',
+        title: 'Eignir og skuldir',
         signLanguageVideo: {
           url: undefined,
         },
@@ -564,5 +650,4 @@ export default withMainLayout(
     CustomPageUniqueIdentifier.OfficialJournalOfIceland,
     TaxHome,
   ),
-  { showFooter: false },
 )
