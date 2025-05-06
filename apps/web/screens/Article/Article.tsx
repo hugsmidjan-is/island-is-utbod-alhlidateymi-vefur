@@ -845,12 +845,7 @@ const ArticleScreen: Screen<ArticleProps> = ({
             portalRef.current,
           )}
       </SidebarLayout>
-      <ArticleChatPanel
-        article={article}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error make web strict
-        pushUp={isVisible && processEntry?.processLink && mounted}
-      />
+
       <div>
         <OrganizationFooter
           organizations={article?.organization as Organization[]}
