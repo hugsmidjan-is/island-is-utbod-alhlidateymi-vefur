@@ -2,7 +2,6 @@ import { buildForm, buildSection } from '@island.is/application/core'
 import { Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
 import { tax } from '../lib/messages'
-import { complete } from '../lib/messages/complete'
 import { buildFormConclusionSection } from '@island.is/application/ui-forms'
 export const Complete: Form = buildForm({
   id: 'OfficialJournalOfIcelandAdvertOfIcelandApplication',
@@ -37,8 +36,8 @@ export const Complete: Form = buildForm({
       children: [],
     }),
     buildFormConclusionSection({
-      multiFieldTitle: complete.general.title,
-      expandableDescription: complete.general.bullets,
+      multiFieldTitle: 'Umsókn samþykkt',
+      expandableDescription: 'Umsókn samþykkt',
     }),
   ],
 })

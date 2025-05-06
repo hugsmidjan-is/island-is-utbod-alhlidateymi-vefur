@@ -12,13 +12,11 @@ import {
   defineTemplateApi,
 } from '@island.is/application/types'
 import { partialSchema } from './dataSchema'
-import { general, tax } from './messages'
-import { InputFields, TemplateApiActions } from './types'
-import { Features } from '@island.is/feature-flags'
+import { tax } from './messages'
+import { TemplateApiActions } from './types'
 import { assign } from 'xstate'
 import set from 'lodash/set'
 import { CodeOwners } from '@island.is/shared/constants'
-import { text } from 'pdfkit'
 
 export enum ApplicationStates {
   REQUIREMENTS = 'requirements',
@@ -74,7 +72,7 @@ const OJOITemplate: ApplicationTemplate<
     states: {
       // [ApplicationStates.REQUIREMENTS]: {
       //   meta: {
-      //     name: general.applicationName.defaultMessage,
+      //     name: tax.applicationName.defaultMessage,
       //     status: 'draft',
       //     lifecycle: pruneAfterDays(90),
       //     progress: 0.33,
@@ -102,12 +100,12 @@ const OJOITemplate: ApplicationTemplate<
       [ApplicationStates.DRAFT]: {
         entry: 'assignToInstitution',
         meta: {
-          name: general.applicationName.defaultMessage,
+          name: tax.applicationName.defaultMessage,
           status: 'inprogress',
           progress: 0.66,
           actionCard: {
             tag: {
-              label: general.draftStatusLabel,
+              label: tax.draftStatusLabel,
               variant: 'blue',
             },
           },
@@ -125,7 +123,7 @@ const OJOITemplate: ApplicationTemplate<
               actions: [
                 {
                   event: DefaultEvents.SUBMIT,
-                  name: general.sendApplication,
+                  name: tax.sendApplication,
                   type: 'primary',
                 },
               ],
@@ -150,13 +148,13 @@ const OJOITemplate: ApplicationTemplate<
       },
       [ApplicationStates.DRAFT_RETRY]: {
         meta: {
-          name: general.applicationName.defaultMessage,
+          name: tax.applicationName.defaultMessage,
           status: 'inprogress',
           progress: 0.66,
           lifecycle: pruneAfterDays(90),
           actionCard: {
             tag: {
-              label: general.draftStatusLabel,
+              label: tax.draftStatusLabel,
               variant: 'blue',
             },
           },
@@ -173,7 +171,7 @@ const OJOITemplate: ApplicationTemplate<
               actions: [
                 {
                   event: DefaultEvents.SUBMIT,
-                  name: general.sendApplication,
+                  name: tax.sendApplication,
                   type: 'primary',
                 },
               ],
@@ -198,7 +196,7 @@ const OJOITemplate: ApplicationTemplate<
       },
       [ApplicationStates.SUBMITTED]: {
         meta: {
-          name: general.applicationName.defaultMessage,
+          name: tax.applicationName.defaultMessage,
           status: 'completed',
           progress: 1,
           lifecycle: pruneAfterDays(90),
@@ -210,7 +208,7 @@ const OJOITemplate: ApplicationTemplate<
           }),
           actionCard: {
             tag: {
-              label: general.submittedStatusLabel,
+              label: tax.submittedStatusLabel,
               variant: 'purple',
             },
           },
@@ -246,7 +244,7 @@ const OJOITemplate: ApplicationTemplate<
       },
       [ApplicationStates.COMPLETE]: {
         meta: {
-          name: general.applicationName.defaultMessage,
+          name: tax.applicationName.defaultMessage,
           status: 'completed',
           progress: 1,
           lifecycle: pruneAfterDays(90),

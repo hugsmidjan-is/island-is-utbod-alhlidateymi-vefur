@@ -5,10 +5,10 @@ import {
 } from '@island.is/application/core'
 import { Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
-import { general, tax } from '../lib/messages'
+import { tax } from '../lib/messages'
 export const DraftRetry: Form = buildForm({
   id: 'OfficialJournalOfIcelandApplication',
-  title: general.applicationName,
+  title: tax.applicationName,
   mode: FormModes.IN_PROGRESS,
   renderLastScreenBackButton: true,
   renderLastScreenButton: true,
