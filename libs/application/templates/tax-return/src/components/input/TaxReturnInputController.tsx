@@ -18,7 +18,7 @@ type Props = {
   onChange?: (value: string) => void
 }
 
-export const OJOIInputController = ({
+export const TaxReturnInputController = ({
   name,
   label,
   placeholder,

@@ -4,6 +4,15 @@ import { tax } from '../lib/messages'
 import { OJOIFieldBaseProps } from '../lib/types'
 import { Box, Stack, Text } from '@island.is/island-ui/core'
 import { Property } from '../components/property/Property'
+import {
+  Body,
+  Data,
+  Head,
+  HeadData,
+  Row,
+  Table,
+} from 'libs/island-ui/core/src/lib/Table/Table'
+import { TaxReturnInputController } from '../components/input/TaxReturnInputController'
 export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
@@ -51,7 +60,31 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
           </Text>
         </Box>
         <Stack space={0} dividers>
-          <p>Insert table</p>
+          <Table>
+            <Head>
+              <Row>
+                <HeadData>{f(tax.launagreidandi)}</HeadData>
+                <HeadData>{f(tax.fyrirhvad)}</HeadData>
+                <HeadData align="right">{f(tax.upphaed)}</HeadData>
+              </Row>
+            </Head>
+            <Body>
+              <Row>
+                <Data>Norðurljós Software ehf</Data>
+                <Data size={16}>Íþróttastyrkur</Data>
+                <Data width={228}>
+                  <TaxReturnInputController
+                    name={'name'}
+                    label={''}
+                    defaultValue={'123'}
+                    textarea={false}
+                    maxLength={180}
+                    type={'number'}
+                  />
+                </Data>
+              </Row>
+            </Body>
+          </Table>
         </Stack>
       </Box>
     </FormScreen>

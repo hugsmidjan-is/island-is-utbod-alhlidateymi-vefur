@@ -1,7 +1,7 @@
 import { Box, SkeletonLoader, Text } from '@island.is/island-ui/core'
 import * as styles from './Property.css'
 import { OJOI_INPUT_HEIGHT } from '../../lib/constants'
-import { OJOIInputController } from '../input/OJOIInputController'
+import { TaxReturnInputController } from '../input/TaxReturnInputController'
 
 import cn from 'classnames'
 
@@ -44,7 +44,7 @@ export const Property = ({
 
           {type === 'input' && (
             <Box className={styles.inputProperty}>
-              <OJOIInputController
+              <TaxReturnInputController
                 name={name}
                 label={''}
                 defaultValue={value}

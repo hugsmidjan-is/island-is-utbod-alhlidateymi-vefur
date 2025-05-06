@@ -65,6 +65,18 @@ export const tax = defineMessages({
     id: 'taxReturn.application:general.submittedStatusLabel',
     defaultMessage: 'Framtal sent til Skattsins',
   },
+  launagreidandi: {
+    id: 'taxReturn.application:income.launagreidandi',
+    defaultMessage: 'Nafn launagreiðanda',
+  },
+  fyrirhvad: {
+    id: 'taxReturn.application:income.fyrirhvad',
+    defaultMessage: 'Fyrir hvað',
+  },
+  upphaed: {
+    id: 'taxReturn.application:income.upphaed',
+    defaultMessage: 'Upphæð',
+  },
 })
 
 export const taxGeneralInfo = defineMessages({
