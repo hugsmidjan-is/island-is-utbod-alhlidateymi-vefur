@@ -1,0 +1,277 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/person/{nationalId}": {
+      "get": {
+        "operationId": "getPersonByNationalId",
+        "summary": "",
+        "parameters": [
+          {
+            "name": "nationalId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GetPersonResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BadRequestResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NotFoundResponse" }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["National Registry"]
+      }
+    },
+    "/api/v1/tax-return/prefill/{nationalId}/{year}": {
+      "get": {
+        "operationId": "getTaxReturnPrefillByNationalIdAndYear",
+        "summary": "",
+        "parameters": [
+          {
+            "name": "nationalId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "year",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPersonPrefillResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BadRequestResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NotFoundResponse" }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Tax Return"]
+      }
+    }
+  },
+  "info": {
+    "title": "Project API",
+    "description": "API for the project.",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Street address",
+            "example": "Lækjargata 1",
+            "nullable": false
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal code",
+            "example": "101",
+            "nullable": false
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "example": "Reykjavík",
+            "nullable": false
+          }
+        },
+        "required": ["address", "postalCode", "city"]
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the person",
+            "example": "Jón Jónsson",
+            "nullable": false
+          },
+          "nationalId": {
+            "type": "string",
+            "description": "National ID of the person",
+            "example": "1234567890",
+            "nullable": false
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the person",
+            "example": "nn@example.org",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Phone number of the person",
+            "example": "+354 333 4567",
+            "nullable": true
+          },
+          "address": {
+            "description": "Address of the person",
+            "nullable": true,
+            "allOf": [{ "$ref": "#/components/schemas/Address" }]
+          }
+        },
+        "required": ["name", "nationalId"]
+      },
+      "GetPersonResponse": {
+        "type": "object",
+        "properties": {
+          "person": {
+            "description": "Person",
+            "allOf": [{ "$ref": "#/components/schemas/Person" }]
+          }
+        },
+        "required": ["person"]
+      },
+      "BadRequestResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message describing the error"
+          },
+          "error": { "type": "string", "description": "Error description" },
+          "code": { "type": "string", "description": "Error code" }
+        },
+        "required": ["message"]
+      },
+      "NotFoundResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message describing the error"
+          },
+          "error": { "type": "string", "description": "Error description" },
+          "code": { "type": "string", "description": "Error code" }
+        },
+        "required": ["message"]
+      },
+      "InternalServerErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message describing the error"
+          },
+          "error": { "type": "string", "description": "Error description" },
+          "code": { "type": "string", "description": "Error code" }
+        },
+        "required": ["message"]
+      },
+      "TaxReturnIncome": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the income return",
+            "nullable": false
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the income return, either `prefill` or `submit`",
+            "example": "prefill",
+            "enum": ["prefill", "submit"],
+            "nullable": false
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "PersonPrefill": {
+        "type": "object",
+        "properties": {
+          "nationalId": {
+            "type": "string",
+            "description": "National ID of the person",
+            "example": "1234567890",
+            "nullable": false
+          },
+          "income": {
+            "description": "Income part of the tax return prefill",
+            "nullable": false,
+            "allOf": [{ "$ref": "#/components/schemas/TaxReturnIncome" }]
+          }
+        },
+        "required": ["nationalId", "income"]
+      },
+      "GetPersonPrefillResponse": {
+        "type": "object",
+        "properties": {
+          "prefill": {
+            "description": "PersonPrefill",
+            "allOf": [{ "$ref": "#/components/schemas/PersonPrefill" }]
+          }
+        },
+        "required": ["prefill"]
+      }
+    }
+  }
+}
