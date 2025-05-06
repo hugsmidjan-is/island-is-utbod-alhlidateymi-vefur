@@ -12,6 +12,7 @@ import {
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { TaxReturnInputController } from '../components/input/TaxReturnInputController'
+import { BaseInputController } from '../components/input/BaseInputController'
 export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
@@ -57,13 +58,14 @@ export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
                   <Text variant="medium">Bláfjallagata 12</Text>
                 </Data>
                 <Data width={204} style={{ paddingRight: 0 }}>
-                  <TaxReturnInputController
+                  <BaseInputController
                     name={'name'}
                     label={''}
                     defaultValue={'123'}
                     textarea={false}
                     maxLength={180}
                     type={'number'}
+                    suffix=" kr."
                   />
                 </Data>
               </Row>
@@ -107,13 +109,16 @@ export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
                   <Text variant="medium">2021</Text>
                 </Data>
                 <Data width={204} style={{ paddingRight: 0 }}>
-                  <TaxReturnInputController
-                    name={'name'}
+                  <BaseInputController
+                    id={'id'}
+                    name={'id'}
+                    defaultValue={'id'}
                     label={''}
-                    defaultValue={'123'}
                     textarea={false}
                     maxLength={180}
+                    placeholder="0 kr."
                     type={'number'}
+                    suffix=" kr."
                   />
                 </Data>
               </Row>
@@ -125,13 +130,16 @@ export const EndOfYearScreen = (props: OJOIFieldBaseProps) => {
                   <Text variant="medium">2012</Text>
                 </Data>
                 <Data width={204} style={{ paddingRight: 0 }}>
-                  <TaxReturnInputController
-                    name={'name'}
+                  <BaseInputController
+                    id={'id'}
+                    name={'id'}
+                    defaultValue={'id'}
                     label={''}
-                    defaultValue={'123'}
                     textarea={false}
                     maxLength={180}
+                    placeholder="0 kr."
                     type={'number'}
+                    suffix=" kr."
                   />
                 </Data>
               </Row>

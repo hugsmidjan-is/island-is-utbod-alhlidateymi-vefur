@@ -16,55 +16,56 @@ import {
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { TaxReturnInputController } from '../components/input/TaxReturnInputController'
 import { InputController } from '@island.is/shared/form-fields'
+import { BaseInputController } from '../components/input/BaseInputController'
 export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
-  // const { updateApplicationV2 } = useApplication({
-  //   applicationId: props.application.id,
-  // })
+  const { updateApplicationV2 } = useApplication({
+    applicationId: props.application.id,
+  })
 
-  // useEffect(() => {
-  //   updateApplicationV2({
-  //     path: InputFields.incomeLastYear.salary,
-  //     value: [
-  //       {
-  //         title: 'Norðurljós Software ehf',
-  //         value: '9360000',
-  //       },
-  //       {
-  //         title: 'Mús og merki',
-  //         value: '960000',
-  //       },
-  //     ],
-  //   })
-  //   updateApplicationV2({
-  //     path: InputFields.incomeLastYear.benefits,
-  //     value: [
-  //       {
-  //         title: 'Ökutækjastyrkur',
-  //         value: '0',
-  //       },
-  //       {
-  //         title: 'Dagpeningar',
-  //         value: '120000',
-  //       },
-  //       {
-  //         title: 'Húsnæðishlunnindi',
-  //         value: '0',
-  //       },
-  //     ],
-  //   })
-  //   updateApplicationV2({
-  //     path: InputFields.incomeLastYear.compensation,
-  //     value: [
-  //       {
-  //         title: 'Norðurljós Software ehf',
-  //         value: '12000',
-  //         details: 'Íþróttastyrkur',
-  //       },
-  //     ],
-  //   })
-  // }, [])
+  useEffect(() => {
+    updateApplicationV2({
+      path: InputFields.incomeLastYear.salary,
+      value: [
+        {
+          title: 'Norðurljós Software ehf',
+          value: '9360000',
+        },
+        {
+          title: 'Mús og merki',
+          value: '960000',
+        },
+      ],
+    })
+    updateApplicationV2({
+      path: InputFields.incomeLastYear.benefits,
+      value: [
+        {
+          title: 'Ökutækjastyrkur',
+          value: '0',
+        },
+        {
+          title: 'Dagpeningar',
+          value: '120000',
+        },
+        {
+          title: 'Húsnæðishlunnindi',
+          value: '0',
+        },
+      ],
+    })
+    updateApplicationV2({
+      path: InputFields.incomeLastYear.compensation,
+      value: [
+        {
+          title: 'Norðurljós Software ehf',
+          value: '12000',
+          details: 'Íþróttastyrkur',
+        },
+      ],
+    })
+  }, [])
 
   console.log('props', props)
   console.log(
@@ -157,14 +158,15 @@ export const IncomeLastYearScreen = (props: OJOIFieldBaseProps) => {
                   <Row>
                     <Data>{item.title}</Data>
                     <Data size={16}>{item.details}</Data>
-                    <Data width={228}>
-                      <TaxReturnInputController
+                    <Data width={228} style={{ paddingRight: 0 }}>
+                      <BaseInputController
                         name={`incomeLastYear.compensation[0].value`}
                         label={''}
                         defaultValue={item.value}
                         textarea={false}
                         maxLength={180}
                         type={'number'}
+                        suffix=" kr."
                         id={`incomeLastYear.compensation[0].value`}
                       />
                     </Data>

@@ -5,6 +5,7 @@ import { TaxReturnInputController } from '../input/TaxReturnInputController'
 
 import cn from 'classnames'
 import { InputController } from '@island.is/shared/form-fields'
+import { BaseInputController } from '../input/BaseInputController'
 
 type Props = {
   name: string
@@ -54,16 +55,7 @@ export const Property = ({
 
           {type === 'input' && (
             <Box className={styles.inputProperty}>
-              {/* <TaxReturnInputController
-                name={inputName ?? name}
-                label={''}
-                id={id ?? name}
-                defaultValue={value}
-                textarea={false}
-                maxLength={180}
-                type={'number'}
-              /> */}
-              <InputController
+              <BaseInputController
                 id={id ?? name}
                 name={inputName ?? name}
                 defaultValue={value}
@@ -73,7 +65,6 @@ export const Property = ({
                 placeholder="0 kr."
                 type={'number'}
                 suffix=" kr."
-                backgroundColor="blue"
               />
             </Box>
           )}
