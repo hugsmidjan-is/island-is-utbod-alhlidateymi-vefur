@@ -158,8 +158,47 @@ export class Prefill {
   property!: Property
 }
 
+@ObjectType('Address')
+export class Address {
+  @Field({ description: 'The street address' })
+  street!: string
+
+  @Field({ description: 'The city of the address' })
+  city!: string
+
+  @Field({ description: 'The postal code of the address' })
+  postalCode!: string
+
+  @Field({ description: 'The country of the address' })
+  country!: string
+}
+
+@ObjectType('Person')
+export class Person {
+  @Field({ description: 'Name of the person' })
+  name!: string
+
+  @Field({ description: 'National ID of the person' })
+  nationalId!: string
+
+  @Field({ nullable: true, description: 'Email address of the person' })
+  email?: string
+
+  @Field({ nullable: true, description: 'Phone number of the person' })
+  phoneNumber?: string
+
+  @Field(() => Address, {
+    nullable: true,
+    description: 'Address of the person',
+  })
+  address?: Address
+}
+
 @ObjectType('PrefilledIncomeResponse')
 export class PrefilledIncomeResponse {
   @Field(() => Prefill, { description: 'The prefill data' })
   prefill!: Prefill
+
+  @Field(() => Person, { nullable: true, description: 'Details of the person' })
+  person?: Person
 }

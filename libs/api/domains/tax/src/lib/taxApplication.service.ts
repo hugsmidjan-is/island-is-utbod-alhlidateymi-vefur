@@ -17,11 +17,9 @@ export class TaxApplicationService {
   ) {}
 
   async getPrefilled(user: User) {
-    const prefilled = await this.taxApplicationService.getPrefilled(user)
-    const userInfo = await this.taxNationalRegistryClientService.getUserInfo(
-      user,
-    )
-    return { prefilled, userInfo }
+    const prefill = await this.taxApplicationService.getPrefilled(user)
+    const person = await this.taxNationalRegistryClientService.getUserInfo(user)
+    return { prefill, person }
   }
 
   /*
