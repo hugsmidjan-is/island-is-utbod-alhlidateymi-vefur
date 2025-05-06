@@ -434,4 +434,9 @@ export const institutionMapper = {
     slug: InstitutionTypes.MIDSTOD_MENNTUNAR_SKOLATHJONUSTU,
     contentfulId: InstitutionContentfulIds.MIDSTOD_MENNTUNAR_SKOLATHJONUSTU,
   },
+  [ApplicationTypes.TAX_RETURN]: {
+    nationalId: InstitutionNationalIds.INNHEIMTUMADUR,
+    slug: InstitutionTypes.SKATTURINN,
+    contentfulId: InstitutionContentfulIds.DOMSMALARADUNEYTID,
+  },
 }

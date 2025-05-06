@@ -171,6 +171,8 @@ const templates: Record<ApplicationTypes, () => Promise<unknown>> = {
     ),
   [ApplicationTypes.OFFICIAL_JOURNAL_OF_ICELAND]: () =>
     import('@island.is/application/templates/official-journal-of-iceland'),
+  [ApplicationTypes.TAX_RETURN]: () =>
+    import('@island.is/application/templates/tax-return'),
   [ApplicationTypes.ENERGY_FUNDS]: () =>
     import('@island.is/application/templates/energy-funds'),
   [ApplicationTypes.HEALTHCARE_LICENSE_CERTIFICATE]: () =>
