@@ -18,7 +18,7 @@ export const Requirements: Form = buildForm({
       title: tax.generalInfoTitle,
       children: [
         buildMultiField({
-          id: Routes.REQUIREMENTS,
+          id: Routes.INCOME_LAST_YEAR,
           children: [
             buildCustomField({
               id: 'requirements',

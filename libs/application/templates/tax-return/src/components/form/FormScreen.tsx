@@ -42,11 +42,6 @@ export const FormScreen = ({
 
   if (!title && !intro && !children) return null
 
-  const path = window.location.origin
-  const helpHref = path.includes('localhost')
-    ? `http://localhost:4200/stjornartidindi/leidbeiningar`
-    : `${path}/stjornartidindi/leidbeiningar`
-
   return (
     <>
       {/* {process.env.NODE_ENV === 'development' && goToScreen && (

@@ -1,13 +1,9 @@
-import addDays from 'date-fns/addDays'
-import addYears from 'date-fns/addYears'
 import { z } from 'zod'
 import { additionSchema, baseEntitySchema } from './dataSchema'
-import { getValueViaPath } from '@island.is/application/core'
-import { RequiredInputFieldsNames } from './types'
-import { FAST_TRACK_DAYS, MINIMUM_WEEKDAYS } from './constants'
+import { FAST_TRACK_DAYS } from './constants'
 import { MessageDescriptor } from 'react-intl'
 import { v4 as uuid } from 'uuid'
-import { getHolidays, Holiday } from 'fridagar'
+import { getHolidays } from 'fridagar'
 import { toISODate } from '@island.is/regulations'
 
 export const countDaysAgo = (date: Date) => {
@@ -37,81 +33,8 @@ const getHolidayMap = (year: number): IsHolidayMap => {
   return yearHolidays
 }
 
-const isWorkday = (date: Date): boolean => {
-  const wDay = date.getDay()
-  if (wDay === 0 || wDay === 6) {
-    return false
-  }
-  const holidays = getHolidayMap(date.getFullYear())
-  return holidays[toISODate(date)] !== true
-}
-const getNextWorkday = (date: Date) => {
-  // Returns the next workday.
-  let nextDay = date
-  let iterations = 0
-  const MAX_ITERATIONS = 30 // Prevent infinite loop
-  while (!isWorkday(nextDay) && iterations < MAX_ITERATIONS) {
-    nextDay = addDays(nextDay, 1)
-    iterations++
-  }
-  return nextDay
-}
-
-const addWorkDays = (date: Date, days: number) => {
-  let result = new Date(date)
-  while (days > 0) {
-    result = addDays(result, 1)
-    if (isWorkday(result)) {
-      days--
-    }
-  }
-  return result
-}
-
-const getWeekendDates = (
-  startDate = new Date(),
-  endDate = addYears(new Date(), 1),
-) => {
-  const weekdays = []
-  let currentDay = startDate
-  while (currentDay <= endDate) {
-    if (!isWeekday(currentDay)) {
-      weekdays.push(currentDay)
-    }
-    currentDay = addDays(currentDay, 1)
-  }
-  return weekdays
-}
-
 const getDateString = (date: Date) => {
   return date.toISOString().split('T')[0]
-}
-
-// Get default date, but push it to the next workday if it is a weekend or holiday
-export const getDefaultDate = (requestedDate?: string) => {
-  if (!requestedDate) {
-    const date = getNextWorkday(addWorkDays(new Date(), MINIMUM_WEEKDAYS))
-    return getDateString(date)
-  }
-  const date = new Date(requestedDate)
-  return getDateString(getNextWorkday(date))
-}
-
-export const getExcludedDates = (
-  startDate = new Date(),
-  endDate = addYears(new Date(), 1),
-) => {
-  const currentYear = startDate.getFullYear()
-  const endYear = endDate.getFullYear()
-  let holidays: Holiday[] = []
-  for (let year = currentYear; year <= endYear; year++) {
-    holidays = [...holidays, ...getHolidays(year)]
-  }
-  const weekendDates = getWeekendDates(startDate, endDate)
-
-  return [
-    ...new Set([...weekendDates, ...holidays.map((holiday) => holiday.date)]),
-  ]
 }
 
 export const getEmptyMember = () => ({
@@ -153,7 +76,7 @@ export const isAddition = (
 export const parseZodIssue = (issue: z.ZodCustomIssue) => {
   const path = issue.path.join('.')
   return {
-    name: getValueViaPath(RequiredInputFieldsNames, path) as string,
+    // name: getValueViaPath(RequiredInputFieldsNames, path) as string,
     message: issue?.params as MessageDescriptor,
   }
 }
