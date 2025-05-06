@@ -1,2 +1,2 @@
-export { OfficialJournalOfIcelandApplicationModule } from './lib/ojoiApplication.module'
-export { OfficialJournalOfIcelandApplicationService } from './lib/taxApplication.service'
+export { TaxApplicationModule } from './lib/taxApplication.module'
+export { TaxApplicationService } from './lib/taxApplication.service'
