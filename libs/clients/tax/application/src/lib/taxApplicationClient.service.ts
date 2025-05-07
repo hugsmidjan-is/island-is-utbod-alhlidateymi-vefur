@@ -1,5 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { TaxReturnPublicAPIApi } from '../../gen/fetch'
+import {
+  GetPersonPrefillResponse,
+  SubmitTaxReturnByNationalIdAndYearRequest,
+  TaxReturnPublicAPIApi,
+} from '../../gen/fetch'
 import { LOGGER_PROVIDER } from '@island.is/logging'
 import type { Logger } from '@island.is/logging'
 import { Auth, AuthMiddleware } from '@island.is/auth-nest-tools'
@@ -38,20 +42,34 @@ export class TaxApplicationClientService {
     }
   }
 
-  /*async postApplication(
-    params: PostApplicationRequest,
+  async submitTaxReturn(
+    params: SubmitTaxReturnByNationalIdAndYearRequest,
     auth: Auth,
   ): Promise<boolean> {
     try {
-      await this.taxApplicationApiWithAuth(auth).postApplication(params)
+      await this.taxApplicationApiWithAuth(
+        auth,
+      ).submitTaxReturnByNationalIdAndYear(params)
       return Promise.resolve(true)
     } catch (error) {
       this.logger.warn('Failed to post application', {
         error,
-        applicationId: params.id,
+        applicationId: params.nationalId,
         category: LOG_CATEGORY,
       })
       return Promise.reject(false)
     }
-  }*/
+  }
+  async getTaxReturnTypes(): Promise<GetPersonPrefillResponse> {
+    try {
+      const data = await this.taxApplicationApi.getTaxReturnTypes()
+      return data
+    } catch (error) {
+      this.logger.warn('Failed to get tax return types', {
+        error,
+        category: LOG_CATEGORY,
+      })
+      throw error
+    }
+  }
 }

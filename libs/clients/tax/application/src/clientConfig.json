@@ -88,12 +88,57 @@
           }
         },
         "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TaxReturnCreate" }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BadRequestResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NotFoundResponse" }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Tax Return public API"]
+      }
+    },
+    "/api/v1/tax-return/types": {
+      "get": {
+        "operationId": "getTaxReturnTypes",
+        "summary": "Get tax return types (income, debt and property)",
+        "description": "Will fetch all data pertaining to income, debt and property types",
+        "parameters": [],
+        "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostPersonSubmitResponse"
+                  "$ref": "#/components/schemas/GetPersonPrefillResponse"
                 }
               }
             }
@@ -133,12 +178,38 @@
         "operationId": "getTaxReturns",
         "summary": "Get all tax returns",
         "description": "Returns all tax returns for all people.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Limits the number of results in a request.",
+            "schema": { "default": 10, "type": "number" }
+          },
+          {
+            "name": "before",
+            "required": false,
+            "in": "query",
+            "description": "The value of `startCursor` from the previous response pageInfo to query the previous page of `limit` number of data items.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "after",
+            "required": false,
+            "in": "query",
+            "description": "The value of `endCursor` from the response to query the next page of `limit` number of data items.",
+            "schema": { "type": "string" }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/json": { "schema": { "type": "object" } }
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedTaxReturnResponse"
+                }
+              }
             }
           },
           "400": {
@@ -171,7 +242,7 @@
         "tags": ["Tax Return admin API"]
       }
     },
-    "/api/v1/admin/tax-return/{nationalId}/{year}": {
+    "/api/v1/admin/tax-return/{nationalId}": {
       "post": {
         "operationId": "createTaxReturn",
         "summary": "Create a tax return for a person",
@@ -182,14 +253,16 @@
             "required": true,
             "in": "path",
             "schema": { "type": "string" }
-          },
-          {
-            "name": "year",
-            "required": true,
-            "in": "path",
-            "schema": { "type": "string" }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SubmitTaxReturnBody" }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "",
@@ -288,6 +361,14 @@
             "schema": { "type": "string" }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SubmitTaxReturnBody" }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "",
@@ -592,16 +673,7 @@
       "TaxReturnPropertyLine": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "ID of the property line",
-            "nullable": false
-          },
-          "propertyId": {
-            "type": "string",
-            "description": "ID of the property this line belongs to",
-            "nullable": false
-          },
+          "id": { "type": "string", "description": "ID of the property line" },
           "label": {
             "type": "string",
             "description": "Label of the property line",
@@ -630,7 +702,6 @@
         },
         "required": [
           "id",
-          "propertyId",
           "label",
           "identifier",
           "value",
@@ -744,24 +815,87 @@
       "SubmitTaxReturnBody": {
         "type": "object",
         "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email of the person",
+            "nullable": false
+          },
+          "phonenumber": {
+            "type": "string",
+            "description": "Phone number of the person",
+            "nullable": false
+          },
           "incomeLines": {
             "description": "Income lines",
             "nullable": false,
             "type": "array",
             "items": { "$ref": "#/components/schemas/TaxReturnIncomeLine" }
+          },
+          "propertyLines": {
+            "description": "Property lines",
+            "nullable": false,
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxReturnPropertyLine" }
+          },
+          "debtLines": {
+            "description": "Debt lines",
+            "nullable": false,
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxReturnDebtLine" }
           }
         },
-        "required": ["incomeLines"]
+        "required": [
+          "email",
+          "phonenumber",
+          "incomeLines",
+          "propertyLines",
+          "debtLines"
+        ]
       },
-      "PostPersonSubmitResponse": {
+      "TaxReturnCreate": {
         "type": "object",
         "properties": {
-          "submit": {
-            "description": "Tax return submit response for a person",
-            "allOf": [{ "$ref": "#/components/schemas/PersonPrefill" }]
+          "nationalId": {
+            "type": "string",
+            "description": "National ID of the person"
+          },
+          "year": { "type": "number", "description": "Year of the tax return" },
+          "id": { "type": "string", "description": "ID of the tax return" },
+          "timestamp": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Timestamp of the tax return"
           }
         },
-        "required": ["submit"]
+        "required": ["nationalId", "year", "id", "timestamp"]
+      },
+      "TaxReturnModel": { "type": "object", "properties": {} },
+      "PageInfoDto": {
+        "type": "object",
+        "properties": {
+          "hasNextPage": { "type": "boolean", "example": true },
+          "hasPreviousPage": { "type": "boolean", "example": false },
+          "startCursor": { "type": "string", "example": "MTpwYWdl" },
+          "endCursor": { "type": "string", "example": "MTA6cGFnZQ==" }
+        },
+        "required": [
+          "hasNextPage",
+          "hasPreviousPage",
+          "startCursor",
+          "endCursor"
+        ]
+      },
+      "PagedTaxReturnResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxReturnModel" }
+          },
+          "pageInfo": { "$ref": "#/components/schemas/PageInfoDto" },
+          "totalCount": { "type": "number" }
+        },
+        "required": ["data", "pageInfo", "totalCount"]
       }
     }
   }
