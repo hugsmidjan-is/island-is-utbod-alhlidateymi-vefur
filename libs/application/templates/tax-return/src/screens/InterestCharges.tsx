@@ -21,6 +21,7 @@ import {
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { BaseInputController } from '../components/input/BaseInputController'
 import { DebtInputController } from '../components/input/DebtInputController'
+import { formatDate } from '../lib/utils'
 export const InterestChargesScreen = ({
   application,
   goToScreen,
@@ -32,7 +33,14 @@ export const InterestChargesScreen = ({
     <FormScreen
       goToScreen={goToScreen}
       title={f(taxInterestCharges.interestChargesTitle)}
+      intro={f(taxInterestCharges.interestChargesSubTitle)}
     >
+      <Box>
+        <Text fontWeight="semiBold">
+          {f(taxInterestCharges.interestChargesIntro)}
+        </Text>
+        <Text>{f(taxInterestCharges.filledBy)}</Text>
+      </Box>
       <Box>
         {externalData.getTaxReturnData.data.prefill.debt.debtLines
           .filter((line) => line.debtType.name === 'property')
@@ -72,9 +80,9 @@ export const InterestChargesScreen = ({
                   <Column>
                     <DebtInputController
                       label="Lánveitandi"
-                      defaultValue={`${line.label}`}
+                      defaultValue={`${line.creditorName}`}
                       type="text"
-                      field={`${InputFields.interestCharges.propertyLoan}[${i}].address`}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].creditorName`}
                     />
                   </Column>
                   <Column>
@@ -88,7 +96,7 @@ export const InterestChargesScreen = ({
                   <Column>
                     <DebtInputController
                       label="Lántökudagur"
-                      defaultValue={`${line.originationDate}`}
+                      defaultValue={`${formatDate(`${line.originationDate}`)}`}
                       type="text"
                       field={`${InputFields.interestCharges.propertyLoan}[${i}].originationDate`}
                     />
@@ -114,10 +122,8 @@ export const InterestChargesScreen = ({
                   </Column>
                   <Column>{''}</Column>
                 </Columns>
-                <Box marginTop={2} marginBottom={2}>
-                  <Text fontWeight="semiBold">
-                    Ef hluti af láninu er nýttur til annars en öflunar...
-                  </Text>
+                <Box marginTop={4} marginBottom={4}>
+                  <Text>{f(taxInterestCharges.disclaimer)}</Text>
                 </Box>
                 <Columns space={3}>
                   <Column>
@@ -153,19 +159,19 @@ export const InterestChargesScreen = ({
                   <Column>
                     <DebtInputController
                       label="Afföll"
-                      defaultValue={`${line.interestAmount}`}
+                      defaultValue={`${line.writeDown ?? 0}`}
                       type="number"
                       prefix={'+ '}
-                      field={`${InputFields.interestCharges.propertyLoan}[${i}].interestAmount`}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].writeDown`}
                     />
                   </Column>
                   <Column>
                     <DebtInputController
                       label="Lántökukostnaður"
-                      defaultValue={`${line.interestAmount}`}
+                      defaultValue={`${line.costOfLoan ?? 0}`}
                       type="number"
                       prefix={'+ '}
-                      field={`${InputFields.interestCharges.propertyLoan}[${i}].interestAmount`}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].costOfLoan ?? 0`}
                     />
                   </Column>
                   <Column>
@@ -189,7 +195,6 @@ export const InterestChargesScreen = ({
                       defaultValue={`${line.outstandingPrincipal}`}
                       type="number"
                       field={`${InputFields.interestCharges.propertyLoan}[${i}].outstandingPrincipal`}
-                      readOnly
                     />
                   </Column>
                 </Columns>
@@ -197,61 +202,7 @@ export const InterestChargesScreen = ({
             )
           })}
       </Box>
-
       <Divider />
-      {/* <Box>
-        <Text fontWeight="semiBold">
-          {f(taxInterestCharges.interestChargesIntro)}
-        </Text>
-        <Text>
-          Lán sem að hluta eða öllu leyti tengjast íbúðarhúsnæði. Ef aðeins
-          hluti lánsins á við, þarf að gera grein fyrir því hlutfalli.
-        </Text>
-      </Box>
-      <Table>
-        <Head>
-          <Row>
-            <HeadData>Fyllist út af ríkisskattstjóra</HeadData>
-            <HeadData></HeadData>
-          </Row>
-        </Head>
-        <Body>
-          <Row>
-            <Data width={'50%'}>
-              <Text fontWeight="semiBold" variant="medium">
-                Staðsetning íbúðarhúsnæðis
-              </Text>
-            </Data>
-            <Data>Bláfjallagata 12</Data>
-          </Row>
-        </Body>
-      </Table>
-      <Text>
-        Ef hluti láns er nýttur til annars en öflunar íbúðarhúsnæðis skal
-        tilgreinar hve hátt hlutfall fjárhæðar er til öflunar íbúðarhúsnæðis
-        (reitur 1). Í reiti 5 til 8 skal færa heildarfjárhæðir (án hlutföllunar)
-        en í dálka 9 og 10 skal aðeins færa þann hluta af vaxtagjöldum og
-        eftirstöðvum sem tilheyra öflun íbúðarhúsnæðis.
-      </Text> */}
-      {/* <Table>
-        <Head>
-          <Row>
-            <HeadData>Útreikningur</HeadData>
-            <HeadData align="right">Fjárhæð</HeadData>
-          </Row>
-        </Head>
-        <Body>
-          <Row>
-            <Data width={'60%'}>
-              <Text fontWeight="semiBold" variant="medium">
-                Lánshlutfall
-              </Text>
-            </Data>
-            <Data align="right">
-            </Data>
-          </Row>
-        </Body>
-      </Table> */}
       <AlertMessage
         type="info"
         title="Vaxtagjöld og lán eða lánshlutar sem ekki ganga til öflunar íbúðarhúsnæðis færast í kafla 5.5."
