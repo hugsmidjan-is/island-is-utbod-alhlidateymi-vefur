@@ -21,11 +21,11 @@ export const Submitted: Form = buildForm({
       title: tax.lastIncomeTitle,
       children: [],
     }),
-    buildSection({
-      id: Routes.CAPITAL_INCOME,
-      title: tax.capitalIncomeTitle,
-      children: [],
-    }),
+    // buildSection({
+    //   id: Routes.CAPITAL_INCOME,
+    //   title: tax.capitalIncomeTitle,
+    //   children: [],
+    // }),
     buildSection({
       id: Routes.END_OF_YEAR,
       title: tax.endOfYearTitle,

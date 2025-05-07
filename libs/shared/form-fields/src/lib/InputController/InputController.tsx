@@ -36,6 +36,7 @@ interface Props {
   currency?: boolean
   type?: 'text' | 'email' | 'number' | 'tel'
   suffix?: string
+  prefix?: string
   rows?: number
   format?: string | FormatInputValueFunction
   required?: boolean
@@ -88,6 +89,7 @@ export const InputController = forwardRef(
       format,
       onChange: onInputChange,
       suffix,
+      prefix,
       rows,
       required,
       rightAlign,
@@ -127,6 +129,7 @@ export const InputController = forwardRef(
             backgroundColor={backgroundColor}
             thousandSeparator="."
             suffix={suffix ?? ' kr.'}
+            prefix={prefix}
             value={value}
             format={format}
             maxLength={maxLength}
@@ -177,6 +180,7 @@ export const InputController = forwardRef(
             data-testid={dataTestId}
             label={label}
             suffix={suffix}
+            prefix={prefix}
             value={value}
             format={format}
             maxLength={maxLength}

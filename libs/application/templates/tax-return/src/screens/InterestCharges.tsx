@@ -1,8 +1,16 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
+import { format as formatNationalId } from 'kennitala'
 import { taxInterestCharges } from '../lib/messages'
-import { OJOIFieldBaseProps } from '../lib/types'
-import { AlertMessage, Box, Text } from '@island.is/island-ui/core'
+import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import {
+  AlertMessage,
+  Box,
+  Column,
+  Columns,
+  Divider,
+  Text,
+} from '@island.is/island-ui/core'
 import {
   Body,
   Data,
@@ -12,15 +20,186 @@ import {
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { BaseInputController } from '../components/input/BaseInputController'
-export const InterestChargesScreen = (props: OJOIFieldBaseProps) => {
+import { DebtInputController } from '../components/input/DebtInputController'
+export const InterestChargesScreen = ({
+  application,
+  goToScreen,
+}: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
+  const { externalData } = application
 
   return (
     <FormScreen
-      goToScreen={props.goToScreen}
+      goToScreen={goToScreen}
       title={f(taxInterestCharges.interestChargesTitle)}
     >
       <Box>
+        {externalData.getTaxReturnData.data.prefill.debt.debtLines
+          .filter((line) => line.debtType.name === 'property')
+          .map((line, i) => {
+            return (
+              <Box key={line.id}>
+                <Columns space={3}>
+                  <Column>
+                    <DebtInputController
+                      label="Staðsetning íbúðarhúsnæðis"
+                      defaultValue={`${line.label}`}
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].address`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Kaupár"
+                      defaultValue={`${new Date(
+                        line.originationDate,
+                      ).getFullYear()}`}
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].buyYear`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Lánsnúmer"
+                      defaultValue={`${line.identifier}`}
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].loanNr`}
+                    />
+                  </Column>
+                </Columns>
+                <Box paddingBottom={3} />
+                <Columns space={3}>
+                  <Column>
+                    <DebtInputController
+                      label="Lánveitandi"
+                      defaultValue={`${line.label}`}
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].address`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Kennitala lánveitanda"
+                      defaultValue={`${formatNationalId(line.creditorId)}`}
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].creditorId`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Lántökudagur"
+                      defaultValue={`${line.originationDate}`}
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].originationDate`}
+                    />
+                  </Column>
+                </Columns>
+                <Box paddingBottom={3} />
+                <Columns space={3}>
+                  <Column>
+                    <DebtInputController
+                      label="Lánstími í árum"
+                      defaultValue={`${line.term / 12}`}
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].term`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Yfirtökudagur"
+                      defaultValue="-"
+                      type="text"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].takeoverDate`}
+                    />
+                  </Column>
+                  <Column>{''}</Column>
+                </Columns>
+                <Box marginTop={2} marginBottom={2}>
+                  <Text fontWeight="semiBold">
+                    Ef hluti af láninu er nýttur til annars en öflunar...
+                  </Text>
+                </Box>
+                <Columns space={3}>
+                  <Column>
+                    <DebtInputController
+                      label="Lánshlutfall"
+                      defaultValue={`${line.annualTotalPayment}`}
+                      type="number"
+                      suffix="%"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].annualTotalPayment`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Heildargreiðslur ársins"
+                      defaultValue={`${line.annualTotalPayment}`}
+                      type="number"
+                      prefix={'+ '}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].annualTotalPayment`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Afborgun af nafnverði"
+                      defaultValue={`${line.annualTotalPrincipalPayment}`}
+                      type="number"
+                      prefix="​- ​"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].annualTotalPrincipalPayment`}
+                    />
+                  </Column>
+                </Columns>
+                <Box paddingBottom={3} />
+                <Columns space={3}>
+                  <Column>
+                    <DebtInputController
+                      label="Afföll"
+                      defaultValue={`${line.interestAmount}`}
+                      type="number"
+                      prefix={'+ '}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].interestAmount`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Lántökukostnaður"
+                      defaultValue={`${line.interestAmount}`}
+                      type="number"
+                      prefix={'+ '}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].interestAmount`}
+                    />
+                  </Column>
+                  <Column>
+                    <DebtInputController
+                      label="Vaxtagjöld"
+                      defaultValue={`${line.interestAmount}`}
+                      type="number"
+                      prefix="= "
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].interestAmount`}
+                      readOnly
+                    />
+                  </Column>
+                </Columns>
+                <Box paddingBottom={3} />
+                <Columns space={3}>
+                  <Column>{''}</Column>
+                  <Column>{''}</Column>
+                  <Column>
+                    <DebtInputController
+                      label="Eftirstöðvar skulda"
+                      defaultValue={`${line.outstandingPrincipal}`}
+                      type="number"
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].outstandingPrincipal`}
+                      readOnly
+                    />
+                  </Column>
+                </Columns>
+              </Box>
+            )
+          })}
+      </Box>
+
+      <Divider />
+      {/* <Box>
         <Text fontWeight="semiBold">
           {f(taxInterestCharges.interestChargesIntro)}
         </Text>
@@ -53,8 +232,8 @@ export const InterestChargesScreen = (props: OJOIFieldBaseProps) => {
         (reitur 1). Í reiti 5 til 8 skal færa heildarfjárhæðir (án hlutföllunar)
         en í dálka 9 og 10 skal aðeins færa þann hluta af vaxtagjöldum og
         eftirstöðvum sem tilheyra öflun íbúðarhúsnæðis.
-      </Text>
-      <Table>
+      </Text> */}
+      {/* <Table>
         <Head>
           <Row>
             <HeadData>Útreikningur</HeadData>
@@ -69,23 +248,10 @@ export const InterestChargesScreen = (props: OJOIFieldBaseProps) => {
               </Text>
             </Data>
             <Data align="right">
-              {/* <BaseInputController
-                id={'id'}
-                name={'id'}
-                defaultValue={'id'}
-                label={''}
-                textarea={false}
-                maxLength={180}
-                placeholder="0 kr."
-                type={'number'}
-                suffix=" %"
-                min={0}
-                max={100}
-              /> */}
             </Data>
           </Row>
         </Body>
-      </Table>
+      </Table> */}
       <AlertMessage
         type="info"
         title="Vaxtagjöld og lán eða lánshlutar sem ekki ganga til öflunar íbúðarhúsnæðis færast í kafla 5.5."
