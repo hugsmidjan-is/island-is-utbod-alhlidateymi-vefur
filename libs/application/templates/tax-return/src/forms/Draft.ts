@@ -8,11 +8,13 @@ import {
 import { DefaultEvents, Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
 import { tax } from '../lib/messages'
+import logo from '../assets/logo'
 export const Draft: Form = buildForm({
   id: 'OfficialJournalOfIcelandApplication',
   title: tax.applicationName,
   mode: FormModes.IN_PROGRESS,
   renderLastScreenBackButton: true,
+  logo: logo,
   renderLastScreenButton: true,
   children: [
     buildSection({
@@ -35,16 +37,16 @@ export const Draft: Form = buildForm({
         }),
       ],
     }),
-    buildSection({
-      id: Routes.CAPITAL_INCOME,
-      title: tax.capitalIncomeTitle,
-      children: [
-        buildCustomField({
-          id: 'attachments',
-          component: 'CapitalIncomeScreen',
-        }),
-      ],
-    }),
+    // buildSection({
+    //   id: Routes.CAPITAL_INCOME,
+    //   title: tax.capitalIncomeTitle,
+    //   children: [
+    //     buildCustomField({
+    //       id: 'attachments',
+    //       component: 'CapitalIncomeScreen',
+    //     }),
+    //   ],
+    // }),
     buildSection({
       id: Routes.END_OF_YEAR,
       title: tax.endOfYearTitle,

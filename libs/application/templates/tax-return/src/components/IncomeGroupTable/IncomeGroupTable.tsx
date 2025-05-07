@@ -1,4 +1,3 @@
-import { FieldKey2, InputFields } from '../../lib/types'
 import { Box, Stack, Text } from '@island.is/island-ui/core'
 import {
   Body,

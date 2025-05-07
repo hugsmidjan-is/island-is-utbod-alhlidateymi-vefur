@@ -24,8 +24,8 @@ export const InputFields = {
     vehicle: 'endOfYear.vehicle',
   },
   [Routes.INTEREST_CHARGES]: {
-    property: 'interestCharges.property',
-    vehicle: 'interestCharges.vehicle',
+    propertyLoan: 'interestCharges.propertyLoan',
+    general: 'interestCharges.general',
   },
   // [Routes.ADVERT]: {
   //   department: 'advert.department',
@@ -92,9 +92,6 @@ export type GroupedIncome = {
   items: IncomeLine[]
 }
 
-export type FieldKey = keyof typeof InputFields.incomeLastYear
-export type FieldKey2 = keyof typeof InputFields.endOfYear
-
 export enum TemplateApiActions {
   departments = 'getDepartments',
   types = 'getAdvertTypes',
@@ -110,6 +107,44 @@ export type NestedType<T> = {
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 
 export type ErrorSchema = NestedType<applicationSchema>
+
+export enum TaxReturnDebtTypeEnum {
+  Prefill = 'prefill',
+  Submit = 'submit',
+}
+
+export interface TaxReturnDebtType {
+  id: string
+  name: string
+}
+
+export interface TaxReturnDebtLine {
+  id: string
+  debtType: TaxReturnDebtType
+  label: string
+  originationDate: Date
+  identifier: string
+  term: number
+  outstandingPrincipal: number
+  interestAmount: number
+  annualTotalPayment: number
+  annualTotalPrincipalPayment: number
+  creditorId: string
+  currency: string
+}
+export interface TaxReturnDebt {
+  id: string
+  type: TaxReturnDebtTypeEnum
+  debtLines: Array<TaxReturnDebtLine>
+}
+
+export interface PersonPrefill {
+  nationalId: string
+  year: number
+  income: any
+  debt: TaxReturnDebt
+  property: any
+}
 
 // export type TaxReturnDataTypes = {
 //   groupedIncome: GroupedIncome[];
@@ -130,7 +165,9 @@ export type OJOIApplication = Override<
         data: {
           groupedIncome: GroupedIncome[]
           groupedProperty: GroupedIncome[]
-          prefill: any
+          groupedGeneralDebt: GroupedIncome[]
+          groupedHomeDebt: any[]
+          prefill: PersonPrefill
         }
       }
     }

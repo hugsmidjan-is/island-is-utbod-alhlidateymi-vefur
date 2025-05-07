@@ -107,7 +107,30 @@ function groupPropertyLines(data: any) {
   return Object.values(grouped)
 }
 
-export { groupByKey, groupIncomeLines, groupPropertyLines }
+function groupHomeDebt(data: any) {
+  const debtLines = data?.property?.debtLines ?? []
+
+  const grouped: Record<string, any> = {}
+
+  for (const line of debtLines) {
+    const debtType = line.debtType
+    const name = debtType?.name
+
+    if (grouped[name] === 'property') {
+      grouped[name] = {
+        id: debtType?.id,
+        type: name,
+        items: [],
+      }
+    }
+
+    grouped[name].items.push(line)
+  }
+
+  return Object.values(grouped)
+}
+
+export { groupByKey, groupIncomeLines, groupPropertyLines, groupHomeDebt }
 
 export function createTaxReturn(
   app: ApplicationWithAttachments,
@@ -559,4 +582,3 @@ export function createTaxReturn(
   "created": "2025-05-07T15:31:44.550Z",
   "modified": "2025-05-07T17:10:00.354Z"
 }
-*/

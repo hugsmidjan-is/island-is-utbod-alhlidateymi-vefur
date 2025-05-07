@@ -38,7 +38,7 @@ const endOfYearSchema = z
   })
   .partial()
 
-const propertyLoan = z
+const propertyLoanSchema = z
   .object({
     address: z.string().optional(),
     buyYear: z.string().optional(),
@@ -51,13 +51,15 @@ const propertyLoan = z
     annualTotalPrincipalPayment: z.string().optional(),
     interestAmount: z.string().optional(),
     outstandingPrincipal: z.string().optional(),
+    writeDown: z.string().optional(),
+    takeoverDate: z.string().optional(),
   })
   .partial()
 
 const interestChargesSchema = z
   .object({
-    housing: z.array(baseEntitySchema).optional(),
-    vehicles: z.array(baseEntitySchema).optional(),
+    propertyLoan: z.array(propertyLoanSchema).optional(),
+    general: z.array(baseEntitySchema).optional(),
   })
   .partial()
 
