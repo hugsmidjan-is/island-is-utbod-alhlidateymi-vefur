@@ -98,7 +98,7 @@ export const BffConfig = defineConfig({
       ids: {
         issuer: env.required('IDENTITY_SERVER_ISSUER_URL'),
         clientId: env.required('IDENTITY_SERVER_CLIENT_ID'),
-        secret: env.required('IDENTITY_SERVER_CLIENT_SECRET'),
+        secret: 'some secret',
         scopes: env.requiredJSON('IDENTITY_SERVER_CLIENT_SCOPES'),
       },
       allowedRedirectUris: env.requiredJSON('BFF_ALLOWED_REDIRECT_URIS'),
@@ -109,7 +109,7 @@ export const BffConfig = defineConfig({
       /**
        * The base64 encoded secret used for encrypting and decrypting.
        */
-      tokenSecretBase64: env.required('BFF_TOKEN_SECRET_BASE64'),
+      tokenSecretBase64: 'Y0ROrC3mxDBnveN+EpAnLtSubttyjZZWcV43dyk7OQI=',
       /**
        * Allowed external API URLs that the BFF can proxy requests to
        */
