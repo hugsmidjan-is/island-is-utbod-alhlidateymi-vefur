@@ -70,9 +70,14 @@ export const Draft: Form = buildForm({
           id: Routes.SECOND_INTEREST_CHARGES,
           component: 'SecondInterestChargesScreen',
         }),
+      ],
+    }),
+    buildSection({
+      id: Routes.CONFIRMATION,
+      title: tax.confirmationTitle,
+      children: [
         buildMultiField({
-          id: 'bull',
-          title: 'test',
+          id: 'ConfirmationPreview',
           children: [
             buildCustomField({
               id: Routes.CONFIRMATION_PREVIEW,
@@ -85,7 +90,7 @@ export const Draft: Form = buildForm({
               actions: [
                 {
                   event: DefaultEvents.SUBMIT,
-                  name: 'Staðfesta',
+                  name: 'Senda inn framtal',
                   type: 'primary',
                 },
               ],
@@ -93,11 +98,6 @@ export const Draft: Form = buildForm({
           ],
         }),
       ],
-    }),
-    buildSection({
-      id: Routes.CONFIRMATION,
-      title: tax.confirmationTitle,
-      children: [],
     }),
     // buildSection({
     //   id: Routes.SUMMARY,
