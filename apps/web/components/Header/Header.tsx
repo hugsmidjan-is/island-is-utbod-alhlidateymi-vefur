@@ -50,11 +50,10 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
   loginButtonType = 'dropdown',
   children,
 }) => {
-  const { activeLocale, t } = useI18n()
   const { colorScheme } = useContext(ColorSchemeContext)
 
-  const locale = activeLocale
-  const english = activeLocale === 'en'
+  const locale = 'is'
+  const english = false
   const isWhite = colorScheme === 'white'
 
   return (
@@ -99,7 +98,9 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                           id="search_input_header"
                           size="medium"
                           activeLocale={locale}
-                          placeholder={searchPlaceholder ?? t.searchPlaceholder}
+                          placeholder={
+                            searchPlaceholder ?? 'Leitaðu á Ísland.is'
+                          }
                           autocomplete={true}
                           autosuggest={true}
                           organization={organizationSearchFilter}
@@ -107,23 +108,12 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                       </Box>
                     )}
 
-                    <Box marginLeft={marginLeft}>
-                      <LoginButton
-                        colorScheme={buttonColorScheme}
-                        topItem={customTopLoginButtonItem}
-                        type={loginButtonType}
-                      />
-                    </Box>
+                    <Box marginLeft={marginLeft}></Box>
 
                     <Box
                       marginLeft={marginLeft}
                       display={['none', 'none', 'none', 'block']}
-                    >
-                      <LanguageToggler
-                        buttonColorScheme={buttonColorScheme}
-                        queryParams={languageToggleQueryParams}
-                      />
-                    </Box>
+                    ></Box>
                     <Box marginLeft={marginLeft}>
                       <Menu
                         {...megaMenuData}

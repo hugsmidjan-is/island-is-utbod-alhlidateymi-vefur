@@ -5,10 +5,7 @@ import {
   TrWebCommonsExternalPortalsApiModelsPaymentPlanPaymentPlanDto,
   IncomePlanStatus as IncomeStatus,
 } from '@island.is/clients/social-insurance-administration'
-import {
-  CmsElasticsearchService,
-  CustomPageUniqueIdentifier,
-} from '@island.is/cms'
+import { CustomPageUniqueIdentifier } from '@island.is/cms'
 import type { Logger } from '@island.is/logging'
 import { LOGGER_PROVIDER } from '@island.is/logging'
 import { isDefined } from '@island.is/shared/utils'
@@ -34,7 +31,6 @@ export class SocialInsuranceService {
   constructor(
     @Inject(LOGGER_PROVIDER) private readonly logger: Logger,
     private readonly socialInsuranceApi: SocialInsuranceAdministrationClientService,
-    private readonly cmsElasticService: CmsElasticsearchService,
   ) {}
 
   async getPayments(user: User): Promise<Payments | undefined> {
@@ -186,10 +182,7 @@ export class SocialInsuranceService {
   async getPensionCalculation(
     input: PensionCalculationInput,
   ): Promise<PensionCalculationResponse> {
-    const pageData = await this.cmsElasticService.getCustomPage({
-      lang: 'is',
-      uniqueIdentifier: CustomPageUniqueIdentifier.PensionCalculator,
-    })
+    const pageData = null
 
     const mappedInput = mapPensionCalculationInput(input, pageData)
     const calculation = await this.socialInsuranceApi.getPensionCalculation(

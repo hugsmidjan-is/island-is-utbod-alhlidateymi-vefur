@@ -33,7 +33,6 @@ import { GetMenuInput } from './dto/getMenu.input'
 import { AnchorPage } from './models/anchorPage.model'
 import { OrganizationTags } from './models/organizationTags.model'
 import { CmsContentfulService } from './cms.contentful.service'
-import { CmsElasticsearchService } from './cms.elasticsearch.service'
 import { PowerBiService } from './powerbi.service'
 import { ArticleCategory } from './models/articleCategory.model'
 import { GetArticleCategoriesInput } from './dto/getArticleCategories.input'
@@ -158,10 +157,7 @@ const defaultCache: CacheControlOptions = { maxAge: CACHE_CONTROL_MAX_AGE }
 
 @Resolver()
 export class CmsResolver {
-  constructor(
-    private readonly cmsContentfulService: CmsContentfulService,
-    private readonly cmsElasticsearchService: CmsElasticsearchService,
-  ) {}
+  constructor(private readonly cmsContentfulService: CmsContentfulService) {}
 
   @CacheControl(defaultCache)
   @Query(() => Namespace, { nullable: true })
@@ -309,10 +305,7 @@ export class CmsResolver {
   async getServiceWebPage(
     @Args('input') input: GetServiceWebPageInput,
   ): Promise<ServiceWebPage | null> {
-    return this.cmsElasticsearchService.getSingleDocumentTypeBySlug(
-      getElasticsearchIndex(input.lang),
-      { type: 'webServiceWebPage', slug: input.slug },
-    )
+    return null
   }
 
   @CacheControl(defaultCache)
@@ -415,10 +408,7 @@ export class CmsResolver {
   getFrontpage(
     @Args('input') input: GetFrontpageInput,
   ): Promise<Frontpage | null> {
-    return this.cmsElasticsearchService.getSingleDocumentTypeBySlug(
-      getElasticsearchIndex(input.lang),
-      { type: 'webFrontpage', slug: input.pageIdentifier },
-    )
+    return Promise.resolve(null)
   }
 
   @CacheControl(defaultCache)
@@ -426,10 +416,7 @@ export class CmsResolver {
   getArticleCategories(
     @Args('input') input: GetArticleCategoriesInput,
   ): Promise<ArticleCategory[]> {
-    return this.cmsElasticsearchService.getArticleCategories(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve([])
   }
 
   @CacheControl(defaultCache)
@@ -455,19 +442,13 @@ export class CmsResolver {
   async getArticles(
     @Args('input') input: GetArticlesInput,
   ): Promise<Article[]> {
-    return this.cmsElasticsearchService.getArticles(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return []
   }
 
   @CacheControl(defaultCache)
   @Query(() => GrantList)
   async getGrants(@Args('input') input: GetGrantsInput): Promise<GrantList> {
-    return this.cmsElasticsearchService.getGrants(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve({ items: [], total: 0 })
   }
 
   @CacheControl(defaultCache)
@@ -497,10 +478,7 @@ export class CmsResolver {
   @CacheControl(defaultCache)
   @Query(() => EventList)
   async getEvents(@Args('input') input: GetEventsInput): Promise<EventList> {
-    return this.cmsElasticsearchService.getEvents(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve({ items: [], total: 0 })
   }
 
   @CacheControl(defaultCache)
@@ -508,10 +486,7 @@ export class CmsResolver {
   async getNewsDates(
     @Args('input') input: GetNewsDatesInput,
   ): Promise<string[]> {
-    return this.cmsElasticsearchService.getNewsDates(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve([])
   }
 
   @CacheControl(defaultCache)
@@ -521,19 +496,13 @@ export class CmsResolver {
     if (!input.year && !input.month && !input.tags?.length) {
       return this.cmsContentfulService.getNews(input)
     }
-    return this.cmsElasticsearchService.getNews(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve({ items: [], total: 0 })
   }
 
   @CacheControl(defaultCache)
   @Query(() => Menu, { nullable: true })
   getMenu(@Args('input') input: GetMenuInput): Promise<Menu | null> {
-    return this.cmsElasticsearchService.getSingleMenuByName(
-      getElasticsearchIndex(input.lang),
-      { ...input },
-    )
+    return Promise.resolve(null)
   }
 
   @CacheControl(defaultCache)
@@ -541,10 +510,7 @@ export class CmsResolver {
   getGroupedMenu(
     @Args('input') input: GetSingleMenuInput,
   ): Promise<GroupedMenu | null> {
-    return this.cmsElasticsearchService.getSingleMenu<GroupedMenu>(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve(null)
   }
 
   @CacheControl(defaultCache)
@@ -560,10 +526,7 @@ export class CmsResolver {
   getSingleSupportQNA(
     @Args('input') { lang, slug }: GetSingleSupportQNAInput,
   ): Promise<SupportQNA | null> {
-    return this.cmsElasticsearchService.getSingleDocumentTypeBySlug<SupportQNA>(
-      getElasticsearchIndex(lang),
-      { type: 'webQNA', slug },
-    )
+    return Promise.resolve(null)
   }
 
   @CacheControl(defaultCache)
@@ -571,10 +534,7 @@ export class CmsResolver {
   async getFeaturedSupportQNAs(
     @Args('input') input: GetFeaturedSupportQNAsInput,
   ): Promise<SupportQNA[]> {
-    return this.cmsElasticsearchService.getFeaturedSupportQNAs(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve([])
   }
 
   @CacheControl(defaultCache)
@@ -622,10 +582,7 @@ export class CmsResolver {
   async getPublishedMaterial(
     @Args('input') input: GetPublishedMaterialInput,
   ): Promise<EnhancedAssetSearchResult> {
-    return this.cmsElasticsearchService.getPublishedMaterial(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve({ items: [], total: 0 })
   }
 
   @CacheControl(defaultCache)
@@ -665,10 +622,7 @@ export class CmsResolver {
   async getCategoryPages(
     @Args('input') input: GetCategoryPagesInput,
   ): Promise<typeof CategoryPage[] | null> {
-    return this.cmsElasticsearchService.getCategoryPages(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve([])
   }
 
   @CacheControl(defaultCache)
@@ -676,12 +630,7 @@ export class CmsResolver {
   async getSingleEntryTitleById(
     @Args('input') input: GetSingleEntryTitleByIdInput,
   ): Promise<EntryTitle | null> {
-    const document = await this.cmsElasticsearchService.getSingleDocumentById(
-      getElasticsearchIndex(input.lang),
-      input.id,
-    )
-    if (typeof document?.title !== 'string') return null
-    return { title: document.title }
+    return Promise.resolve(null)
   }
 
   @CacheControl(defaultCache)
@@ -689,7 +638,7 @@ export class CmsResolver {
   async getCustomPage(
     @Args('input') input: GetCustomPageInput,
   ): Promise<CustomPage | null> {
-    return this.cmsElasticsearchService.getCustomPage(input)
+    return null
   }
 
   @CacheControl(defaultCache)
@@ -697,7 +646,7 @@ export class CmsResolver {
   async getCustomSubpage(
     @Args('input') input: GetCustomSubpageInput,
   ): Promise<CustomPage | null> {
-    return this.cmsElasticsearchService.getCustomSubpage(input)
+    return Promise.resolve(null)
   }
 
   @CacheControl(defaultCache)
@@ -705,7 +654,11 @@ export class CmsResolver {
   getGenericListItems(
     @Args('input') input: GetGenericListItemsInput,
   ): Promise<GenericListItemResponse> {
-    return this.cmsElasticsearchService.getGenericListItems(input)
+    return Promise.resolve({
+      items: [],
+      total: 0,
+      input: { genericListId: '12', lang: 'en' },
+    })
   }
 
   @CacheControl(defaultCache)
@@ -713,7 +666,7 @@ export class CmsResolver {
   getGenericListItemBySlug(
     @Args('input') input: GetGenericListItemBySlugInput,
   ): Promise<GenericListItem | null> {
-    return this.cmsElasticsearchService.getGenericListItemBySlug(input)
+    return Promise.resolve(null)
   }
 
   @CacheControl(defaultCache)
@@ -721,7 +674,16 @@ export class CmsResolver {
   getTeamMembers(
     @Args('input') input: GetTeamMembersInput,
   ): Promise<TeamMemberResponse> {
-    return this.cmsElasticsearchService.getTeamMembers(input)
+    return Promise.resolve({
+      items: [],
+      total: 0,
+      input: {
+        lang: 'is',
+        size: 0,
+        teamListId: '123',
+        orderBy: GetTeamMembersInputOrderBy.Name,
+      },
+    })
   }
 
   @CacheControl(defaultCache)
@@ -757,9 +719,7 @@ export class CmsResolver {
   getBloodDonationRestrictionGenericTags(
     @Args('input') input: GetBloodDonationRestrictionGenericTagsInput,
   ): Promise<BloodDonationRestrictionGenericTagList> {
-    return this.cmsElasticsearchService.getBloodDonationRestrictionGenericTags(
-      getElasticsearchIndex(input.lang),
-    )
+    return Promise.resolve({ items: [], total: 0 })
   }
 
   @CacheControl(defaultCache)
@@ -767,10 +727,7 @@ export class CmsResolver {
   getBloodDonationRestrictions(
     @Args('input') input: GetBloodDonationRestrictionsInput,
   ): Promise<BloodDonationRestrictionList> {
-    return this.cmsElasticsearchService.getBloodDonationRestrictionList(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return Promise.resolve({ items: [], total: 0, input: { lang: 'is' } })
   }
 
   @CacheControl(defaultCache)
@@ -785,35 +742,22 @@ export class CmsResolver {
 @Resolver(() => LatestNewsSlice)
 @CacheControl(defaultCache)
 export class LatestNewsSliceResolver {
-  constructor(private cmsElasticsearchService: CmsElasticsearchService) {}
-
   @CacheControl(defaultCache)
   @ResolveField(() => [News])
   async news(@Parent() { news: input }: LatestNewsSlice): Promise<News[]> {
-    const newsList = await this.cmsElasticsearchService.getNews(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
-    return newsList.items
+    return Promise.resolve([])
   }
 }
 
 @Resolver(() => LatestEventsSlice)
 @CacheControl(defaultCache)
 export class LatestEventsSliceResolver {
-  constructor(private cmsElasticsearchService: CmsElasticsearchService) {}
-
   @CacheControl(defaultCache)
   @ResolveField(() => [EventModel])
   async events(
     @Parent() { events: input }: LatestEventsSlice,
   ): Promise<EventModel[]> {
-    const eventsList = await this.cmsElasticsearchService.getEvents(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
-
-    return eventsList.items
+    return Promise.resolve([])
   }
 }
 
@@ -839,8 +783,6 @@ export class ArticleResolver {
 @Resolver(() => FeaturedArticles)
 @CacheControl(defaultCache)
 export class FeaturedArticlesResolver {
-  constructor(private cmsElasticsearchService: CmsElasticsearchService) {}
-
   @ResolveField(() => [Article])
   async resolvedArticles(
     @Parent() { resolvedArticles: input }: FeaturedArticles,
@@ -848,18 +790,13 @@ export class FeaturedArticlesResolver {
     if (input.size === 0) {
       return []
     }
-    return this.cmsElasticsearchService.getArticles(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return []
   }
 }
 
 @Resolver(() => FeaturedSupportQNAs)
 @CacheControl(defaultCache)
 export class FeaturedSupportQNAsResolver {
-  constructor(private cmsElasticsearchService: CmsElasticsearchService) {}
-
   @ResolveField(() => [SupportQNA])
   async resolvedSupportQNAs(
     @Parent() { resolvedSupportQNAs: input }: FeaturedSupportQNAs,
@@ -867,10 +804,7 @@ export class FeaturedSupportQNAsResolver {
     if (input.size === 0) {
       return []
     }
-    return this.cmsElasticsearchService.getFeaturedSupportQNAs(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return []
   }
 }
 
@@ -889,10 +823,7 @@ export class PowerBiSliceResolver {
 @Resolver(() => GrantCardsList)
 @CacheControl(defaultCache)
 export class GrantCardsListResolver {
-  constructor(
-    private cmsElasticsearchService: CmsElasticsearchService,
-    private cmsContentfulService: CmsContentfulService,
-  ) {}
+  constructor(private cmsContentfulService: CmsContentfulService) {}
 
   @ResolveField(() => GrantList)
   async resolvedGrantsList(
@@ -902,16 +833,7 @@ export class GrantCardsListResolver {
     if (!input || input?.size === 0 || maxNumberOfCards === 0) {
       return { total: 0, items: [] }
     }
-
-    return this.cmsElasticsearchService.getGrants(
-      getElasticsearchIndex(input.lang),
-      {
-        ...input,
-        ...(maxNumberOfCards && {
-          size: maxNumberOfCards,
-        }),
-      },
-    )
+    return { total: 0, items: [] }
   }
   @ResolveField(() => GraphQLJSONObject)
   async namespace(@Parent() { resolvedGrantsList: input }: GrantCardsList) {
@@ -931,10 +853,7 @@ export class GrantCardsListResolver {
 @Resolver(() => FeaturedEvents)
 @CacheControl(defaultCache)
 export class FeaturedEventsResolver {
-  constructor(
-    private cmsElasticsearchService: CmsElasticsearchService,
-    private cmsContentfulService: CmsContentfulService,
-  ) {}
+  constructor(private cmsContentfulService: CmsContentfulService) {}
 
   @ResolveField(() => EventList)
   async resolvedEventList(
@@ -944,10 +863,7 @@ export class FeaturedEventsResolver {
       return { total: 0, items: [] }
     }
 
-    return this.cmsElasticsearchService.getEvents(
-      getElasticsearchIndex(input.lang),
-      input,
-    )
+    return { total: 0, items: [] }
   }
   @ResolveField(() => GraphQLJSONObject)
   async namespace(@Parent() { resolvedEventList: input }: FeaturedEvents) {
@@ -985,8 +901,6 @@ export class TeamListResolver {
 
 @Resolver(() => LatestGenericListItems)
 export class LatestGenericListItemsResolver {
-  constructor(private cmsElasticsearchService: CmsElasticsearchService) {}
-
   @ResolveField(() => GenericListItemResponse, { nullable: true })
   async itemResponse(
     @Parent() { itemResponse: input }: LatestGenericListItems,
@@ -994,7 +908,7 @@ export class LatestGenericListItemsResolver {
     if (!input) {
       return null
     }
-    return this.cmsElasticsearchService.getGenericListItems(input)
+    return null
   }
 }
 

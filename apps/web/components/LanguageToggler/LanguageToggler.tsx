@@ -36,14 +36,13 @@ export const LanguageToggler = ({
     (!hideWhenMobile ? '-mobile' : ''),
   queryParams,
 }: LanguageTogglerProps) => {
-  const client = useApolloClient()
   const Router = useRouter()
   const [showDialog, setShowDialog] = useState<boolean>(false)
   const { contentfulIds, resolveLinkTypeLocally, globalNamespace } =
     useContext(GlobalContext)
-  const { activeLocale, locale, t } = useI18n()
+
   const gn = useNamespace(globalNamespace)
-  const otherLanguage = (activeLocale === 'en' ? 'is' : 'en') as Locale
+  const otherLanguage = 'en' as Locale
   const { linkResolver, typeResolver } = useLinkResolver()
 
   const getOtherLanguagePath = async () => {
@@ -80,31 +79,17 @@ export const LanguageToggler = ({
 
     const responses = await Promise.all(queries)
 
-    const secondContentSlug = responses[1]?.data?.getContentSlug
+    const secondContentSlug = null
 
     // We need to have a special case for subArticles since they've got a url field instead of a slug field
-    if (secondContentSlug?.type === 'subArticle') {
-      const urls = secondContentSlug?.url?.[otherLanguage].split('/')
 
-      // Show dialog when either there is no title or there aren't at least 2 urls (for example, a valid url would be on the format: 'parental-leave/payments')
-      if (
-        !secondContentSlug?.title?.[otherLanguage] ||
-        (urls && urls.length < 2)
-      ) {
-        return setShowDialog(true)
-      }
-      return goToOtherLanguagePage(
-        linkResolver('subarticle', urls, otherLanguage).href,
-      )
-    }
-
-    const slugs = []
+    const slugs: never[] = []
     let title: TextFieldLocales = { is: '', en: '' }
     let type: LinkType | '' = ''
     let activeTranslations = {}
 
     for (const res of responses) {
-      const slug = res.data?.getContentSlug?.slug
+      const slug = null
       if (!slug) {
         break
       }
@@ -112,7 +97,7 @@ export const LanguageToggler = ({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore make web strict
       title = res.data?.getContentSlug?.title
-      type = res.data?.getContentSlug?.type as LinkType
+      type = ''
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore make web strict
       activeTranslations = res.data?.getContentSlug?.activeTranslations
@@ -155,7 +140,7 @@ export const LanguageToggler = ({
   }
 
   const goToOtherLanguagePage = (path: string) => {
-    locale(t.otherLanguageCode)
+    'Change language to english'
     Router.push(path)
   }
 
@@ -164,49 +149,8 @@ export const LanguageToggler = ({
   }
 
   const getContentSlug = async (contentfulId: string) => {
-    return client.query<GetContentSlugQuery, GetContentSlugQueryVariables>({
-      query: GET_CONTENT_SLUG,
-      variables: {
-        input: {
-          id: contentfulId as string,
-        },
-      },
-    })
+    return { res: { data: null } }
   }
-
-  const buttonElementProps: ButtonElementProps = {
-    buttonColorScheme,
-    otherLanguage,
-    otherLanguageAria: t.otherLanguageAria,
-    onClick,
-  }
-
-  const Disclosure: ReactElement = (
-    <ButtonElement {...buttonElementProps}>{t.otherLanguageName}</ButtonElement>
-  )
-
-  const Dialog = (
-    <DialogPrompt
-      baseId={dialogId}
-      initialVisibility={true}
-      title={gn('switchToEnglishModalTitle', 'Translation not available')}
-      description={gn(
-        'switchToEnglishModalText',
-        'The page you are viewing does not have an English translation yet',
-      )}
-      ariaLabel="Confirm switching to english"
-      disclosureElement={Disclosure}
-      onConfirm={() => {
-        goToOtherLanguagePage(linkResolver('homepage', [], otherLanguage).href)
-      }}
-      buttonTextConfirm="Go to home page"
-      buttonTextCancel="Keep viewing"
-    />
-  )
-
-  const Content = showDialog ? Dialog : Disclosure
-
-  return !hideWhenMobile ? Content : <Hidden below="md">{Content}</Hidden>
 }
 
 type ButtonElementProps = {

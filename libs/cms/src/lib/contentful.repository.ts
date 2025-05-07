@@ -69,12 +69,7 @@ export class ContentfulRepository {
   }
 
   async getLocales() {
-    const locales = await this.getClient().getLocales()
-    return locales.items.map(({ code, name, fallbackCode }) => ({
-      code,
-      name,
-      fallbackCode,
-    }))
+    return []
   }
 
   async getLocalizedEntries<Fields>(
@@ -87,12 +82,7 @@ export class ContentfulRepository {
     if (localeMap[code]) {
       code = localeMap[code]
     }
-
-    return this.getClient().getEntries({
-      locale: validLocales.includes(code) ? code : 'is-IS',
-      include,
-      ...query,
-    })
+    return { items: [], total: 0, skip: 0, limit: 0 } as any
   }
 
   async getLocalizedEntry<Fields>(

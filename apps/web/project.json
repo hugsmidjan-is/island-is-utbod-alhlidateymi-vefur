@@ -122,11 +122,7 @@
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "./scripts/run-es-proxy.sh",
-          "yarn nx run api:dev",
-          "yarn start web"
-        ],
+        "commands": ["yarn start web"],
         "parallel": true
       }
     },

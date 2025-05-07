@@ -33,7 +33,7 @@ const Webreader: FC<React.PropsWithChildren<WebReaderProps>> = ({
 }) => {
   const [href, setHref] = useState('')
   const router = useRouter()
-  const { activeLocale } = useI18n()
+  const activeLocale = 'is'
 
   useEffect(() => {
     const routeChangestart = () => {

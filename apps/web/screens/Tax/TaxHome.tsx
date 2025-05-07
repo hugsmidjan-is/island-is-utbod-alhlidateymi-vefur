@@ -28,6 +28,7 @@ import {
   Organization,
 } from '@island.is/web/graphql/schema'
 import { withMainLayout } from '@island.is/web/layouts/main'
+import { Screen } from '@island.is/web/types'
 
 import {
   CustomScreen,
@@ -35,7 +36,7 @@ import {
 } from '../CustomPage/CustomPageWrapper'
 import SidebarLayout from '../Layouts/SidebarLayout'
 
-const TaxHome: CustomScreen<TaxProps> = ({ title, article }) => {
+const TaxHome: Screen<TaxProps> = ({ pageProps: { title, article } }) => {
   const inStepperView = false
   const breadcrumbItems: Array<BreadCrumbItem> = [
     { title: 'Ísland.is', href: '/' },
@@ -546,8 +547,10 @@ interface SkatturArticle {
 }
 
 interface TaxProps {
-  title: string
-  article: SkatturArticle
+  pageProps: {
+    title: string
+    article: SkatturArticle
+  }
 }
 
 TaxHome.getProps = async () => {
@@ -640,14 +643,11 @@ TaxHome.getProps = async () => {
     ],
   }
   return {
-    title: 'Tax',
-    article,
+    pageProps: {
+      title: 'Tax',
+      article,
+    },
   }
 }
 
-export default withMainLayout(
-  withCustomPageWrapper(
-    CustomPageUniqueIdentifier.OfficialJournalOfIceland,
-    TaxHome,
-  ),
-)
+export default withMainLayout(TaxHome)
