@@ -38,10 +38,34 @@ const endOfYearSchema = z
   })
   .partial()
 
+const propertyLoan = z
+  .object({
+    address: z.string().optional(),
+    buyYear: z.string().optional(),
+    loanNr: z.string().optional(),
+    creditorName: z.string().optional(),
+    creditorId: z.string().optional(),
+    originationDate: z.string().optional(),
+    term: z.string().optional(),
+    annualTotalPayment: z.string().optional(),
+    annualTotalPrincipalPayment: z.string().optional(),
+    interestAmount: z.string().optional(),
+    outstandingPrincipal: z.string().optional(),
+  })
+  .partial()
+
+const interestChargesSchema = z
+  .object({
+    housing: z.array(baseEntitySchema).optional(),
+    vehicles: z.array(baseEntitySchema).optional(),
+  })
+  .partial()
+
 export const applicationSchema = z.object({
   generalInfo: generalInfoSchema.optional(),
   incomeLastYear: lastYearIncomeSchema.optional(),
   endOfYear: endOfYearSchema.optional(),
+  interestCharges: interestChargesSchema.optional(),
   requirements: z
     .object({
       approveExternalData: z.string(),
