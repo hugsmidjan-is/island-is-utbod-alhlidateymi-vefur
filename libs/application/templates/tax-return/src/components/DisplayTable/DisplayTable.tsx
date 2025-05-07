@@ -7,16 +7,19 @@ import {
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { Text } from '@island.is/island-ui/core'
+import { formatCurrencyWithoutSuffix } from '@island.is/application/ui-components'
 type DisplayTableProps = {
   headData: string[]
   bodyData: string[][]
-  total?: string
+  total?: number | number[]
 }
 export const DisplayTable = ({
   headData,
   bodyData,
   total,
 }: DisplayTableProps) => {
+  const totalArray = Array.isArray(total)
+  const addData = headData.length > 2 && !totalArray
   return (
     <Table>
       <Head>
@@ -47,12 +50,26 @@ export const DisplayTable = ({
                 Samtals
               </Text>
             </Data>
-            {headData.length > 2 && <Data align={'right'}></Data>}
-            <Data align={'right'}>
-              <Text variant="medium" fontWeight="semiBold">
-                {total}
-              </Text>
-            </Data>
+            {totalArray ? (
+              total.map((t) => {
+                return (
+                  <Data align={'right'}>
+                    <Text variant="medium" fontWeight="semiBold">
+                      {formatCurrencyWithoutSuffix(t.toString())}
+                    </Text>
+                  </Data>
+                )
+              })
+            ) : (
+              <>
+                {addData && <Data align={'right'}></Data>}
+                <Data align={'right'}>
+                  <Text variant="medium" fontWeight="semiBold">
+                    {formatCurrencyWithoutSuffix(total.toString())}
+                  </Text>
+                </Data>
+              </>
+            )}
           </Row>
         )}
       </Body>
