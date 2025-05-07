@@ -6,6 +6,7 @@ import { useBoxStyles, UseBoxStylesProps } from '../Box/useBoxStyles'
 import { getTextStyles, TextProps } from '../Text/Text'
 import * as styles from './Table.css'
 import { TestSupport } from '@island.is/island-ui/utils'
+import { TextVariants } from '../Text/Text.css'
 
 type DataField = {
   children?: ReactNode
@@ -17,6 +18,8 @@ type DataField = {
   borderColor?: keyof typeof theme.color
   align?: 'left' | 'right' | 'center'
   disabled?: boolean
+  fontsize?: TextVariants
+  weight?: 'medium' | 'light' | 'regular' | 'semiBold'
 }
 
 type Table = {
@@ -82,14 +85,17 @@ export const Data = ({
   borderColor = 'blue200',
   align,
   disabled,
+  fontsize,
+  weight,
   ...props
 }: DataField &
   Omit<AllHTMLAttributes<HTMLTableDataCellElement>, 'className'>) => {
   const classNames = cn(
     styles.cell,
     getTextStyles({
-      variant: 'small',
+      variant: fontsize ?? 'h5',
       disabled,
+      fontWeight: weight ?? 'regular',
       ...text,
     }),
     useBoxStyles({

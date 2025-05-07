@@ -1,4 +1,4 @@
-import { Box, Stack, Text } from '@island.is/island-ui/core'
+import { Box, Button, Icon, Stack, Text } from '@island.is/island-ui/core'
 import {
   Body,
   Data,
@@ -9,6 +9,8 @@ import {
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { GroupedIncome } from '../../lib/types'
 import { BaseInputController } from '../input/BaseInputController'
+import { sumOfBaseEntity } from '../../lib/utils'
+import NumberFormat from 'react-number-format'
 
 type IncomeGroupTableProps = {
   group: GroupedIncome
@@ -72,9 +74,34 @@ export const IncomeGroupTable = ({
                 </Data>
               </Row>
             ))}
+            {group.items.length > 1 && (
+              <Row>
+                {showPayer && (
+                  <Data weight="semiBold" fontsize={'h5'}>
+                    Samtals
+                  </Data>
+                )}
+                <Data weight="semiBold" fontsize={'h5'}>
+                  {!showPayer && 'Samtals'}
+                </Data>
+                <Data align="right" weight="semiBold" fontsize={'h5'}>
+                  {group.items
+                    .reduce((acc, item) => {
+                      return acc + (Number(item.value) || 0)
+                    }, 0)
+                    .toLocaleString('de-DE') || 0}{' '}
+                  kr.
+                </Data>
+              </Row>
+            )}
           </Body>
         </Table>
       </Stack>
+      <Box marginTop={2}>
+        <Button colorScheme="white" icon="add" size="small" variant={'utility'}>
+          Bæta við línu
+        </Button>
+      </Box>
     </Box>
   )
 }
