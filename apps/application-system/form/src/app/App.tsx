@@ -25,9 +25,7 @@ export const App = () => (
         applicationBasePath={BASE_PATH}
         mockedInitialState={mockedInitialState}
       >
-        <FeatureFlagProvider sdkKey={environment.featureFlagSdkKey}>
-          <Router />
-        </FeatureFlagProvider>
+        <Router />
       </BffProvider>
     </LocaleProvider>
   </ApolloProvider>

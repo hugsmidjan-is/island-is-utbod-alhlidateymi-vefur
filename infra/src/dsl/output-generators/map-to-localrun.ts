@@ -75,14 +75,6 @@ const serializeService = async (
   }
 
   // secrets
-  if (Object.keys(serviceDef.secrets).length > 0 && withSecrets) {
-    logger.debug('Retrieving secrets', {
-      service: service.name,
-      env: env,
-    })
-    const secrets = await retrieveSecrets(serviceDef.secrets)
-    mergeObjects(result.env, secrets)
-  }
 
   // initContainers
   if (typeof serviceDef.initContainers !== 'undefined') {
@@ -191,6 +183,7 @@ const retrieveSecrets: RetrieveSecrets = async (
 ): Promise<ContainerEnvironmentVariables> => {
   const secretPaths = Object.entries(secrets).map((entry) => entry[1])
   const secretValues = await getSsmParams(secretPaths)
+
   return Object.entries(secrets)
     .map((entry) => [entry[0], secretValues[entry[1]]])
     .reduce(
