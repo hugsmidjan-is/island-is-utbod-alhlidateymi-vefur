@@ -138,6 +138,18 @@ It is as simple as:
 yarn nx test application-system-form
 ```
 
+### E2E test
+
+```bash
+yarn run playwright test -c apps/application-system/form/src/e2e-test
+```
+
+With the UI
+
+```bash
+yarn run playwright test -c apps/application-system/form/src/e2e-test --ui
+```
+
 ## Code owners and maintainers
 
 - [Norda](https://github.com/orgs/island-is/teams/norda-applications/members)
