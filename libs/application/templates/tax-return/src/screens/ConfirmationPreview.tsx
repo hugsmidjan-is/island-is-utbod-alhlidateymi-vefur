@@ -1,6 +1,6 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
-import { taxInterestCharges, taxSecondInterestCharges } from '../lib/messages'
+import { taxInterestCharges, taxOverviewConfirmation } from '../lib/messages'
 import { OJOIFieldBaseProps } from '../lib/types'
 import { format as formatNationalId } from 'kennitala'
 import {
@@ -21,14 +21,14 @@ export const ConfirmationPreviewScreen = ({
   const { formatMessage: f } = useLocale()
 
   const chapterIncomeMap = [
-    taxSecondInterestCharges.salarySubChapter,
-    taxSecondInterestCharges.grantsSubChapter,
-    taxSecondInterestCharges.otherRevenueSubChapter,
+    taxOverviewConfirmation.salarySubChapter,
+    taxOverviewConfirmation.grantsSubChapter,
+    taxOverviewConfirmation.otherRevenueSubChapter,
   ]
 
   const chapterPropertyMap = [
-    taxSecondInterestCharges.localPropertySubChapter,
-    taxSecondInterestCharges.vehiclesSubChapter,
+    taxOverviewConfirmation.localPropertySubChapter,
+    taxOverviewConfirmation.vehiclesSubChapter,
   ]
 
   const propertyDepts =
@@ -44,18 +44,18 @@ export const ConfirmationPreviewScreen = ({
   return (
     <FormScreen
       goToScreen={goToScreen}
-      title={f(taxSecondInterestCharges.title)}
-      intro={f(taxSecondInterestCharges.intro)}
+      title={f(taxOverviewConfirmation.title)}
+      intro={f(taxOverviewConfirmation.intro)}
     >
       <FormChapter
         onClick={goToScreen ? () => goToScreen(Routes.GENERAL_INFO) : undefined}
-        title={f(taxSecondInterestCharges.generalInfoChapter)}
+        title={f(taxOverviewConfirmation.generalInfoChapter)}
       >
         <Stack space={3}>
           <Box width="full" display="flex">
             <Box width="half">
               <Text fontWeight="semiBold">
-                {f(taxSecondInterestCharges.name)}
+                {f(taxOverviewConfirmation.name)}
               </Text>
               <Text>
                 {
@@ -67,7 +67,7 @@ export const ConfirmationPreviewScreen = ({
 
             <Box width="half">
               <Text fontWeight="semiBold">
-                {f(taxSecondInterestCharges.nationalId)}
+                {f(taxOverviewConfirmation.nationalId)}
               </Text>
               <Text>
                 {
@@ -80,7 +80,7 @@ export const ConfirmationPreviewScreen = ({
           <Box width="full" display="flex">
             <Box width="half">
               <Text fontWeight="semiBold">
-                {f(taxSecondInterestCharges.address)}
+                {f(taxOverviewConfirmation.address)}
               </Text>
               <Text>
                 {
@@ -91,7 +91,7 @@ export const ConfirmationPreviewScreen = ({
             </Box>
             <Box width="half">
               <Text fontWeight="semiBold">
-                {f(taxSecondInterestCharges.municipality)}
+                {f(taxOverviewConfirmation.municipality)}
               </Text>
               <Text>
                 {`${application.externalData.getTaxNationalRegistryData.data.person.address?.postalCode} ${application.externalData.getTaxNationalRegistryData.data.person.address?.city}`}
@@ -101,7 +101,7 @@ export const ConfirmationPreviewScreen = ({
           <Box width="full" display="flex">
             <Box width="half">
               <Text fontWeight="semiBold">
-                {f(taxSecondInterestCharges.email)}
+                {f(taxOverviewConfirmation.email)}
               </Text>
               <Text>
                 {
@@ -112,7 +112,7 @@ export const ConfirmationPreviewScreen = ({
             </Box>
             <Box width="half">
               <Text fontWeight="semiBold">
-                {f(taxSecondInterestCharges.phone)}
+                {f(taxOverviewConfirmation.phone)}
               </Text>
               <Text>
                 {`+354 ${formatPhoneNumber(
@@ -124,7 +124,7 @@ export const ConfirmationPreviewScreen = ({
           </Box>
         </Stack>
       </FormChapter>
-      <FormChapter title={f(taxSecondInterestCharges.annualIncomeChapter)}>
+      <FormChapter title={f(taxOverviewConfirmation.annualIncomeChapter)}>
         {application.externalData.getTaxReturnData.data.groupedIncome.length >
           0 &&
           application.externalData.getTaxReturnData.data.groupedIncome.map(
@@ -153,7 +153,7 @@ export const ConfirmationPreviewScreen = ({
             },
           )}
       </FormChapter>
-      <FormChapter title={f(taxSecondInterestCharges.yearEndAssetsChapter)}>
+      <FormChapter title={f(taxOverviewConfirmation.yearEndAssetsChapter)}>
         {application.externalData.getTaxReturnData.data.groupedProperty.length >
           0 &&
           application.externalData.getTaxReturnData.data.groupedProperty.map(
@@ -190,8 +190,8 @@ export const ConfirmationPreviewScreen = ({
           )}
       </FormChapter>
       <FormChapter
-        title={f(taxSecondInterestCharges.debtsChapter)}
-        subTitle={f(taxSecondInterestCharges.loansSubChapter)}
+        title={f(taxOverviewConfirmation.debtsChapter)}
+        subTitle={f(taxOverviewConfirmation.loansSubChapter)}
       >
         <Box marginBottom={6}>
           <Text variant="small">{f(taxInterestCharges.filledBy)}</Text>
@@ -395,8 +395,8 @@ export const ConfirmationPreviewScreen = ({
         </Box>
       </FormChapter>
       <FormChapter
-        title={f(taxSecondInterestCharges.annualIncomeChapter)}
-        subTitle={f(taxSecondInterestCharges.otherDebtsSubChapter)}
+        title={f(taxOverviewConfirmation.annualIncomeChapter)}
+        subTitle={f(taxOverviewConfirmation.otherDebtsSubChapter)}
       >
         <Box marginBottom={2}>
           <DisplayTable

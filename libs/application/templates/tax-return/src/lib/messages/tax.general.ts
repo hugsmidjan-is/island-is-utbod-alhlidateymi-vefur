@@ -19,7 +19,8 @@ export const tax = defineMessages({
   },
   generalInfoIntro: {
     id: 'taxReturn.application:generalInfo.intro',
-    defaultMessage: 'Almennar upplýsingar',
+    defaultMessage:
+      'Vinsamlegast farið yfir upplýsingarnar og passið að þær séu réttar. Athugið að ef að grunnupplýsingar eru ekki réttar þarft þú að hafa samband við Þjóðskrá og fara fram á breytingu.',
   },
   confirmationTitle: {
     id: 'taxReturn.application:confirmation.title',
@@ -36,7 +37,8 @@ export const tax = defineMessages({
   },
   lastIncomeIntro: {
     id: 'taxReturn.application:lastIncome.intro',
-    defaultMessage: 'Lorem ipsum',
+    defaultMessage:
+      'Laun, hlunnindi, styrkir og aðrar starfstengdar greiðslur eru sett inn á framtalið samkvæmt launamiðum, einnig greiðslur frá Tryggingastofnun, atvinnuleysis- og fæðingarorlofssjóðum, lífeyrissjóðum og ráðstöfun séreignarsparnaðar til íbúðarkaupa.',
   },
   lastIncomeLabel: {
     id: 'taxReturn.application:lastIncome.label',
@@ -65,6 +67,14 @@ export const tax = defineMessages({
   endOfYearTitle: {
     id: 'taxReturn.application:endOfYear.title',
     defaultMessage: 'Eignir í árslok',
+  },
+  propertyEndOfYearTitle: {
+    id: 'taxReturn.application:endOfYear.title',
+    defaultMessage: '4.1. Innlendar fasteignir',
+  },
+  vehicleEndOfYearTitle: {
+    id: 'taxReturn.application:endOfYear.title',
+    defaultMessage: '4.3. Bifreiðir',
   },
   endOfYearIntro: {
     id: 'taxReturn.application:endOfYear.intro',
@@ -225,7 +235,7 @@ export const taxInterestCharges = defineMessages({
   },
 })
 
-export const taxSecondInterestCharges = defineMessages({
+export const taxOverviewConfirmation = defineMessages({
   modify: {
     id: 'taxReturn.application:secondInterestCharges.modify',
     defaultMessage: 'Breyta',

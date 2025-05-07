@@ -72,7 +72,7 @@ function groupIncomeLines(data: any) {
 
     if (!grouped[id]) {
       grouped[id] = {
-        name,
+        name: incomeType.code ? `${incomeType.code} ${name}` : name,
         type: category,
         items: [],
       }

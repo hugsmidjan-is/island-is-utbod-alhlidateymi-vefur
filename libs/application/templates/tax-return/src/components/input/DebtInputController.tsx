@@ -5,6 +5,7 @@ type DebtInputControllerProps = {
   defaultValue: string
   label?: string
   type?: 'number' | 'text'
+  size?: 'sm' | 'xs'
   readOnly?: boolean
   prefix?: string
   suffix?: string
@@ -18,6 +19,7 @@ export const DebtInputController = ({
   readOnly,
   prefix,
   suffix = ' kr.',
+  size = 'sm',
   ...props
 }: DebtInputControllerProps) => {
   const numberProps = {
@@ -30,7 +32,7 @@ export const DebtInputController = ({
       backgroundColor="blue"
       maxLength={180}
       label={label}
-      size="sm"
+      size={size}
       defaultValue={defaultValue}
       name={field}
       id={field}

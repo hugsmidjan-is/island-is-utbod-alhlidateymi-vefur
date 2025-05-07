@@ -25,7 +25,7 @@ export const GeneralInfoScreen = ({ application }: OJOIFieldBaseProps) => {
   }
 
   return (
-    <FormScreen title={f(tax.generalInfoTitle)}>
+    <FormScreen title={f(tax.generalInfoTitle)} intro={f(tax.generalInfoIntro)}>
       <Box>
         <Box marginBottom={2}>
           <Text fontWeight="semiBold" variant="h4">

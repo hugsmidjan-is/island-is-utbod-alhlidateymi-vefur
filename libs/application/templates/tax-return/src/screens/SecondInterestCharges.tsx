@@ -1,19 +1,30 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
-import { taxSecondInterestCharges } from '../lib/messages'
-import { OJOIFieldBaseProps } from '../lib/types'
+import { taxInterestCharges, taxOverviewConfirmation } from '../lib/messages'
+import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import { Box, Column, Columns, Text } from '@island.is/island-ui/core'
+import { DebtInputController } from '../components/input/DebtInputController'
+import { formatDate } from '../lib/utils'
+import { IncomeInterestTable } from '../components/IncomeGroupTable/IncomeInterestTable'
 
 export const SecondInterestChargesScreen = ({
+  application,
   goToScreen,
 }: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
+  const { externalData } = application
+
   return (
     <FormScreen
       goToScreen={goToScreen}
-      title={f(taxSecondInterestCharges.title)}
-      intro={f(taxSecondInterestCharges.intro)}
+      title={f(taxInterestCharges.interestChargesTitle)}
+      intro={f(taxInterestCharges.interestChargesSubTitle)}
     >
-      <p>cool</p>
+      <IncomeInterestTable
+        line={externalData.getTaxReturnData.data.prefill.debt.debtLines.filter(
+          (item) => item.debtType.name === 'general',
+        )}
+      />
     </FormScreen>
   )
 }

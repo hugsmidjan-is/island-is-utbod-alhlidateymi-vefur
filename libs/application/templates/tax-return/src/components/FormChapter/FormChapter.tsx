@@ -1,5 +1,5 @@
 import { Box, Button, Text } from '@island.is/island-ui/core'
-import { taxSecondInterestCharges } from '../../lib/messages/tax.general'
+import { taxOverviewConfirmation } from '../../lib/messages/tax.general'
 import { useLocale } from '@island.is/localization'
 
 type FormChapterProps = {
@@ -24,7 +24,7 @@ export const FormChapter = ({
         <Text variant="h3">{title}</Text>
         {editButton && (
           <Button variant="utility" icon="pencil" onClick={onClick}>
-            {f(taxSecondInterestCharges.modify)}
+            {f(taxOverviewConfirmation.modify)}
           </Button>
         )}
       </Box>
