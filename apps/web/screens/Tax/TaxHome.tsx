@@ -41,10 +41,10 @@ const TaxHome: Screen<TaxProps> = ({ pageProps: { title, article } }) => {
   const breadcrumbItems: Array<BreadCrumbItem> = [
     { title: 'Ísland.is', href: '/' },
     { title: 'Skatturinn', href: '/skattur' },
-    { title: 'Skattaframtal', href: '/skattaskyrsla', isCurrentPage: true },
+    { title: 'Skattaframtal', href: '/skattframtal', isCurrentPage: true },
   ]
   const processEntry = {
-    processLink: 'http://localhost:4242/umsoknir/skattaskyrsla',
+    processLink: 'http://localhost:4242/umsoknir/skattframtal',
     processTitle: 'Skila skattframtali',
     buttonText: 'Opna framtal',
     newTab: false,
