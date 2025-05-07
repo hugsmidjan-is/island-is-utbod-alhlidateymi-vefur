@@ -43,7 +43,7 @@ const TaxHome: CustomScreen<TaxProps> = ({ title, article }) => {
     { title: 'Skattaframtal', href: '/skattaskyrsla', isCurrentPage: true },
   ]
   const processEntry = {
-    processLink: '/umsoknir/skattaskyrsla',
+    processLink: 'http://localhost:4242/umsoknir/skattaskyrsla',
     processTitle: 'Skila skattframtali',
     buttonText: 'Opna framtal',
     newTab: false,
