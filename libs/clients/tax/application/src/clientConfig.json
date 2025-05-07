@@ -608,6 +608,14 @@
             "type": "string",
             "description": "Optional creditor id of the debt return line"
           },
+          "creditorName": {
+            "type": "string",
+            "description": "Optional creditor name of the debt return line"
+          },
+          "writeDown": {
+            "type": "number",
+            "description": "Optional write-down of the debt return line"
+          },
           "currency": {
             "type": "string",
             "description": "Optional currency of the debt return line",
@@ -626,6 +634,8 @@
           "annualTotalPayment",
           "annualTotalPrincipalPayment",
           "creditorId",
+          "creditorName",
+          "writeDown",
           "currency"
         ]
       },
