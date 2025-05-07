@@ -17,10 +17,12 @@ type IncomeGroupTableProps = {
   columnLabels: string[]
   showPayer?: boolean
   fieldType: string
+  customGroupLabel?: string
 }
 
 export const IncomeGroupTable = ({
   group,
+  customGroupLabel,
   columnLabels,
   fieldType,
   showPayer = false,
@@ -29,7 +31,7 @@ export const IncomeGroupTable = ({
     <Box>
       <Box marginBottom={2} style={{ width: '70%' }}>
         <Text fontWeight="semiBold" variant="h4">
-          {group.name}
+          {customGroupLabel ?? group.name}
         </Text>
       </Box>
       <Stack space={0} dividers>

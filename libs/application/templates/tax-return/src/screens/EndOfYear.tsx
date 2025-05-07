@@ -21,6 +21,7 @@ export const EndOfYearScreen = ({
           return (
             <IncomeGroupTable
               key={group.name}
+              customGroupLabel={f(tax.propertyEndOfYearTitle)}
               group={group}
               fieldType={InputFields.endOfYear.property}
               columnLabels={[
@@ -36,6 +37,7 @@ export const EndOfYearScreen = ({
           return (
             <IncomeGroupTable
               key={group.name}
+              customGroupLabel={f(tax.vehicleEndOfYearTitle)}
               group={group}
               fieldType={InputFields.endOfYear.vehicle}
               columnLabels={[f(tax.vehicleNr), f(tax.buyYear), f(tax.price)]}
