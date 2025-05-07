@@ -1,10 +1,11 @@
 import {
   buildCustomField,
   buildForm,
+  buildMultiField,
   buildSection,
   buildSubmitField,
 } from '@island.is/application/core'
-import { Form, FormModes } from '@island.is/application/types'
+import { DefaultEvents, Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
 import { tax } from '../lib/messages'
 import logo from '../assets/logo'
@@ -59,26 +60,40 @@ export const Draft: Form = buildForm({
     buildSection({
       id: Routes.INTEREST_CHARGES,
       title: tax.interestChargesTitle,
+
       children: [
         buildCustomField({
           id: Routes.INTEREST_CHARGES,
           component: 'InterestChargesScreen',
         }),
-        buildCustomField({
-          id: Routes.SECOND_INTEREST_CHARGES,
-          component: 'SecondInterestChargesScreen',
+        buildMultiField({
+          id: 'bull',
+          title: 'test',
+          children: [
+            buildCustomField({
+              id: Routes.SECOND_INTEREST_CHARGES,
+              component: 'SecondInterestChargesScreen',
+            }),
+            buildSubmitField({
+              id: 'submit',
+              placement: 'footer',
+              refetchApplicationAfterSubmit: true,
+              actions: [
+                {
+                  event: DefaultEvents.SUBMIT,
+                  name: 'Staðfesta',
+                  type: 'primary',
+                },
+              ],
+            }),
+          ],
         }),
       ],
     }),
     buildSection({
       id: Routes.CONFIRMATION,
       title: tax.confirmationTitle,
-      children: [
-        buildCustomField({
-          id: Routes.CONFIRMATION,
-          component: 'ConfirmationScreen',
-        }),
-      ],
+      children: [],
     }),
     // buildSection({
     //   id: Routes.SUMMARY,

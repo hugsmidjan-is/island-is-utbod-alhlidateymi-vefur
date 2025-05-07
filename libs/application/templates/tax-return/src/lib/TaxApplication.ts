@@ -33,9 +33,7 @@ enum Roles {
 
 export type OJOIEvents =
   | { type: DefaultEvents.APPROVE }
-  | { type: DefaultEvents.REJECT }
   | { type: DefaultEvents.SUBMIT }
-  | { type: DefaultEvents.EDIT }
 
 const OJOITemplate: ApplicationTemplate<
   ApplicationContext,
@@ -134,13 +132,13 @@ const OJOITemplate: ApplicationTemplate<
               write: 'all',
             },
           ],
+
+          onExit: defineTemplateApi({
+            action: TemplateApiActions.postApplication,
+          }),
         },
         on: {
-          [DefaultEvents.SUBMIT]: [
-            {
-              target: ApplicationStates.SUBMITTED,
-            },
-          ],
+          [DefaultEvents.SUBMIT]: { target: ApplicationStates.SUBMITTED },
         },
       },
       [ApplicationStates.SUBMITTED]: {
@@ -178,11 +176,6 @@ const OJOITemplate: ApplicationTemplate<
               write: 'all',
             },
           ],
-        },
-        on: {
-          [DefaultEvents.EDIT]: {
-            target: ApplicationStates.SUBMITTED,
-          },
         },
       },
     },
