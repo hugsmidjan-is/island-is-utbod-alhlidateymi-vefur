@@ -20,8 +20,8 @@ export const InputFields = {
     compensation: 'incomeLastYear.compensation',
   },
   [Routes.END_OF_YEAR]: {
-    housing: 'endOfYear.housing',
-    vehicles: 'endOfYear.vehicles',
+    property: 'endOfYear.property',
+    vehicle: 'endOfYear.vehicle',
   },
   // [Routes.ADVERT]: {
   //   department: 'advert.department',
@@ -70,6 +70,7 @@ export type IncomeLine = {
   label: string
   value: number
   payer?: string
+  identifier?: string
   incomeType: IncomeType
 }
 
@@ -77,6 +78,8 @@ export type IncomeTypeCategory =
   | 'compensation'
   | 'salary'
   | 'benefits'
+  | 'property'
+  | 'vehicle'
   | 'unknown'
 
 export type GroupedIncome = {
@@ -86,6 +89,7 @@ export type GroupedIncome = {
 }
 
 export type FieldKey = keyof typeof InputFields.incomeLastYear
+export type FieldKey2 = keyof typeof InputFields.endOfYear
 
 export enum TemplateApiActions {
   departments = 'getDepartments',
@@ -121,6 +125,7 @@ export type OJOIApplication = Override<
       getTaxReturnData: {
         data: {
           groupedIncome: GroupedIncome[]
+          groupedProperty: GroupedIncome[]
           prefill: any
         }
       }

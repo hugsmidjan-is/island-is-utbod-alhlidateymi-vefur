@@ -55,7 +55,7 @@ export const Property = ({
 
           {type === 'input' && (
             <Box className={styles.inputProperty}>
-              <BaseInputController
+              {/* <BaseInputController
                 id={id ?? name}
                 name={inputName ?? name}
                 defaultValue={value}
@@ -65,7 +65,7 @@ export const Property = ({
                 placeholder="0 kr."
                 type={'number'}
                 suffix=" kr."
-              />
+              /> */}
             </Box>
           )}
         </>

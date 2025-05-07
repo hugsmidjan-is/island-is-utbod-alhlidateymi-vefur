@@ -75,4 +75,27 @@ function groupIncomeLines(data: any) {
   return Object.values(grouped)
 }
 
-export { groupByKey, groupIncomeLines }
+function groupPropertyLines(data: any) {
+  const propertyLines = data?.property?.propertyLines ?? []
+
+  const grouped: Record<string, any> = {}
+
+  for (const line of propertyLines) {
+    const propertyType = line.propertyType
+    const name = propertyType?.name ?? 'Unknown'
+
+    if (!grouped[name]) {
+      grouped[name] = {
+        name,
+        type: name,
+        items: [],
+      }
+    }
+
+    grouped[name].items.push(line)
+  }
+
+  return Object.values(grouped)
+}
+
+export { groupByKey, groupIncomeLines, groupPropertyLines }

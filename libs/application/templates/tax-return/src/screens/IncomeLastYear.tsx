@@ -1,7 +1,7 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { tax } from '../lib/messages'
-import { OJOIFieldBaseProps } from '../lib/types'
+import { InputFields, OJOIFieldBaseProps } from '../lib/types'
 import { IncomeGroupTable } from '../components/IncomeGroupTable/IncomeGroupTable'
 export const IncomeLastYearScreen = ({ application }: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
@@ -15,8 +15,8 @@ export const IncomeLastYearScreen = ({ application }: OJOIFieldBaseProps) => {
             <IncomeGroupTable
               key={group.name}
               group={group}
-              fieldKey="salary"
               columnLabels={[f(tax.launagreidandi), f(tax.upphaed)]}
+              fieldType={`${InputFields.incomeLastYear}.salary`}
             />
           )
         }
@@ -26,7 +26,7 @@ export const IncomeLastYearScreen = ({ application }: OJOIFieldBaseProps) => {
             <IncomeGroupTable
               key={group.name}
               group={group}
-              fieldKey="benefits"
+              fieldType={`${InputFields.incomeLastYear}.benefits`}
               columnLabels={[f(tax.type), f(tax.upphaed)]}
             />
           )
@@ -37,7 +37,7 @@ export const IncomeLastYearScreen = ({ application }: OJOIFieldBaseProps) => {
             <IncomeGroupTable
               key={group.name}
               group={group}
-              fieldKey="compensation"
+              fieldType={`${InputFields.incomeLastYear}.compensation`}
               columnLabels={[f(tax.type), f(tax.fyrirhvad), f(tax.upphaed)]}
               showPayer
             />

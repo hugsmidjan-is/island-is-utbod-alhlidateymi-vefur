@@ -12,7 +12,7 @@ import { info } from 'kennitala'
 import { TemplateApiError } from '@island.is/nest/problem'
 import { coreErrorMessages } from '@island.is/application/core/messages'
 import { logger } from '@island.is/logging'
-import { groupIncomeLines } from './utils'
+import { groupIncomeLines, groupPropertyLines } from './utils'
 
 @Injectable()
 export class TaxReturnStatusService extends BaseTemplateApiService {
@@ -71,8 +71,10 @@ export class TaxReturnStatusService extends BaseTemplateApiService {
   async getTaxReturnData({ auth }: TemplateApiModuleActionProps) {
     const res = await this.taxApplicationService.getPrefilled(auth)
     const groupedIncome = groupIncomeLines(res.prefill)
+    const groupedProperty = groupPropertyLines(res.prefill)
     return {
       groupedIncome,
+      groupedProperty,
       prefill: res.prefill,
     }
   }
