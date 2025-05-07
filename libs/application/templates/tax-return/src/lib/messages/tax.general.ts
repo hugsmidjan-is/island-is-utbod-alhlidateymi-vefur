@@ -204,10 +204,24 @@ export const taxInterestCharges = defineMessages({
     id: 'taxReturn.application:interestCharges.title',
     defaultMessage: 'Skuldir og vaxtagjöld',
   },
+  interestChargesSubTitle: {
+    id: 'taxReturn.application:interestCharges.subTitle',
+    defaultMessage:
+      'Í framtalinu þarf að skrá inn öll lán, skuldir og vaxtagjöld. Þar með talin íbúðarlán, skuldir við greiðslukortafyrirtæki og smálánafyrirtæki. ',
+  },
   interestChargesIntro: {
     id: 'taxReturn.application:interestCharges.intro',
     defaultMessage:
       '5.2 Lán vegna kaupa eða byggingar íbúðarhúsnæðis til eigin nota.',
+  },
+  filledBy: {
+    id: 'taxReturn.application:interestCharges.filledBy',
+    defaultMessage: 'Fyllt út af Ríkisskattstjóra',
+  },
+  disclaimer: {
+    id: 'taxReturn.application:interestCharges.disclaimer',
+    defaultMessage:
+      'Ef hluti af láninu fer til annars en íbúðarhúsnæðis, þá þarf að tilgreina hversu mikið af láninu var notað til að kaupa eða byggja íbúðarhúsnæði. ',
   },
 })
 

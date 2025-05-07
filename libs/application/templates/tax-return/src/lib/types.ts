@@ -131,6 +131,9 @@ export interface TaxReturnDebtLine {
   annualTotalPrincipalPayment: number
   creditorId: string
   currency: string
+  creditorName: string
+  writeDown: number
+  costOfLoan?: number
 }
 export interface TaxReturnDebt {
   id: string
@@ -165,8 +168,6 @@ export type OJOIApplication = Override<
         data: {
           groupedIncome: GroupedIncome[]
           groupedProperty: GroupedIncome[]
-          groupedGeneralDebt: GroupedIncome[]
-          groupedHomeDebt: any[]
           prefill: PersonPrefill
         }
       }

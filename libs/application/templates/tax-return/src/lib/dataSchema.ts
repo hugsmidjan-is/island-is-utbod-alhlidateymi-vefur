@@ -50,9 +50,10 @@ const propertyLoanSchema = z
     annualTotalPayment: z.string().optional(),
     annualTotalPrincipalPayment: z.string().optional(),
     interestAmount: z.string().optional(),
-    outstandingPrincipal: z.string().optional(),
     writeDown: z.string().optional(),
     takeoverDate: z.string().optional(),
+    outstandingPrincipal: z.string().optional(),
+    costOfLoan: z.string().optional(),
   })
   .partial()
 

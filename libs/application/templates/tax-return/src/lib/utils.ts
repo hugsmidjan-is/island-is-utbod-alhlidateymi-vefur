@@ -2,6 +2,15 @@ import { z } from 'zod'
 import { FAST_TRACK_DAYS } from './constants'
 import { MessageDescriptor } from 'react-intl'
 import { BaseEntityType } from './dataSchema'
+import format from 'date-fns/format'
+import is from 'date-fns/locale/is'
+import parseISO from 'date-fns/parseISO'
+
+export const formatDate = (date: string) => {
+  return format(parseISO(date), 'dd.MM.yyyy', {
+    locale: is,
+  })
+}
 
 export const countDaysAgo = (date: Date) => {
   const now = new Date()

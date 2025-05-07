@@ -9,12 +9,7 @@ import {
 } from '@island.is/application/types'
 import { BaseTemplateApiService } from '../../base-template-api.service'
 import { logger } from '@island.is/logging'
-import {
-  createTaxReturn,
-  groupHomeDebt,
-  groupIncomeLines,
-  groupPropertyLines,
-} from './utils'
+import { createTaxReturn, groupIncomeLines, groupPropertyLines } from './utils'
 
 @Injectable()
 export class TaxReturnStatusService extends BaseTemplateApiService {
@@ -41,12 +36,9 @@ export class TaxReturnStatusService extends BaseTemplateApiService {
     const res = await this.taxApplicationService.getPrefilled(auth)
     const groupedIncome = groupIncomeLines(res.prefill)
     const groupedProperty = groupPropertyLines(res.prefill)
-    const groupedHomeDebt = groupHomeDebt(res.prefill)
-    const groupedGeneralDebt = groupPropertyLines(res.prefill)
     return {
       groupedIncome,
       groupedProperty,
-      groupedHomeDebt,
       prefill: res.prefill,
     }
   }
