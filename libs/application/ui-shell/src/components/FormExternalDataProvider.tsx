@@ -76,11 +76,7 @@ const ItemHeader: React.FC<
       </Text>
 
       {subTitle && (
-        <Text>
-          <Markdown>
-            {formatText(subTitle, application, formatMessage)}
-          </Markdown>
-        </Text>
+        <Markdown>{formatText(subTitle, application, formatMessage)}</Markdown>
       )}
     </>
   )

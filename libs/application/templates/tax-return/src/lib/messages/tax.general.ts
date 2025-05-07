@@ -53,6 +53,11 @@ export const tax = defineMessages({
     id: 'taxReturn.application:endOfYear.title',
     defaultMessage: 'Eignir í árslok',
   },
+  endOfYearIntro: {
+    id: 'taxReturn.application:endOfYear.intro',
+    defaultMessage:
+      'Fasteignir eru skráðar á fasteignamati ársins. Bifreiðir sem keyptar voru á árinu eru skráðar á kaupverð og eldri bifreiðir lækka um 10% á ári.',
+  },
   interestChargesTitle: {
     id: 'taxReturn.application:interestCharges.title',
     defaultMessage: 'Skuldir og vaxtagjöld',
@@ -71,7 +76,11 @@ export const tax = defineMessages({
   },
   launagreidandi: {
     id: 'taxReturn.application:income.launagreidandi',
-    defaultMessage: 'Nafn launagreiðanda',
+    defaultMessage: 'Launagreiðandi',
+  },
+  type: {
+    id: 'taxReturn.application:income.type',
+    defaultMessage: 'Tegund',
   },
   fyrirhvad: {
     id: 'taxReturn.application:income.fyrirhvad',
@@ -80,6 +89,30 @@ export const tax = defineMessages({
   upphaed: {
     id: 'taxReturn.application:income.upphaed',
     defaultMessage: 'Upphæð',
+  },
+  propertyNr: {
+    id: 'taxReturn.application:income.propertyNr',
+    defaultMessage: 'Fastanúmer eignar',
+  },
+  propertyLabel: {
+    id: 'taxReturn.application:income.propertyLabel',
+    defaultMessage: 'Fasteign',
+  },
+  propertyEvaluation: {
+    id: 'taxReturn.application:income.propertyEvaluation',
+    defaultMessage: 'Fasteignamat',
+  },
+  vehicleNr: {
+    id: 'taxReturn.application:income.vehicleNr',
+    defaultMessage: 'Númer eignar',
+  },
+  buyYear: {
+    id: 'taxReturn.application:income.buyYear',
+    defaultMessage: 'Kaupár',
+  },
+  price: {
+    id: 'taxReturn.application:income.price',
+    defaultMessage: 'Verð',
   },
 })
 

@@ -171,14 +171,20 @@
         "tags": ["Tax Return admin API"]
       }
     },
-    "/api/v1/admin/tax-return/{nationalId}": {
+    "/api/v1/admin/tax-return/{nationalId}/{year}": {
       "post": {
         "operationId": "createTaxReturn",
         "summary": "Create a tax return for a person",
-        "description": "Given a national ID and a body, create a tax return for that person.",
+        "description": "Given a national ID, year and a body, create a tax return for that person for that year.",
         "parameters": [
           {
             "name": "nationalId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "year",
             "required": true,
             "in": "path",
             "schema": { "type": "string" }
@@ -386,13 +392,18 @@
             "description": "ID of the income return type",
             "nullable": false
           },
+          "code": {
+            "type": "string",
+            "description": "Code of the income return type",
+            "nullable": false
+          },
           "name": {
             "type": "string",
             "description": "Name of the income return type",
             "nullable": false
           }
         },
-        "required": ["id", "name"]
+        "required": ["id", "code", "name"]
       },
       "TaxReturnIncomeLine": {
         "type": "object",
@@ -562,6 +573,22 @@
         },
         "required": ["id", "type", "debtLines"]
       },
+      "TaxReturnPropertyType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of the property type",
+            "nullable": false
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the property type",
+            "nullable": false
+          }
+        },
+        "required": ["id", "name"]
+      },
       "TaxReturnPropertyLine": {
         "type": "object",
         "properties": {
@@ -595,10 +622,10 @@
             "description": "Currency of the property line",
             "default": "ISK"
           },
-          "propertyTypeId": {
-            "type": "string",
-            "description": "ID of the property type this line belongs to",
-            "nullable": false
+          "propertyType": {
+            "description": "Property type this line belongs to",
+            "nullable": false,
+            "allOf": [{ "$ref": "#/components/schemas/TaxReturnPropertyType" }]
           }
         },
         "required": [
@@ -608,7 +635,7 @@
           "identifier",
           "value",
           "currency",
-          "propertyTypeId"
+          "propertyType"
         ]
       },
       "TaxReturnProperty": {

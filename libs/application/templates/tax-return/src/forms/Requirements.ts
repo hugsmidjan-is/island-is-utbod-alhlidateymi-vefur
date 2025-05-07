@@ -1,21 +1,12 @@
 import {
-  YesOrNoEnum,
-  buildCustomField,
   buildDataProviderItem,
   buildExternalDataProvider,
   buildForm,
-  buildMultiField,
   buildSection,
   buildSubmitField,
-  getValueViaPath,
 } from '@island.is/application/core'
 import { TaxReturnApi, TaxNationalRegistryApi } from '../dataProviders'
-import {
-  Comparators,
-  DefaultEvents,
-  Form,
-  FormModes,
-} from '@island.is/application/types'
+import { DefaultEvents, Form, FormModes } from '@island.is/application/types'
 import { Routes } from '../lib/constants'
 import { tax, requirements } from '../lib/messages'
 

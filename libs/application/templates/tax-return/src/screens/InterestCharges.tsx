@@ -69,7 +69,7 @@ export const InterestChargesScreen = (props: OJOIFieldBaseProps) => {
               </Text>
             </Data>
             <Data align="right">
-              <BaseInputController
+              {/* <BaseInputController
                 id={'id'}
                 name={'id'}
                 defaultValue={'id'}
@@ -81,7 +81,7 @@ export const InterestChargesScreen = (props: OJOIFieldBaseProps) => {
                 suffix=" %"
                 min={0}
                 max={100}
-              />
+              /> */}
             </Data>
           </Row>
         </Body>
