@@ -1,7 +1,6 @@
 import { InputController } from '@island.is/shared/form-fields'
 import { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { FieldKey, GroupedIncome, InputFields } from '../../lib/types'
 
 type BaseInputControllerProps = {
   field: string

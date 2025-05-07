@@ -17,8 +17,8 @@ export const Requirements: Form = buildForm({
   renderLastScreenButton: true,
   children: [
     buildSection({
-      id: Routes.REQUIREMENTS,
-      title: tax.dataRequirements,
+      id: Routes.GENERAL_INFO,
+      title: tax.generalInfoTitle,
       children: [
         buildExternalDataProvider({
           title: requirements.general.title,
@@ -53,13 +53,13 @@ export const Requirements: Form = buildForm({
       ],
     }),
     buildSection({
-      id: Routes.GENERAL_INFO,
-      title: tax.generalInfoTitle,
+      id: Routes.INCOME_LAST_YEAR,
+      title: tax.lastIncomeTitle,
       children: [],
     }),
     buildSection({
-      id: Routes.INCOME_LAST_YEAR,
-      title: tax.lastIncomeTitle,
+      id: Routes.CAPITAL_INCOME,
+      title: tax.capitalIncomeTitle,
       children: [],
     }),
     buildSection({
@@ -70,6 +70,11 @@ export const Requirements: Form = buildForm({
     buildSection({
       id: Routes.INTEREST_CHARGES,
       title: tax.interestChargesTitle,
+      children: [],
+    }),
+    buildSection({
+      id: 'STADFESTING',
+      title: 'Staðfesting',
       children: [],
     }),
   ],

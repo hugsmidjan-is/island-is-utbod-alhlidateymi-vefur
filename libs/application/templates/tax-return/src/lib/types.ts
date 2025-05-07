@@ -23,6 +23,10 @@ export const InputFields = {
     property: 'endOfYear.property',
     vehicle: 'endOfYear.vehicle',
   },
+  [Routes.INTEREST_CHARGES]: {
+    property: 'interestCharges.property',
+    vehicle: 'interestCharges.vehicle',
+  },
   // [Routes.ADVERT]: {
   //   department: 'advert.department',
   //   mainType: 'advert.mainType',

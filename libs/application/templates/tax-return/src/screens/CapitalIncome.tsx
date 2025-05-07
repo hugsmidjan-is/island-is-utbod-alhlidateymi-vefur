@@ -1,17 +1,21 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { tax } from '../lib/messages'
-import { OJOIFieldBaseProps } from '../lib/types'
-export const CapitalIncomeScreen = (props: OJOIFieldBaseProps) => {
+import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import { IncomeGroupTable } from '../components/IncomeGroupTable/IncomeGroupTable'
+export const CapitalIncomeScreen = ({
+  application,
+  goToScreen,
+}: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
-
+  const { externalData } = application
   return (
     <FormScreen
-      goToScreen={props.goToScreen}
-      title={f(tax.lastIncomeTitle)}
-      intro={f(tax.lastIncomeIntro)}
+      goToScreen={goToScreen}
+      title={f(tax.capitalIncomeTitleYr)}
+      intro={f(tax.capitalIncomeTitle)}
     >
-      <p>CapitalIncomeScreen</p>
+      Fjármagnstekjur???
     </FormScreen>
   )
 }

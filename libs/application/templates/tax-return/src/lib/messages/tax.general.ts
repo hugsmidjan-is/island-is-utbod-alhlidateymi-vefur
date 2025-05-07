@@ -21,9 +21,18 @@ export const tax = defineMessages({
     id: 'taxReturn.application:generalInfo.intro',
     defaultMessage: 'Almennar upplýsingar',
   },
+  confirmationTitle: {
+    id: 'taxReturn.application:confirmation.title',
+    defaultMessage: 'Staðfesting',
+    description: 'Title of confirmation form',
+  },
   lastIncomeTitle: {
     id: 'taxReturn.application:lastIncome.title',
     defaultMessage: 'Tekjur ársins',
+  },
+  lastIncomeTitleYr: {
+    id: 'taxReturn.application:lastIncome.titleYr',
+    defaultMessage: 'Tekjur ársins 2024',
   },
   lastIncomeIntro: {
     id: 'taxReturn.application:lastIncome.intro',
@@ -48,6 +57,10 @@ export const tax = defineMessages({
   capitalIncomeTitle: {
     id: 'taxReturn.application:capitalIncome.title',
     defaultMessage: 'Fjármagnstekjur',
+  },
+  capitalIncomeTitleYr: {
+    id: 'taxReturn.application:capitalIncome.titleYr',
+    defaultMessage: 'Fjármagnstekjur ársins 2024',
   },
   endOfYearTitle: {
     id: 'taxReturn.application:endOfYear.title',
@@ -257,3 +270,42 @@ export const requirements = {
     },
   }),
 }
+
+export const confirmation = defineMessages({
+  received: {
+    id: 'taxReturn.application:confirmation.received',
+    defaultMessage: 'Skattframtal móttekið',
+  },
+  alert: {
+    id: 'taxReturn.application:confirmation.alert',
+    defaultMessage: `Skattframtalinu var skilað 8. mars 2024 kl 14:32.{br}
+      Móttökunúmer:1.702
+      {br}{br}
+      Þú getur alltaf nálgast eintak af kvittuninni inn á Mínum síðum, skoðað bráðabirgðaútreikning og sent inn viðbótargögn eða leiðréttingu.`,
+    description: 'Alert message in confirmation form',
+  },
+  whatHappensNext: {
+    id: 'taxReturn.application:confirmation.whatHappensNext',
+    defaultMessage: 'Hvað gerist næst?',
+  },
+  disclaimer: {
+    id: 'taxReturn.application:confirmation.disclaimer',
+    defaultMessage:
+      'Skatturinn fer yfir framtalið. Ef þörf er a er kallað eftir frekarupplýsingum/gögnum.',
+  },
+  results: {
+    id: 'taxReturn.application:confirmation.results',
+    defaultMessage:
+      'Niðurstöður álagningar verða birtar í lok maí. Hafi of lágum skatti verið haldið eftir í staðgreiðslu verður þú að standa skil á því sem upp á vantar.',
+  },
+  returnTooHigh: {
+    id: 'taxReturn.application:confirmation.returnTooHigh',
+    defaultMessage:
+      'Hins vegar hafi of hárri staðgreiðslu verið haldið eftir getur það leitt til endurgreiðslu við álagningu opinberra gjalda.',
+  },
+  notificationWhenAvailable: {
+    id: 'taxReturn.application:confirmation.notificationWhenAvailable',
+    defaultMessage:
+      'Þú munt fá tilkynningu á netfang þegar niðurstöður álagningar eru aðgengilegar á Mínum síðum.',
+  },
+})

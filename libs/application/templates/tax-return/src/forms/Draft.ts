@@ -68,6 +68,16 @@ export const Draft: Form = buildForm({
         }),
       ],
     }),
+    buildSection({
+      id: Routes.CONFIRMATION,
+      title: tax.confirmationTitle,
+      children: [
+        buildCustomField({
+          id: Routes.CONFIRMATION,
+          component: 'ConfirmationScreen',
+        }),
+      ],
+    }),
     // buildSection({
     //   id: Routes.SUMMARY,
     //   title: summary.general.section,
