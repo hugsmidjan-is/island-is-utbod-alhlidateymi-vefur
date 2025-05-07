@@ -1,4 +1,4 @@
-import OJOIApplicationTemplate from './lib/TaxApplication'
+import OJOIApplicationTemplate from './lib/OJOIApplication'
 
 export const getFields = () => import('./fields/')
 
