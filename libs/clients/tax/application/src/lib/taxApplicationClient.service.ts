@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import {
   GetPersonPrefillResponse,
   SubmitTaxReturnByNationalIdAndYearRequest,
+  TaxReturnCreate,
   TaxReturnPublicAPIApi,
 } from '../../gen/fetch'
 import { LOGGER_PROVIDER } from '@island.is/logging'
@@ -45,12 +46,12 @@ export class TaxApplicationClientService {
   async submitTaxReturn(
     params: SubmitTaxReturnByNationalIdAndYearRequest,
     auth: Auth,
-  ): Promise<boolean> {
+  ): Promise<TaxReturnCreate> {
     try {
-      await this.taxApplicationApiWithAuth(
+      const res = await this.taxApplicationApiWithAuth(
         auth,
       ).submitTaxReturnByNationalIdAndYear(params)
-      return Promise.resolve(true)
+      return Promise.resolve(res)
     } catch (error) {
       this.logger.warn('Failed to post application', {
         error,

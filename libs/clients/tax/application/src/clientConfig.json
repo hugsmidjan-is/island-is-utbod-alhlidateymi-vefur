@@ -64,7 +64,7 @@
     "/api/v1/tax-return/submit/{nationalId}/{year}": {
       "post": {
         "operationId": "submitTaxReturnByNationalIdAndYear",
-        "summary": "",
+        "summary": "Submit tax return for a person",
         "parameters": [
           {
             "name": "nationalId",
@@ -456,8 +456,8 @@
     }
   },
   "info": {
-    "title": "Digitial Iceland 2025 tender API project",
-    "description": "Single API for all the projects in Digital Iceland 2025 tender.",
+    "title": "Skatturinn API",
+    "description": "Skatturinn API for the Digital Iceland 2025 tender example.",
     "version": "1.0",
     "contact": {}
   },
@@ -576,7 +576,6 @@
             "nullable": false
           },
           "originationDate": {
-            "format": "date-time",
             "type": "string",
             "description": "Optional originating date of the debt return line"
           },

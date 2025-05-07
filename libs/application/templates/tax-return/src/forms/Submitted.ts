@@ -1,7 +1,6 @@
 import {
   buildCustomField,
   buildForm,
-  buildMultiField,
   buildSection,
 } from '@island.is/application/core'
 import { Form, FormModes } from '@island.is/application/types'
@@ -37,16 +36,12 @@ export const Submitted: Form = buildForm({
       children: [],
     }),
     buildSection({
-      id: Routes.COMPLETE,
-      title: 'Umsókn lokið',
+      id: Routes.CONFIRMATION,
+      title: tax.confirmationTitle,
       children: [
-        buildMultiField({
-          children: [
-            buildCustomField({
-              id: 'submitted',
-              component: 'SubmittedScreen',
-            }),
-          ],
+        buildCustomField({
+          id: Routes.CONFIRMATION,
+          component: 'ConfirmationScreen',
         }),
       ],
     }),
