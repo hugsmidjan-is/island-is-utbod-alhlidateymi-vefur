@@ -66,13 +66,17 @@ export const Draft: Form = buildForm({
           id: Routes.INTEREST_CHARGES,
           component: 'InterestChargesScreen',
         }),
+        buildCustomField({
+          id: Routes.SECOND_INTEREST_CHARGES,
+          component: 'SecondInterestChargesScreen',
+        }),
         buildMultiField({
           id: 'bull',
           title: 'test',
           children: [
             buildCustomField({
-              id: Routes.SECOND_INTEREST_CHARGES,
-              component: 'SecondInterestChargesScreen',
+              id: Routes.CONFIRMATION_PREVIEW,
+              component: 'ConfirmationPreviewScreen',
             }),
             buildSubmitField({
               id: 'submit',

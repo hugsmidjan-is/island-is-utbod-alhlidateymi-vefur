@@ -225,6 +225,91 @@ export const taxInterestCharges = defineMessages({
   },
 })
 
+export const taxSecondInterestCharges = defineMessages({
+  modify: {
+    id: 'taxReturn.application:secondInterestCharges.modify',
+    defaultMessage: 'Breyta',
+  },
+  name: {
+    id: 'taxReturn.application:secondInterestCharges.name',
+    defaultMessage: 'Nafn',
+  },
+  nationalId: {
+    id: 'taxReturn.application:secondInterestCharges.nationalId',
+    defaultMessage: 'Kennitala',
+  },
+  address: {
+    id: 'taxReturn.application:secondInterestCharges.address',
+    defaultMessage: 'Heimili',
+  },
+  municipality: {
+    id: 'taxReturn.application:secondInterestCharges.municipality',
+    defaultMessage: 'Sveitarfélag',
+  },
+  email: {
+    id: 'taxReturn.application:secondInterestCharges.email',
+    defaultMessage: 'Netfang',
+  },
+  phone: {
+    id: 'taxReturn.application:secondInterestCharges.phone',
+    defaultMessage: 'Símanúmer',
+  },
+  title: {
+    id: 'taxReturn.application:secondInterestCharges.title',
+    defaultMessage: 'Yfirlit',
+  },
+  intro: {
+    id: 'taxReturn.application:secondInterestCharges.intro',
+    defaultMessage:
+      'Vinsamlegast farðu yfir framtalið áður en þú sendir það inn.',
+  },
+  generalInfoChapter: {
+    id: 'taxReturn.application:secondInterestCharges.generalInfoChapter',
+    defaultMessage: '1. Almennar upplýsingar',
+  },
+  annualIncomeChapter: {
+    id: 'taxReturn.application:secondInterestCharges.annualIncomeChapter',
+    defaultMessage: '2. Tekjur ársins 2024',
+  },
+  salarySubChapter: {
+    id: 'taxReturn.application:secondInterestCharges.salarySubChapter',
+    defaultMessage: '2.1. Launatekjur og starfstengdar greiðslur',
+  },
+  grantsSubChapter: {
+    id: 'taxReturn.application:secondInterestCharges.grantsSubChapter',
+    defaultMessage: '2.2. Ökutækjastyrkur, dagpeningar og hlunnindi',
+  },
+  otherRevenueSubChapter: {
+    id: 'taxReturn.application:secondInterestCharges.otherRevenueSubChapter',
+    defaultMessage: `2.3. Lífeyrisgreiðslur. Greiðslur frá Tryggingastofnun. Aðrar bótagreiðslur, styrkir o.fl.`,
+  },
+  yearEndAssetsChapter: {
+    id: 'taxReturn.application:secondInterestCharges.yearEndAssetsChapter',
+    defaultMessage: '4. Eignir í árslok',
+  },
+  localPropertySubChapter: {
+    id: 'taxReturn.application:secondInterestCharges.localPropertySubChapter',
+    defaultMessage: '4.1. Innlendar fasteignir',
+  },
+  vehiclesSubChapter: {
+    id: 'taxReturn.application:secondInterestCharges.vehiclesSubChapter',
+    defaultMessage: '4.3. Bifreiðir',
+  },
+  debtsChapter: {
+    id: 'taxReturn.application:secondInterestCharges.debtsChapter',
+    defaultMessage: '5. Skuldir og vaxtagjöld',
+  },
+  loansSubChapter: {
+    id: 'taxReturn.application:secondInterestCharges.loansSubChapter',
+    defaultMessage:
+      '5.2 Lán vegna kaupa eða byggingar íbúðarhúsnæðis til eigin nota.',
+  },
+  otherDebtsSubChapter: {
+    id: 'taxReturn.application:secondInterestCharges.otherDebtsSubChapter',
+    defaultMessage: '5.5 Aðrar skuldir og vaxtagjöld',
+  },
+})
+
 export const requirements = {
   general: defineMessages({
     title: {

@@ -43,6 +43,7 @@ export enum Routes {
   END_OF_YEAR = 'endOfYear',
   INTEREST_CHARGES = 'interestCharges',
   SECOND_INTEREST_CHARGES = 'secondInterestCharges',
+  CONFIRMATION_PREVIEW = 'confirmationPreview',
   CONFIRMATION = 'confirmation',
 }
 
