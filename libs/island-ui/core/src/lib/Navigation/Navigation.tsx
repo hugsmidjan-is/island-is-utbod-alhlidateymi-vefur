@@ -596,7 +596,7 @@ export const NavigationTree: FC<
                     background={colorSchemeColors[colorScheme]['dividerColor']}
                     marginRight={2}
                     aria-expanded={activeAccordion}
-                    aria-controls={ariaId}
+                    aria-controls={'test2'}
                     className={cn(
                       styles.accordionIcon,
                       styles.largerClickableArea,

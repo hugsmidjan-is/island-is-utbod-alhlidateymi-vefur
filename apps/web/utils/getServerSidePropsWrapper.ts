@@ -1,5 +1,4 @@
 import type { GetServerSideProps } from 'next'
-import { NormalizedCacheObject } from '@apollo/client'
 
 import { logger } from '@island.is/logging'
 
@@ -25,16 +24,9 @@ const deleteUndefined = (obj: Record<string, any> | undefined): void => {
 }
 
 type Component = {
-  ({
-    apolloState,
-    pageProps,
-  }: {
-    apolloState: unknown
-    pageProps: unknown
-  }): JSX.Element
+  ({ pageProps }: { pageProps: unknown }): JSX.Element
   getProps(ctx: Partial<ScreenContext>): Promise<{
     pageProps: unknown
-    apolloState: NormalizedCacheObject
   }>
 }
 

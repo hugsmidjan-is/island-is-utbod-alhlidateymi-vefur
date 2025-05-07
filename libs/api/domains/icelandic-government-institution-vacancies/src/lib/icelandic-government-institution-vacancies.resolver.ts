@@ -8,11 +8,7 @@ import {
 } from '@island.is/clients/icelandic-government-institution-vacancies'
 import { CacheControl, CacheControlOptions } from '@island.is/nest/graphql'
 import { CACHE_CONTROL_MAX_AGE } from '@island.is/shared/constants'
-import {
-  CmsContentfulService,
-  CmsElasticsearchService,
-  Vacancy,
-} from '@island.is/cms'
+import { CmsContentfulService, Vacancy } from '@island.is/cms'
 import { IcelandicGovernmentInstitutionVacanciesInput } from './dto/icelandicGovernmentInstitutionVacancies.input'
 import { IcelandicGovernmentInstitutionVacanciesResponse } from './dto/icelandicGovernmentInstitutionVacanciesResponse'
 import { IcelandicGovernmentInstitutionVacancyByIdInput } from './dto/icelandicGovernmentInstitutionVacancyById.input'
@@ -40,7 +36,6 @@ const defaultLang = 'is'
 export class IcelandicGovernmentInstitutionVacanciesResolver {
   constructor(
     private readonly api: DefaultApi,
-    private readonly cmsElasticService: CmsElasticsearchService,
     private readonly cmsContentfulService: CmsContentfulService,
     @Inject(LOGGER_PROVIDER) private logger: Logger,
   ) {}
@@ -142,9 +137,7 @@ export class IcelandicGovernmentInstitutionVacanciesResolver {
     let vacanciesFromCms: Vacancy[] = []
 
     try {
-      vacanciesFromCms = await this.cmsElasticService.getVacancies(
-        getElasticsearchIndex(defaultLang),
-      )
+      vacanciesFromCms = []
     } catch (error) {
       errorOccurred = true
       this.logger.error(error)
@@ -178,10 +171,7 @@ export class IcelandicGovernmentInstitutionVacanciesResolver {
   }
 
   private async getVacancyFromCms(id: string) {
-    const item = await this.cmsElasticService.getSingleVacancy(
-      getElasticsearchIndex(defaultLang),
-      id,
-    )
+    const item = null
     if (!item) {
       return { vacancy: null }
     }

@@ -31,7 +31,6 @@ export const MobileAppBanner = ({ namespace }: MobileAppBannerProps) => {
   const COOKIE_NAME = 'island-mobile-app-banner'
 
   const n = useNamespace(namespace)
-  const { activeLocale } = useI18n()
 
   const appleLink = n('mobileAppLinkApple')
   const androidLink = n('mobileAppLinkAndroid')
@@ -73,9 +72,7 @@ export const MobileAppBanner = ({ namespace }: MobileAppBannerProps) => {
             setHidden(true)
           }}
         >
-          <VisuallyHidden>
-            {activeLocale === 'is' ? 'Loka' : 'Close'}
-          </VisuallyHidden>
+          <VisuallyHidden>{'Close'}</VisuallyHidden>
           <Icon icon="close" color="white" type="outline" />
         </button>
         <Box

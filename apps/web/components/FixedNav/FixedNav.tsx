@@ -10,7 +10,6 @@ import {
   Logo,
 } from '@island.is/island-ui/core'
 import { useLinkResolver } from '@island.is/web/hooks/useLinkResolver'
-import { useI18n } from '@island.is/web/i18n'
 
 import { useScrollPosition } from '../../hooks/useScrollPosition'
 import SearchInput from '../SearchInput/SearchInput'
@@ -18,7 +17,6 @@ import * as styles from './FixedNav.css'
 
 export const FixedNav: FC<React.PropsWithChildren<unknown>> = () => {
   const [show, setShow] = useState<boolean>(false)
-  const { activeLocale, t } = useI18n()
   const { linkResolver } = useLinkResolver()
 
   useScrollPosition(
@@ -94,8 +92,8 @@ export const FixedNav: FC<React.PropsWithChildren<unknown>> = () => {
                 id="search_input_fixed_nav"
                 white
                 size="medium"
-                activeLocale={activeLocale}
-                placeholder={t.searchPlaceholder}
+                activeLocale={'is'}
+                placeholder={'Leitaðu á Ísland.is'}
                 autocomplete={true}
                 autosuggest={false}
               />
@@ -106,7 +104,7 @@ export const FixedNav: FC<React.PropsWithChildren<unknown>> = () => {
                 onClick={() => {
                   window.scrollTo(0, 0)
                 }}
-                aria-label={t.gotoTop}
+                aria-label={'Fara efst'}
               >
                 <Icon icon="arrowUp" color="white" />
               </button>

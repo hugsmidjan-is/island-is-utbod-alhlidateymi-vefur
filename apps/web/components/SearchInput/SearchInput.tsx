@@ -84,7 +84,6 @@ const searchReducer = (state: any, action: any): SearchState => {
     default:
       return initialSearchState
   }
-  return initialSearchState
 }
 
 const useSearch = (
@@ -94,7 +93,6 @@ const useSearch = (
   organization?: string,
 ): SearchState => {
   const [state, dispatch] = useReducer(searchReducer, initialSearchState)
-  const client = useApolloClient()
   const timer = useRef(null)
 
   useEffect(() => {
@@ -116,39 +114,6 @@ const useSearch = (
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore make web strict
       (timer.current = setTimeout(async () => {
-        client
-          .query<GetSearchResultsQuery, QuerySearchResultsArgs>({
-            query: GET_SEARCH_RESULTS_QUERY,
-            variables: {
-              query: {
-                queryString: term?.trim() ?? '',
-                language: locale as ContentLanguage,
-                types: [
-                  // RÁ suggestions has only been searching particular types for some time - SYNC SUGGESTIONS SCOPE WITH DEFAULT - keep it in sync
-                  SearchableContentTypes['WebArticle'],
-                  SearchableContentTypes['WebSubArticle'],
-                  SearchableContentTypes['WebProjectPage'],
-                  SearchableContentTypes['WebOrganizationPage'],
-                  SearchableContentTypes['WebOrganizationSubpage'],
-                  SearchableContentTypes['WebDigitalIcelandService'],
-                  SearchableContentTypes['WebDigitalIcelandCommunityPage'],
-                  SearchableContentTypes['WebManual'],
-                ],
-                highlightResults: true,
-                useQuery: 'suggestions',
-                tags: organization
-                  ? [{ key: organization, type: SearchableTags.Organization }]
-                  : undefined,
-              },
-            },
-          })
-          .then(({ data: { searchResults: results } }) => {
-            dispatch({
-              type: 'searchResults',
-              results,
-            })
-          })
-
         // the api only completes single terms get only single terms
         if (term) {
           const indexOfLastSpace = term.lastIndexOf(' ')
@@ -164,7 +129,7 @@ const useSearch = (
 
     return () => clearTimeout(thisTimerId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [client, locale, term, dispatch])
+  }, [locale, term, dispatch])
 
   return state
 }
@@ -328,7 +293,7 @@ export const SearchInput = forwardRef<
             dataTestId={dataTestId}
             skipContext={skipContext}
             rootProps={{
-              'aria-controls': id + '-menu',
+              'aria-controls': 'test' + '-menu',
               ...getRootProps(),
             }}
             menuProps={{

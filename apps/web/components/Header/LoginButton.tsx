@@ -11,7 +11,6 @@ import {
 } from '@island.is/island-ui/core'
 import { webLoginButtonSelect } from '@island.is/plausible'
 import { ProjectBasePath } from '@island.is/shared/constants'
-import { useI18n } from '@island.is/web/i18n'
 import { LayoutProps } from '@island.is/web/layouts/main'
 
 const minarsidurLink = '/minarsidur/'
@@ -24,7 +23,6 @@ interface Props {
 }
 
 function LoginButtonDropdown(props: Props) {
-  const { t } = useI18n()
   const router = useRouter()
 
   function trackAndNavigate(
@@ -65,7 +63,7 @@ function LoginButtonDropdown(props: Props) {
               solid={false}
             />
           )}
-          {t.loginIndividuals}
+          {'Einstaklingar'}
         </Inline>
       ),
       onClick: trackAndNavigate.bind(null, 'Dropdown - Individuals'),
@@ -83,7 +81,7 @@ function LoginButtonDropdown(props: Props) {
               solid={false}
             />
           )}
-          {t.loginDelegations}
+          {'Fyrirtæki og umboð'}
         </Inline>
       ),
       onClick: trackAndNavigate.bind(null, 'Dropdown - Companies'),
@@ -120,7 +118,9 @@ function LoginButtonDropdown(props: Props) {
               colorScheme={props.colorScheme}
               variant="utility"
               icon="person"
-              title={t.login}
+              title={'Innskráning'}
+              id="test-button"
+              aria-controls="alls-ekki"
             />
           }
           openOnHover={false}
@@ -138,7 +138,7 @@ function LoginButtonDropdown(props: Props) {
               variant="utility"
               icon="person"
             >
-              {t.login}
+              {'Innskráning'}
             </Button>
           }
           openOnHover={true}
@@ -152,8 +152,6 @@ function LoginButtonDropdown(props: Props) {
 }
 
 const LoginButtonLink = (props: Props) => {
-  const { t } = useI18n()
-
   return (
     <>
       <Hidden above="sm">
@@ -162,7 +160,7 @@ const LoginButtonLink = (props: Props) => {
             colorScheme={props.colorScheme}
             variant="utility"
             icon="person"
-            title={t.login}
+            title={'Innskráning'}
             as="span"
           />
         </a>
@@ -175,7 +173,7 @@ const LoginButtonLink = (props: Props) => {
             icon="person"
             as="span"
           >
-            {t.login}
+            {'Innskráning'}
           </Button>
         </a>
       </Hidden>

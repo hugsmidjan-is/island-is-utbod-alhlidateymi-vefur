@@ -46,7 +46,6 @@ export const Menu = ({
   languageToggleQueryParams,
 }: Props) => {
   const searchInput = useRef<HTMLInputElement>()
-  const { activeLocale, t } = useI18n()
 
   return (
     <MenuUI
@@ -57,12 +56,12 @@ export const Menu = ({
       }))}
       asideTopLinks={asideTopLinks}
       asideBottomLinks={asideBottomLinks}
-      mainTitle={t.serviceCategories}
+      mainTitle={'Þjónustuflokkar'}
       asideBottomTitle={asideBottomTitle}
-      myPagesText={t.login}
-      closeButtonLabel={activeLocale === 'is' ? 'Loka' : 'Close'}
-      expandButtonLabel={activeLocale === 'is' ? 'Opna allt' : 'Expand'}
-      collapseButtonLabel={activeLocale === 'is' ? 'Loka öllu' : 'Collapse'}
+      myPagesText={'Mínar síður'}
+      closeButtonLabel={'Loka'}
+      expandButtonLabel={'Opna allt'}
+      collapseButtonLabel={'Loka öllu'}
       renderDisclosure={(
         disclosureDefault,
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -77,7 +76,7 @@ export const Menu = ({
                 colorScheme={buttonColorScheme}
                 variant="utility"
                 icon="search"
-                value={t.search}
+                value={'Leita'}
                 onClick={(e) => {
                   onClick(e)
                   setTimeout(() => {
@@ -87,9 +86,7 @@ export const Menu = ({
                   }, 100)
                 }}
               >
-                <VisuallyHidden>
-                  {activeLocale === 'is' ? 'Leit' : 'Search'}
-                </VisuallyHidden>
+                <VisuallyHidden>{'Leit'}</VisuallyHidden>
               </Button>
             </Box>
             {disclosureDefault}
@@ -98,7 +95,7 @@ export const Menu = ({
       }}
       renderLogo={(logo, closeModal) => (
         <Link
-          href={activeLocale === 'en' ? '/en' : '/'}
+          href={'/'}
           onClick={() => {
             closeModal?.()
           }}
@@ -114,7 +111,7 @@ export const Menu = ({
           data-testid="frontpage-burger-button"
           onClick={onMenuOpen}
         >
-          {t.menuCaption}
+          {'Valmynd'}
         </Button>
       }
       renderLink={({ className, text, href }, closeModal) => {
@@ -131,14 +128,6 @@ export const Menu = ({
           </a>
         )
       }}
-      renderLanguageSwitch={(isMobile) => (
-        <LanguageToggler
-          dialogId={
-            isMobile ? 'menu-language-toggle-mobile' : 'menu-language-toggle'
-          }
-          queryParams={languageToggleQueryParams}
-        />
-      )}
       renderSearch={(input, closeModal) => (
         <SearchInput
           id="search_input_menu"
@@ -146,8 +135,8 @@ export const Menu = ({
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore make web strict
           ref={searchInput}
-          activeLocale={activeLocale}
-          placeholder={t.searchPlaceholder}
+          activeLocale={'is'}
+          placeholder={'Leitaðu á Ísland.is'}
           autocomplete={true}
           autosuggest={true}
           onRouting={closeModal}

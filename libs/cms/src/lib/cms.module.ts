@@ -18,7 +18,6 @@ import {
 } from './cms.resolver'
 import { CmsContentfulService } from './cms.contentful.service'
 import { ContentfulRepository } from './contentful.repository'
-import { CmsElasticsearchService } from './cms.elasticsearch.service'
 import { CmsHealthIndicator } from './cms.health'
 import { OrganizationLogoByNationalIdLoader } from './loaders/organizationLogoByNationalId.loader'
 import { OrganizationLogoByReferenceIdLoader } from './loaders/organizationLogoByReferenceId.loader'
@@ -41,7 +40,6 @@ import { OrganizationTitleByEntryIdLoader } from './loaders/organizationTitleByE
     ArticleResolver,
     ElasticService,
     CmsContentfulService,
-    CmsElasticsearchService,
     ContentfulRepository,
     CmsHealthIndicator,
     LatestNewsSliceResolver,
@@ -81,7 +79,6 @@ import { OrganizationTitleByEntryIdLoader } from './loaders/organizationTitleByE
     OrganizationTitleEnByNationalIdLoader,
     OrganizationTitleByEntryIdLoader,
     OrganizationLogoByEntryIdLoader,
-    CmsElasticsearchService,
   ],
 })
 export class CmsModule {}

@@ -102,6 +102,7 @@ export const DropdownMenu = ({
           iconType={iconType}
           loading={loading}
           disabled={disabled}
+          aria-controls="nei"
           {...menu}
           {...hoverProps}
         >

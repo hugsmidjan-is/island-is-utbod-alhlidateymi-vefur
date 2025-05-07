@@ -10,7 +10,6 @@ import {
   CmsContentfulService,
   localeMap,
   Form,
-  CmsElasticsearchService,
   ServiceWebPage,
 } from '@island.is/cms'
 import type { Logger } from '@island.is/logging'
@@ -45,7 +44,6 @@ export class CommunicationsService {
     private logger: Logger,
     @Inject(CommunicationsConfig.KEY)
     private readonly config: ConfigType<typeof CommunicationsConfig>,
-    private readonly cmsElasticsearchService: CmsElasticsearchService,
   ) {}
   emailTypeTemplateMap = {
     contactUs: getContactUsTemplate,
@@ -79,10 +77,7 @@ export class CommunicationsService {
         ['content_type']: 'organization',
         'fields.slug': institutionSlug,
       }),
-      this.cmsElasticsearchService.getSingleDocumentTypeBySlug<ServiceWebPage>(
-        getElasticsearchIndex('is'),
-        { type: 'webServiceWebPage', slug: institutionSlug },
-      ),
+      null,
     ])
 
     const errors: Record<string, string> = {}
@@ -108,9 +103,7 @@ export class CommunicationsService {
     return {
       ...input,
       institutionEmail: institutionEmail!,
-      config: serviceWebPageResult
-        ? serviceWebPageResult.emailConfig
-        : { emails: [] },
+      config: { emails: [] },
     }
   }
 

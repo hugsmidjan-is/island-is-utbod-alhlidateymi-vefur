@@ -657,7 +657,7 @@ export class CmsContentfulService {
   async getContentSlug({
     id,
   }: GetContentSlugInput): Promise<ContentSlug | null> {
-    const result = await this.contentfulRepository
+    /*const result = await this.contentfulRepository
       .getClient()
       .getEntry<{
         slug: Record<string, string>
@@ -670,60 +670,8 @@ export class CmsContentfulService {
         locale: '*',
         include: 1,
       })
-      .catch(errorHandler('getContentSlug'))
-
-    let slugs: TextFieldLocales = { is: '', en: '' }
-    let titles: TextFieldLocales = { is: '', en: '' }
-    let urls: TextFieldLocales = { is: '', en: '' }
-
-    const type = result?.sys?.contentType?.sys?.id ?? ''
-
-    if (
-      (result?.fields?.title || result?.fields?.question) &&
-      (result?.fields?.slug || result?.fields?.url)
-    ) {
-      ;({ slugs, titles, urls } = Object.keys(localeMap).reduce(
-        (obj, k) => {
-          obj.slugs[k] = result?.fields?.slug?.[localeMap[k]] ?? ''
-          obj.titles[k] =
-            (result?.fields?.title ?? result?.fields?.question)?.[
-              localeMap[k]
-            ] ?? ''
-
-          if (type === 'subArticle') {
-            const parentSlug =
-              result?.fields?.parent?.['is-IS']?.fields?.slug?.[localeMap[k]] ??
-              ''
-
-            const url = result?.fields?.url?.[localeMap[k]] ?? ''
-
-            obj.urls[k] = parentSlug
-              ? `${parentSlug}/${url?.split('/')?.pop() ?? ''}`
-              : ''
-          } else {
-            obj.urls[k] = result?.fields?.url?.[localeMap[k]] ?? ''
-          }
-
-          return obj
-        },
-        {
-          slugs: {} as typeof localeMap,
-          titles: {} as typeof localeMap,
-          urls: {} as typeof localeMap,
-        },
-      ))
-    }
-
-    return {
-      id: result?.sys?.id,
-      slug: slugs,
-      title: titles,
-      url: urls,
-      type,
-      activeTranslations: result?.fields?.activeTranslations?.['is-IS'] ?? {
-        en: true,
-      },
-    }
+      .catch(errorHandler('getContentSlug'))*/
+    return null
   }
 
   async getGenericPage({
