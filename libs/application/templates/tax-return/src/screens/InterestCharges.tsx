@@ -202,61 +202,7 @@ export const InterestChargesScreen = ({
             )
           })}
       </Box>
-
       <Divider />
-      {/* <Box>
-        <Text fontWeight="semiBold">
-          {f(taxInterestCharges.interestChargesIntro)}
-        </Text>
-        <Text>
-          Lán sem að hluta eða öllu leyti tengjast íbúðarhúsnæði. Ef aðeins
-          hluti lánsins á við, þarf að gera grein fyrir því hlutfalli.
-        </Text>
-      </Box>
-      <Table>
-        <Head>
-          <Row>
-            <HeadData>Fyllist út af ríkisskattstjóra</HeadData>
-            <HeadData></HeadData>
-          </Row>
-        </Head>
-        <Body>
-          <Row>
-            <Data width={'50%'}>
-              <Text fontWeight="semiBold" variant="medium">
-                Staðsetning íbúðarhúsnæðis
-              </Text>
-            </Data>
-            <Data>Bláfjallagata 12</Data>
-          </Row>
-        </Body>
-      </Table>
-      <Text>
-        Ef hluti láns er nýttur til annars en öflunar íbúðarhúsnæðis skal
-        tilgreinar hve hátt hlutfall fjárhæðar er til öflunar íbúðarhúsnæðis
-        (reitur 1). Í reiti 5 til 8 skal færa heildarfjárhæðir (án hlutföllunar)
-        en í dálka 9 og 10 skal aðeins færa þann hluta af vaxtagjöldum og
-        eftirstöðvum sem tilheyra öflun íbúðarhúsnæðis.
-      </Text> */}
-      {/* <Table>
-        <Head>
-          <Row>
-            <HeadData>Útreikningur</HeadData>
-            <HeadData align="right">Fjárhæð</HeadData>
-          </Row>
-        </Head>
-        <Body>
-          <Row>
-            <Data width={'60%'}>
-              <Text fontWeight="semiBold" variant="medium">
-                Lánshlutfall
-              </Text>
-            </Data>
-            <Data align="right">
-            </Data>
-          </Row>
-        </Body>
-      </Table> */}
       <AlertMessage
         type="info"
         title="Vaxtagjöld og lán eða lánshlutar sem ekki ganga til öflunar íbúðarhúsnæðis færast í kafla 5.5."
