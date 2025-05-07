@@ -65,7 +65,6 @@ export const CheckboxFormField = ({
           )}
         </Text>
       )}
-
       {description && (
         <FieldDescription
           description={formatTextWithLocale(
@@ -76,7 +75,6 @@ export const CheckboxFormField = ({
           )}
         />
       )}
-
       <Box paddingTop={2}>
         <CheckboxController
           id={id}

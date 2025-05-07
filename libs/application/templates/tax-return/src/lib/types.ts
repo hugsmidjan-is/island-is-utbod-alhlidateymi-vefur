@@ -60,6 +60,33 @@ export const InputFields = {
 //   },
 // }
 
+export type IncomeType = {
+  id: string
+  name: string
+}
+
+export type IncomeLine = {
+  id: string
+  label: string
+  value: number
+  payer?: string
+  incomeType: IncomeType
+}
+
+export type IncomeTypeCategory =
+  | 'compensation'
+  | 'salary'
+  | 'benefits'
+  | 'unknown'
+
+export type GroupedIncome = {
+  name: string // from incomeType.name
+  type: IncomeTypeCategory
+  items: IncomeLine[]
+}
+
+export type FieldKey = keyof typeof InputFields.incomeLastYear
+
 export enum TemplateApiActions {
   departments = 'getDepartments',
   types = 'getAdvertTypes',
@@ -76,6 +103,11 @@ export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 
 export type ErrorSchema = NestedType<applicationSchema>
 
+// export type TaxReturnDataTypes = {
+//   groupedIncome: GroupedIncome[];
+//   groupedDebt: GroupedDebt[];
+// }
+
 export type OJOIApplication = Override<
   Application,
   {
@@ -84,6 +116,12 @@ export type OJOIApplication = Override<
       getTaxNationalRegistryData: {
         data: {
           person: TaxApplicationPerson
+        }
+      }
+      getTaxReturnData: {
+        data: {
+          groupedIncome: GroupedIncome[]
+          prefill: any
         }
       }
     }

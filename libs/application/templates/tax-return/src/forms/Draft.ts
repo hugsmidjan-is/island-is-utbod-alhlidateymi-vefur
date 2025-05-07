@@ -15,6 +15,11 @@ export const Draft: Form = buildForm({
   renderLastScreenButton: true,
   children: [
     buildSection({
+      id: Routes.REQUIREMENTS,
+      title: tax.dataRequirements,
+      children: [],
+    }),
+    buildSection({
       id: Routes.GENERAL_INFO,
       title: tax.generalInfoTitle,
       children: [

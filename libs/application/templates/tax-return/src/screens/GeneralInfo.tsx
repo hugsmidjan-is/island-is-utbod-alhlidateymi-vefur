@@ -15,14 +15,15 @@ import {
   InputController,
   PhoneInputController,
 } from '@island.is/shared/form-fields'
-export const GeneralInfoScreen = ({
-  application,
-  errors,
-  setSubmitButtonDisabled,
-}: OJOIFieldBaseProps) => {
+export const GeneralInfoScreen = ({ application }: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
   const { externalData } = application
+
+  if (!externalData.getTaxNationalRegistryData) {
+    return <p>Samþykkja þarf gagnaöflun.</p>
+  }
+
   return (
     <FormScreen title={f(tax.generalInfoTitle)}>
       <Box>
@@ -70,7 +71,9 @@ export const GeneralInfoScreen = ({
               label={f(taxGeneralInfo.email)}
               backgroundColor="blue"
               placeholder="nafn@netfang.is"
-              defaultValue=""
+              defaultValue={
+                externalData.getTaxNationalRegistryData.data.person.email ?? ''
+              }
             />
           </GridColumn>
           <GridColumn span={['1/1', '1/1', '1/1', '1/2']} paddingBottom={2}>
@@ -80,7 +83,10 @@ export const GeneralInfoScreen = ({
               label={f(taxGeneralInfo.phone)}
               backgroundColor="blue"
               placeholder="123 4567"
-              defaultValue=""
+              defaultValue={
+                externalData.getTaxNationalRegistryData.data.person
+                  .phoneNumber ?? ''
+              }
             />
           </GridColumn>
         </GridRow>

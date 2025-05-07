@@ -1,8 +1,8 @@
 import { defineTemplateApi } from '@island.is/application/types'
 
 export const TaxReturnApi = defineTemplateApi({
-  action: 'getTestTaxData',
-  externalDataId: 'getTestTaxData',
+  action: 'getTaxReturnData',
+  externalDataId: 'getTaxReturnData',
 })
 
 export const TaxNationalRegistryApi = defineTemplateApi({

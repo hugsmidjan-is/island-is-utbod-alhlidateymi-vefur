@@ -71,7 +71,11 @@ export const tax = defineMessages({
   },
   launagreidandi: {
     id: 'taxReturn.application:income.launagreidandi',
-    defaultMessage: 'Nafn launagreiðanda',
+    defaultMessage: 'Launagreiðandi',
+  },
+  type: {
+    id: 'taxReturn.application:income.type',
+    defaultMessage: 'Tegund',
   },
   fyrirhvad: {
     id: 'taxReturn.application:income.fyrirhvad',
