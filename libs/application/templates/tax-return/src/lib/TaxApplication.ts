@@ -1,4 +1,4 @@
-import { getValueViaPath, pruneAfterDays } from '@island.is/application/core'
+import { pruneAfterDays } from '@island.is/application/core'
 
 import {
   Application,
@@ -23,10 +23,7 @@ import { CodeOwners } from '@island.is/shared/constants'
 export enum ApplicationStates {
   REQUIREMENTS = 'requirements',
   DRAFT = 'draft',
-  DRAFT_RETRY = 'draft_retry',
   SUBMITTED = 'submitted',
-  COMPLETE = 'complete',
-  REJECTED = 'rejected',
 }
 
 enum Roles {
@@ -144,57 +141,6 @@ const OJOITemplate: ApplicationTemplate<
               target: ApplicationStates.SUBMITTED,
             },
           ],
-          [DefaultEvents.REJECT]: {
-            target: ApplicationStates.REJECTED,
-          },
-        },
-      },
-      [ApplicationStates.DRAFT_RETRY]: {
-        meta: {
-          name: tax.applicationName.defaultMessage,
-          status: 'inprogress',
-          progress: 0.66,
-          lifecycle: pruneAfterDays(90),
-          actionCard: {
-            tag: {
-              label: tax.draftStatusLabel,
-              variant: 'blue',
-            },
-          },
-          roles: [
-            {
-              id: Roles.APPLICANT,
-              read: 'all',
-              write: 'all',
-              delete: false,
-              formLoader: () =>
-                import('../forms/DraftRetry').then((val) =>
-                  Promise.resolve(val.DraftRetry),
-                ),
-              actions: [
-                {
-                  event: DefaultEvents.SUBMIT,
-                  name: tax.sendApplication,
-                  type: 'primary',
-                },
-              ],
-            },
-            {
-              id: Roles.ASSIGNEE,
-              read: 'all',
-              write: 'all',
-            },
-          ],
-        },
-        on: {
-          [DefaultEvents.SUBMIT]: [
-            {
-              target: ApplicationStates.SUBMITTED,
-            },
-          ],
-          [DefaultEvents.REJECT]: {
-            target: ApplicationStates.REJECTED,
-          },
         },
       },
       [ApplicationStates.SUBMITTED]: {
@@ -234,75 +180,9 @@ const OJOITemplate: ApplicationTemplate<
           ],
         },
         on: {
-          [DefaultEvents.APPROVE]: {
-            target: ApplicationStates.COMPLETE,
-          },
           [DefaultEvents.EDIT]: {
-            target: ApplicationStates.DRAFT_RETRY,
+            target: ApplicationStates.SUBMITTED,
           },
-          [DefaultEvents.REJECT]: {
-            target: ApplicationStates.REJECTED,
-          },
-        },
-      },
-      [ApplicationStates.COMPLETE]: {
-        meta: {
-          name: tax.applicationName.defaultMessage,
-          status: 'completed',
-          progress: 1,
-          lifecycle: pruneAfterDays(90),
-          actionCard: {
-            tag: {
-              label: 'Útgefið',
-              variant: 'mint',
-            },
-          },
-          roles: [
-            {
-              id: Roles.APPLICANT,
-              read: 'all',
-              write: 'all',
-              delete: false,
-              formLoader: () =>
-                import('../forms/Complete').then((val) =>
-                  Promise.resolve(val.Complete),
-                ),
-            },
-            {
-              id: Roles.ASSIGNEE,
-              read: 'all',
-              write: 'all',
-            },
-          ],
-        },
-      },
-      [ApplicationStates.REJECTED]: {
-        meta: {
-          name: 'Umsókn hafnað',
-          status: 'rejected',
-          lifecycle: pruneAfterDays(90),
-          actionCard: {
-            tag: {
-              label: 'Hafnað',
-              variant: 'red',
-            },
-          },
-          roles: [
-            {
-              id: Roles.APPLICANT,
-              read: 'all',
-              delete: false,
-              formLoader: () =>
-                import('../forms/Rejected').then((val) =>
-                  Promise.resolve(val.Rejected),
-                ),
-            },
-            {
-              id: Roles.ASSIGNEE,
-              read: 'all',
-              write: 'all',
-            },
-          ],
         },
       },
     },
