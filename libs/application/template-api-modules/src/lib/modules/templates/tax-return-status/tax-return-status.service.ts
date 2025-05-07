@@ -9,8 +9,12 @@ import {
 } from '@island.is/application/types'
 import { BaseTemplateApiService } from '../../base-template-api.service'
 import { logger } from '@island.is/logging'
-import { groupHomeDebt, groupIncomeLines, groupPropertyLines } from './utils'
-import { createTaxReturn, groupHomeDebt, groupIncomeLines, groupPropertyLines } from './utils'
+import {
+  createTaxReturn,
+  groupHomeDebt,
+  groupIncomeLines,
+  groupPropertyLines,
+} from './utils'
 
 @Injectable()
 export class TaxReturnStatusService extends BaseTemplateApiService {
