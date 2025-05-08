@@ -7,7 +7,7 @@ import {
 } from '@island.is/island-ui/core'
 import * as styles from './FormScreen.css'
 import { useLocale } from '@island.is/localization'
-import { OJOI_INPUT_HEIGHT, Routes } from '../../lib/constants'
+import { TAX_INPUT_HEIGHT, Routes } from '../../lib/constants'
 
 type WarningProps = {
   type?: AlertMessageProps['type']
@@ -116,7 +116,7 @@ export const FormScreen = ({
       </Box>
       {loading ? (
         <SkeletonLoader
-          height={OJOI_INPUT_HEIGHT}
+          height={TAX_INPUT_HEIGHT}
           repeat={3}
           borderRadius="standard"
           space={2}

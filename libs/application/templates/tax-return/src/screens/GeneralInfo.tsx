@@ -1,7 +1,7 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { tax, taxGeneralInfo } from '../lib/messages'
-import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import { InputFields, TaxFieldBaseProps } from '../lib/types'
 import { format as formatNationalId } from 'kennitala'
 
 import {
@@ -21,7 +21,7 @@ import { getErrorViaPath } from '@island.is/application/core'
 export const GeneralInfoScreen = ({
   application,
   errors,
-}: OJOIFieldBaseProps) => {
+}: TaxFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
   const { externalData } = application

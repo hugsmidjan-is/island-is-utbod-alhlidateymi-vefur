@@ -31,14 +31,14 @@ enum Roles {
   ASSIGNEE = 'assignee',
 }
 
-export type OJOIEvents =
+export type TaxEvents =
   | { type: DefaultEvents.APPROVE }
   | { type: DefaultEvents.SUBMIT }
 
-const OJOITemplate: ApplicationTemplate<
+const TaxTemplate: ApplicationTemplate<
   ApplicationContext,
-  ApplicationStateSchema<OJOIEvents>,
-  OJOIEvents
+  ApplicationStateSchema<TaxEvents>,
+  TaxEvents
 > = {
   type: ApplicationTypes.TAX_RETURN,
   name: tax.applicationName,
@@ -190,4 +190,4 @@ const OJOITemplate: ApplicationTemplate<
   },
 }
 
-export default OJOITemplate
+export default TaxTemplate
