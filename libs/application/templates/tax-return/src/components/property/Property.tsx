@@ -1,11 +1,8 @@
 import { Box, SkeletonLoader, Text } from '@island.is/island-ui/core'
 import * as styles from './Property.css'
 import { TAX_INPUT_HEIGHT } from '../../lib/constants'
-import { TaxReturnInputController } from '../input/TaxReturnInputController'
 
 import cn from 'classnames'
-import { InputController } from '@island.is/shared/form-fields'
-import { BaseInputController } from '../input/BaseInputController'
 
 type Props = {
   name: string

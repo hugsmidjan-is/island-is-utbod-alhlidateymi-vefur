@@ -7,8 +7,6 @@ import {
   Row,
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
-import { GroupedIncome, InputFields, TaxReturnDebtLine } from '../../lib/types'
-import { BaseInputController } from '../input/BaseInputController'
 import { DebtInputController } from '../input/DebtInputController'
 import { useFormContext } from 'react-hook-form'
 import { useEffect } from 'react'

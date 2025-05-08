@@ -71,6 +71,7 @@ export const IncomeGroupTable = ({
                     type="number"
                     field={`${fieldType}[${i}]`}
                     titleValue={item.label}
+                    ariaLabel={item.label}
                     detailsValue={
                       showPayer ? item.payer ?? item.identifier : ''
                     }
