@@ -392,7 +392,7 @@ export const confirmation = defineMessages({
     defaultMessage: `Skattframtalinu var skilað {date}.{br}
       Móttökunúmer: {number}
       {br}{br}
-      Þú getur alltaf nálgast eintak af kvittuninni inn á Mínum síðum, skoðað bráðabirgðaútreikning og sent inn viðbótargögn eða leiðréttingu.`,
+      Þú getur alltaf nálgast eintak af framtalinu undir kláruðum umsóknum á Mínum síðum, skoðað bráðabirgðaútreikning og sent inn viðbótargögn eða leiðréttingu.`,
     description: 'Alert message in confirmation form',
   },
   whatHappensNext: {
