@@ -27,7 +27,7 @@ const getInitials = (username?: string) => {
     initials += names[names.length - 1].substring(0, 1).toUpperCase()
   }
 
-  return initials
+  return 'JÞ'
 }
 
 export const UserAvatar = ({
