@@ -8,7 +8,6 @@ export const InputFields = {
     approveExternalData: 'requirements.approveExternalData',
   },
   [Routes.GENERAL_INFO]: {
-    user: 'generalInfo.user',
     contact: {
       email: 'generalInfo.contact.email',
       phone: 'generalInfo.contact.phone',
@@ -27,42 +26,7 @@ export const InputFields = {
     propertyLoan: 'interestCharges.propertyLoan',
     general: 'interestCharges.general',
   },
-  // [Routes.ADVERT]: {
-  //   department: 'advert.department',
-  //   mainType: 'advert.mainType',
-  //   type: 'advert.type',
-  //   title: 'advert.title',
-  //   html: 'advert.html',
-  //   requestedDate: 'advert.requestedDate',
-  //   categories: 'advert.categories',
-  //   channels: 'advert.channels',
-  //   message: 'advert.message',
-  //   involvedPartyId: 'advert.involvedPartyId',
-  //   additions: 'advert.additions',
-  // },
-  // [Routes.SIGNATURE]: {
-  //   regular: 'signature.regular',
-  //   committee: 'signature.committee',
-  // },
-  // [Routes.MISC]: {
-  //   signatureType: 'misc.signatureType',
-  //   selectedTemplate: 'misc.selectedTemplate',
-  //   asDocument: 'misc.asDocument',
-  //   titlePrefix: 'misc.titlePrefix',
-  //   asRoman: 'misc.asRoman',
-  // },
 }
-
-// export const RequiredInputFieldsNames = {
-//   [Routes.ADVERT]: {
-//     department: 'Deild',
-//     type: 'Tegund',
-//     title: 'Titill',
-//     html: 'Auglýsing',
-//     requestedDate: 'Útgáfudagur',
-//     categories: 'Efnisflokkar',
-//   },
-// }
 
 export type IncomeType = {
   id: string

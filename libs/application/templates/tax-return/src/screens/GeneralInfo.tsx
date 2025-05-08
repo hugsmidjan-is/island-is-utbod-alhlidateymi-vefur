@@ -15,7 +15,11 @@ import {
   InputController,
   PhoneInputController,
 } from '@island.is/shared/form-fields'
-export const GeneralInfoScreen = ({ application }: OJOIFieldBaseProps) => {
+import { getErrorViaPath } from '@island.is/application/core'
+export const GeneralInfoScreen = ({
+  application,
+  errors,
+}: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
   const { externalData } = application
@@ -71,6 +75,11 @@ export const GeneralInfoScreen = ({ application }: OJOIFieldBaseProps) => {
               label={f(taxGeneralInfo.email)}
               backgroundColor="blue"
               placeholder="nafn@netfang.is"
+              required
+              error={getErrorViaPath(
+                errors,
+                InputFields.generalInfo.contact.email,
+              )}
               defaultValue={
                 externalData.getTaxNationalRegistryData.data.person.email ?? ''
               }
@@ -79,6 +88,11 @@ export const GeneralInfoScreen = ({ application }: OJOIFieldBaseProps) => {
           <GridColumn span={['1/1', '1/1', '1/1', '1/2']} paddingBottom={2}>
             <PhoneInputController
               id="phone"
+              required
+              error={getErrorViaPath(
+                errors,
+                InputFields.generalInfo.contact.phone,
+              )}
               name={InputFields.generalInfo.contact.phone}
               label={f(taxGeneralInfo.phone)}
               backgroundColor="blue"

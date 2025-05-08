@@ -1,27 +1,29 @@
 import { z } from 'zod'
 import { requirements } from './messages'
 import { YesOrNoEnum } from '@island.is/application/core'
-
+import { errorMessages } from '../lib/messages'
+import { isEmail } from 'class-validator'
 export const baseEntitySchema = z.object({
   title: z.string(),
   value: z.string(),
   details: z.string().optional(),
 })
 
-const generalInfoSchema = z
-  .object({
-    user: z.object({
-      name: z.string().optional(),
-      nationalId: z.string().optional(),
-      address: z.string().optional(),
-      city: z.string().optional(),
+const generalInfoSchema = z.object({
+  contact: z.object({
+    email: z.string().refine((val) => isEmail(val), {
+      params: errorMessages.email,
     }),
-    contact: z.object({
-      email: z.string().optional(),
-      phone: z.string().optional(),
-    }),
-  })
-  .partial()
+    phone: z.string().refine(
+      (val) => {
+        return val.length >= 11
+      },
+      {
+        params: errorMessages.phone,
+      },
+    ),
+  }),
+})
 
 const lastYearIncomeSchema = z
   .object({
@@ -65,7 +67,7 @@ const interestChargesSchema = z
   .partial()
 
 export const applicationSchema = z.object({
-  generalInfo: generalInfoSchema.optional(),
+  generalInfo: generalInfoSchema,
   incomeLastYear: lastYearIncomeSchema.optional(),
   endOfYear: endOfYearSchema.optional(),
   interestCharges: interestChargesSchema.optional(),

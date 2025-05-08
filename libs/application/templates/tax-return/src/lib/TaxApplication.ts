@@ -72,7 +72,6 @@ const OJOITemplate: ApplicationTemplate<
           name: 'Gagnaöflun',
           status: 'draft',
           lifecycle: pruneAfterDays(90),
-          progress: 0.33,
           roles: [
             {
               id: Roles.APPLICANT,
@@ -99,7 +98,7 @@ const OJOITemplate: ApplicationTemplate<
         entry: 'assignToInstitution',
         meta: {
           name: tax.applicationName.defaultMessage,
-          status: 'inprogress',
+          status: 'draft',
           progress: 0.66,
           actionCard: {
             tag: {
