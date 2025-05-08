@@ -11,7 +11,6 @@ type BaseInputControllerProps = {
   detailsValue?: string
 }
 
-// import { useFieldArray } from 'react-hook-form'
 export const BaseInputController = ({
   field,
   type,
@@ -22,9 +21,6 @@ export const BaseInputController = ({
   ...props
 }: BaseInputControllerProps) => {
   const { setValue } = useFormContext()
-  // const { fields, append, remove } = useFieldArray({
-  //   name: `${props.testId}.title`,
-  // })
 
   useEffect(() => {
     setValue(`${field}.title`, titleValue ?? '')

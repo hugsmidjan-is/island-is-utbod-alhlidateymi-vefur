@@ -9,8 +9,6 @@ import {
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { GroupedIncome } from '../../lib/types'
 import { BaseInputController } from '../input/BaseInputController'
-import { sumOfBaseEntity } from '../../lib/utils'
-import NumberFormat from 'react-number-format'
 
 type IncomeGroupTableProps = {
   group: GroupedIncome
@@ -71,7 +69,7 @@ export const IncomeGroupTable = ({
                     type="number"
                     field={`${fieldType}[${i}]`}
                     titleValue={item.label}
-                    detailsValue={showPayer ? item.payer : ''}
+                    detailsValue={item.payer ?? item.identifier ?? ''}
                   />
                 </Data>
               </Row>

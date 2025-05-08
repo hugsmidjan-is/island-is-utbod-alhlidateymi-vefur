@@ -11,15 +11,6 @@ import {
   Divider,
   Text,
 } from '@island.is/island-ui/core'
-import {
-  Body,
-  Data,
-  Head,
-  HeadData,
-  Row,
-  Table,
-} from 'libs/island-ui/core/src/lib/Table/Table'
-import { BaseInputController } from '../components/input/BaseInputController'
 import { DebtInputController } from '../components/input/DebtInputController'
 import { formatDate } from '../lib/utils'
 export const InterestChargesScreen = ({
@@ -129,10 +120,11 @@ export const InterestChargesScreen = ({
                   <Column>
                     <DebtInputController
                       label="Lánshlutfall"
-                      defaultValue={`${line.annualTotalPayment}`}
+                      // defaultValue={`${line.ratio}`}
+                      defaultValue={`74`}
                       type="number"
                       suffix="%"
-                      field={`${InputFields.interestCharges.propertyLoan}[${i}].annualTotalPayment`}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].ratio`}
                     />
                   </Column>
                   <Column>
@@ -171,7 +163,7 @@ export const InterestChargesScreen = ({
                       defaultValue={`${line.costOfLoan ?? 0}`}
                       type="number"
                       prefix={'+ '}
-                      field={`${InputFields.interestCharges.propertyLoan}[${i}].costOfLoan ?? 0`}
+                      field={`${InputFields.interestCharges.propertyLoan}[${i}].costOfLoan`}
                     />
                   </Column>
                   <Column>
