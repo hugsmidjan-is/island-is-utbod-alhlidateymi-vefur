@@ -579,6 +579,10 @@
             "type": "string",
             "description": "Optional originating date of the debt return line"
           },
+          "ratio": {
+            "type": "number",
+            "description": "Optional ratio of the debt return line"
+          },
           "identifier": {
             "type": "string",
             "description": "Optional identifier of the debt return line"
@@ -627,6 +631,7 @@
           "debtType",
           "label",
           "originationDate",
+          "ratio",
           "identifier",
           "term",
           "outstandingPrincipal",

@@ -120,9 +120,11 @@ export const InterestChargesScreen = ({
                   <Column>
                     <DebtInputController
                       label="Lánshlutfall"
-                      // defaultValue={`${line.ratio}`}
-                      defaultValue={`74`}
+                      defaultValue={`${
+                        line.ratio ? (line.ratio * 100).toFixed(2) : ''
+                      }`}
                       type="number"
+                      thousandSeparator={false}
                       suffix="%"
                       field={`${InputFields.interestCharges.propertyLoan}[${i}].ratio`}
                     />
