@@ -6,6 +6,7 @@ type BaseInputControllerProps = {
   field: string
   defaultValue: string
   label?: string
+  ariaLabel?: string
   type?: 'number' | 'text'
   titleValue?: string
   detailsValue?: string
@@ -15,6 +16,7 @@ export const BaseInputController = ({
   field,
   type,
   defaultValue,
+  ariaLabel,
   label,
   titleValue,
   detailsValue,
@@ -28,20 +30,25 @@ export const BaseInputController = ({
   }, [])
 
   return (
-    <InputController
-      {...props}
-      backgroundColor="blue"
-      suffix=" kr."
-      maxLength={180}
-      label={label}
-      rightAlign
-      size="xs"
-      thousandSeparator
-      defaultValue={defaultValue}
-      name={`${field}.value`}
-      id={`${field}.value`}
-      textarea={false}
-      type={type}
-    />
+    <>
+      <label htmlFor={`${field}.value`} className="visually-hidden">
+        {ariaLabel}
+      </label>
+      <InputController
+        {...props}
+        backgroundColor="blue"
+        suffix=" kr."
+        maxLength={180}
+        label={label}
+        rightAlign
+        size="xs"
+        thousandSeparator
+        defaultValue={defaultValue}
+        name={`${field}.value`}
+        id={`${field}.value`}
+        textarea={false}
+        type={type}
+      />
+    </>
   )
 }
