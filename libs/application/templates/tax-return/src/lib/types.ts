@@ -134,6 +134,7 @@ export interface TaxReturnDebtLine {
   creditorName: string
   writeDown: number
   costOfLoan?: number
+  ratio?: number
 }
 export interface TaxReturnDebt {
   id: string
