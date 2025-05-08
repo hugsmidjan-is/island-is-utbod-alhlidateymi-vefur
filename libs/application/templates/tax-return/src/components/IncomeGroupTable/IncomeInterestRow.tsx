@@ -37,7 +37,9 @@ export const IncomeInterestTableRow = ({
   }, [])
   return (
     <Row key={label}>
-      <Data size={16}>{label}</Data>
+      <Data size={16} weight="light">
+        {label}
+      </Data>
       <Data>
         <DebtInputController
           label=""

@@ -37,19 +37,19 @@ export const IncomeGroupTable = ({
           <Head>
             <Row>
               <HeadData>
-                <Text variant="medium" fontWeight="semiBold">
+                <Text variant="small" fontWeight="semiBold">
                   {columnLabels[0]}
                 </Text>
               </HeadData>
               {showPayer && (
                 <HeadData>
-                  <Text variant="medium" fontWeight="semiBold">
+                  <Text variant="small" fontWeight="semiBold">
                     {columnLabels[1]}
                   </Text>
                 </HeadData>
               )}
               <HeadData align="right">
-                <Text variant="medium" fontWeight="semiBold">
+                <Text variant="small" fontWeight="semiBold">
                   {columnLabels[showPayer ? 2 : 1]}
                 </Text>
               </HeadData>
@@ -59,9 +59,11 @@ export const IncomeGroupTable = ({
             {group.items.map((item, i) => (
               <Row key={item.label}>
                 {showPayer && (
-                  <Data size={16}>{item.payer ?? item.identifier ?? ''}</Data>
+                  <Data size={16} weight="light">
+                    {item.payer ?? item.identifier ?? ''}
+                  </Data>
                 )}
-                <Data>{item.label}</Data>
+                <Data weight="light">{item.label}</Data>
                 <Data width={228} style={{ paddingRight: 0 }}>
                   <BaseInputController
                     label=""

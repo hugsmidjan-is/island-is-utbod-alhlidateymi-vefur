@@ -27,17 +27,17 @@ export const IncomeInterestTable = ({ line }: IncomeInterestTableProps) => {
           <Head>
             <Row>
               <HeadData>
-                <Text variant="medium" fontWeight="semiBold">
+                <Text variant="small" fontWeight="semiBold">
                   Tegund skuldar
                 </Text>
               </HeadData>
               <HeadData align="right">
-                <Text variant="medium" fontWeight="semiBold">
+                <Text variant="small" fontWeight="semiBold">
                   Vaxtagjöld
                 </Text>
               </HeadData>
               <HeadData align="right">
-                <Text variant="medium" fontWeight="semiBold">
+                <Text variant="small" fontWeight="semiBold">
                   Eftirstöðvar skuldar
                 </Text>
               </HeadData>

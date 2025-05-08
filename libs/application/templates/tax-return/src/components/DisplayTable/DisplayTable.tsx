@@ -7,7 +7,7 @@ import {
   Table,
 } from 'libs/island-ui/core/src/lib/Table/Table'
 import { Text } from '@island.is/island-ui/core'
-import { formatCurrencyWithoutSuffix } from '@island.is/application/ui-components'
+import { formatCurrency } from '@island.is/application/ui-components'
 type DisplayTableProps = {
   headData: string[]
   bodyData: string[][]
@@ -26,7 +26,7 @@ export const DisplayTable = ({
         <Row>
           {headData.map((data, index) => (
             <HeadData key={index} align={index === 0 ? 'left' : 'right'}>
-              <Text variant="medium" fontWeight="semiBold">
+              <Text variant="small" fontWeight="semiBold">
                 {data}
               </Text>
             </HeadData>
@@ -37,35 +37,49 @@ export const DisplayTable = ({
         {bodyData.map((bdata, index) => (
           <Row key={index}>
             {bdata.map((data, index) => (
-              <Data key={index} align={index === 0 ? 'left' : 'right'}>
+              <Data
+                key={index}
+                weight="light"
+                align={index === 0 ? 'left' : 'right'}
+                width={addData ? '1/3' : '1/2'}
+              >
                 {data}
               </Data>
             ))}
           </Row>
         ))}
-        {!!total && (
+        {!!total && bodyData.length > 1 && (
           <Row>
-            <Data align={'left'}>
-              <Text variant="medium" fontWeight="semiBold">
-                Samtals
-              </Text>
+            <Data
+              align={'left'}
+              weight="semiBold"
+              fontsize={'h5'}
+              width={addData ? '1/3' : '1/2'}
+            >
+              Samtals
             </Data>
             {totalArray ? (
-              total.map((t) => {
+              total.map((t, index) => {
                 return (
-                  <Data align={'right'}>
-                    <Text variant="medium" fontWeight="semiBold">
-                      {formatCurrencyWithoutSuffix(t.toString())}
+                  <Data
+                    align={'right'}
+                    key={index}
+                    width={addData ? '1/3' : '1/2'}
+                  >
+                    <Text variant="h5" fontWeight="semiBold">
+                      {formatCurrency(t.toString())}
                     </Text>
                   </Data>
                 )
               })
             ) : (
               <>
-                {addData && <Data align={'right'}></Data>}
-                <Data align={'right'}>
-                  <Text variant="medium" fontWeight="semiBold">
-                    {formatCurrencyWithoutSuffix(total.toString())}
+                {addData && (
+                  <Data align={'right'} width={addData ? '1/3' : '1/2'}></Data>
+                )}
+                <Data align={'right'} width={addData ? '1/3' : '1/2'}>
+                  <Text variant="h5" fontWeight="semiBold">
+                    {formatCurrency(total.toString())}
                   </Text>
                 </Data>
               </>

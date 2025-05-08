@@ -4,7 +4,7 @@ import { taxInterestCharges, taxOverviewConfirmation } from '../lib/messages'
 import { OJOIFieldBaseProps } from '../lib/types'
 import { format as formatNationalId } from 'kennitala'
 import {
-  formatCurrencyWithoutSuffix,
+  formatCurrency,
   formatPhoneNumber,
 } from '@island.is/application/ui-components'
 import { Box, Button, Stack, Text } from '@island.is/island-ui/core'
@@ -131,15 +131,22 @@ export const ConfirmationPreviewScreen = ({
             (income, i) => {
               return (
                 <>
-                  <Box marginBottom={4}>
-                    <Text variant="h5">{f(chapterIncomeMap[i])}</Text>
+                  <Box marginBottom={2} marginTop={i === 0 ? 3 : 5}>
+                    <Text variant="h4">{f(chapterIncomeMap[i])}</Text>
                   </Box>
                   <Box marginBottom={2}>
                     <DisplayTable
-                      headData={['Greiðandi', 'Upphæð']}
+                      headData={[
+                        i === 0
+                          ? 'Greiðandi'
+                          : i === 1
+                          ? 'Tegund'
+                          : 'Launagreiðandi',
+                        'Upphæð',
+                      ]}
                       bodyData={income.items.map((i) => [
                         i.label,
-                        formatCurrencyWithoutSuffix(i.value.toString()),
+                        formatCurrency(i.value.toString()),
                       ])}
                       total={income.items.reduce(
                         (sum, item) => sum + Number(item.value),
@@ -160,8 +167,8 @@ export const ConfirmationPreviewScreen = ({
             (property, i) => {
               return (
                 <>
-                  <Box marginBottom={4}>
-                    <Text variant="h5">{f(chapterPropertyMap[i])}</Text>
+                  <Box marginBottom={2} marginTop={i === 0 ? 3 : 5}>
+                    <Text variant="h4">{f(chapterPropertyMap[i])}</Text>
                   </Box>
                   <Box marginBottom={2}>
                     <DisplayTable
@@ -174,7 +181,7 @@ export const ConfirmationPreviewScreen = ({
                         return [
                           i.identifier as string,
                           i.label,
-                          formatCurrencyWithoutSuffix(i.value.toString()),
+                          formatCurrency(i.value.toString()),
                         ]
                       })}
                       total={property.items.reduce(
@@ -189,33 +196,41 @@ export const ConfirmationPreviewScreen = ({
             },
           )}
       </FormChapter>
-      <FormChapter
-        title={f(taxOverviewConfirmation.debtsChapter)}
-        subTitle={f(taxOverviewConfirmation.loansSubChapter)}
-      >
-        <Box marginBottom={6}>
-          <Text variant="small">{f(taxInterestCharges.filledBy)}</Text>
+      <FormChapter title={f(taxOverviewConfirmation.debtsChapter)}>
+        <Box marginBottom={2} marginTop={3}>
+          <Text variant="h4" fontWeight="semiBold">
+            {f(taxOverviewConfirmation.loansSubChapter)}
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text variant="h5" fontWeight="light">
+            {f(taxInterestCharges.filledBy)}
+          </Text>
+        </Box>
+        <Box marginTop={2}>
           {propertyDepts.length > 0 &&
             propertyDepts.map((dept, i) => (
               <>
-                <Box marginBottom={6}>
+                <Box marginBottom={6} marginTop={2}>
                   <Table>
                     <Body>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Staðsetning íbúðarhúsnæðis
                           </Text>
                         </Data>
-                        <Data align={'right'}>{dept.label}</Data>
+                        <Data align="left" width="50%" weight="light">
+                          {dept.label}
+                        </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Kaupár
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'} weight="light">
                           <Text>
                             {formatDate(
                               dept.originationDate.toString(),
@@ -225,73 +240,76 @@ export const ConfirmationPreviewScreen = ({
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Lánsnúmer
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'} weight="light">
                           <Text>{dept.identifier}</Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Lánsveitandi
                           </Text>
                         </Data>
 
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'} weight="light">
                           <Text>{dept.creditorName}</Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Kennitala Lánsveitanda
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'} weight="light">
                           <Text>{formatNationalId(dept.creditorId)}</Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Lántökudagur
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'} weight="light">
                           <Text>
-                            {formatDate(dept.originationDate.toString())}
+                            {formatDate(
+                              dept.originationDate.toString(),
+                              'dd.MMM yyyy',
+                            )}
                           </Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Lánstími í árum
                           </Text>
                         </Data>
-                        <Data align={'right'}>
-                          <Text>{dept.term / 12}</Text>
+                        <Data align={'left'} width={'50%'} weight="light">
+                          <Text>{dept.term / 12} ár</Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
-                            Lánstími í árum
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
+                            Yfirtökudagur
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'} weight="light">
                           <Text>-</Text>
                         </Data>
                       </Row>
                     </Body>
                   </Table>
                 </Box>
-                <Box marginBottom={6}>
-                  <Text variant="small">
+                <Box marginBottom={4}>
+                  <Text variant="h5" fontWeight="light">
                     Ef hluti af láninu fer til annars en íbúðarhúsnæðis, þá þarf
                     að tilgreina hversu mikið af láninu var notað til að kaupa
                     eða byggja íbúðarhúsnæði.
@@ -301,87 +319,83 @@ export const ConfirmationPreviewScreen = ({
                   <Table>
                     <Body>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Lánshlutfall
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'} weight="light">
                           {/* TODO: ??? */}
                           100%
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Heildargreiðslur ársins
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'}>
                           <Text>
-                            {formatCurrencyWithoutSuffix(
-                              dept.annualTotalPayment.toString(),
-                            )}
+                            {formatCurrency(dept.annualTotalPayment.toString())}
                           </Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Afborgun af nafnverði
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'}>
                           <Text>
-                            {formatCurrencyWithoutSuffix(
+                            {formatCurrency(
                               dept.annualTotalPrincipalPayment.toString(),
                             )}
                           </Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Afföll
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'}>
                           <Text>{dept.writeDown}</Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Lántökukostnaður
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'}>
                           <Text>{dept.costOfLoan ?? '-'}</Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Vaxtagjöld
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'}>
                           <Text>
-                            {formatCurrencyWithoutSuffix(
-                              dept.interestAmount.toString(),
-                            )}
+                            {formatCurrency(dept.interestAmount.toString())}
                           </Text>
                         </Data>
                       </Row>
                       <Row>
-                        <Data align={'left'}>
-                          <Text variant="medium" fontWeight="semiBold">
+                        <Data align={'left'} width={'50%'}>
+                          <Text variant="h5" fontWeight="semiBold">
                             Eftirstöðvar skulda
                           </Text>
                         </Data>
-                        <Data align={'right'}>
+                        <Data align={'left'} width={'50%'}>
                           <Text>
-                            {formatCurrencyWithoutSuffix(
+                            {formatCurrency(
                               dept.outstandingPrincipal.toString(),
                             )}
                           </Text>
@@ -393,11 +407,11 @@ export const ConfirmationPreviewScreen = ({
               </>
             ))}
         </Box>
-      </FormChapter>
-      <FormChapter
-        title={f(taxOverviewConfirmation.annualIncomeChapter)}
-        subTitle={f(taxOverviewConfirmation.otherDebtsSubChapter)}
-      >
+        <Box marginBottom={4}>
+          <Text variant="h4">
+            {f(taxOverviewConfirmation.otherDebtsSubChapter)}
+          </Text>
+        </Box>
         <Box marginBottom={2}>
           <DisplayTable
             headData={['Tegund skulda', 'Vaxtagjöld', 'Eftirstöðvar skuldar']}
@@ -405,10 +419,8 @@ export const ConfirmationPreviewScreen = ({
               otherDepts.map((d, i) => {
                 return [
                   d.label,
-                  formatCurrencyWithoutSuffix(d.interestAmount.toString()),
-                  formatCurrencyWithoutSuffix(
-                    d.outstandingPrincipal.toString(),
-                  ),
+                  formatCurrency(d.interestAmount.toString()),
+                  formatCurrency(d.outstandingPrincipal.toString()),
                   ,
                 ]
               }) as string[][]

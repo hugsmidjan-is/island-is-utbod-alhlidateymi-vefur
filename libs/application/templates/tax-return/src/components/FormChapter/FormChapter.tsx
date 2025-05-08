@@ -20,7 +20,7 @@ export const FormChapter = ({
 
   return (
     <Box marginBottom={2}>
-      <Box display="flex" justifyContent="spaceBetween" marginBottom={4}>
+      <Box display="flex" justifyContent="spaceBetween" alignItems={'center'}>
         <Text variant="h3">{title}</Text>
         {editButton && (
           <Button variant="utility" icon="pencil" onClick={onClick}>
@@ -29,8 +29,8 @@ export const FormChapter = ({
         )}
       </Box>
       {!!subTitle && (
-        <Box marginBottom={4}>
-          <Text variant="h5">{subTitle}</Text>
+        <Box>
+          <Text variant="h4">{subTitle}</Text>
         </Box>
       )}
       {children}
