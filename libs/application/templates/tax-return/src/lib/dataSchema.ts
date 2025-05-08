@@ -33,8 +33,8 @@ const lastYearIncomeSchema = z
 
 const endOfYearSchema = z
   .object({
-    housing: z.array(baseEntitySchema).optional(),
-    vehicles: z.array(baseEntitySchema).optional(),
+    property: z.array(baseEntitySchema).optional(),
+    vehicle: z.array(baseEntitySchema).optional(),
   })
   .partial()
 

@@ -52,7 +52,7 @@ export const Draft: Form = buildForm({
       title: tax.endOfYearTitle,
       children: [
         buildCustomField({
-          id: 'preview',
+          id: Routes.END_OF_YEAR,
           component: 'EndOfYearScreen',
         }),
       ],
@@ -67,7 +67,7 @@ export const Draft: Form = buildForm({
           component: 'InterestChargesScreen',
         }),
         buildCustomField({
-          id: Routes.SECOND_INTEREST_CHARGES,
+          id: Routes.INTEREST_CHARGES,
           component: 'SecondInterestChargesScreen',
         }),
       ],
