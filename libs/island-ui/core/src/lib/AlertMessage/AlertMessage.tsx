@@ -111,7 +111,7 @@ export const AlertMessage: FC<AlertMessageProps & TitleAndOrMessage> = ({
         >
           {title &&
             (typeof title === 'string' ? (
-              <Text as="h5" variant="h5" marginBottom={message ? 1 : 0}>
+              <Text as="h5" variant="h5" marginBottom={message ? 2 : 0}>
                 {title}
               </Text>
             ) : (
@@ -123,7 +123,7 @@ export const AlertMessage: FC<AlertMessageProps & TitleAndOrMessage> = ({
                 message
               ) : (
                 <Box flexGrow={1}>
-                  <Text variant="small">{message}</Text>
+                  <Text variant="medium">{message}</Text>
                 </Box>
               )}
               {action && (

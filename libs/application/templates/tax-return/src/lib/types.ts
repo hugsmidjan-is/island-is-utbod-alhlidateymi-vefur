@@ -160,6 +160,12 @@ export type OJOIApplication = Override<
   {
     answers: applicationSchema
     externalData: {
+      postApplication?: {
+        data: {
+          id: string
+          timestamp: string
+        }
+      }
       getTaxNationalRegistryData: {
         data: {
           person: TaxApplicationPerson

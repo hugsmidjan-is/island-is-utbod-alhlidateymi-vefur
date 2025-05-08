@@ -53,6 +53,7 @@ export const IncomeInterestTable = ({ line }: IncomeInterestTableProps) => {
                 keyDetails={`${InputFields.interestCharges.general}[${i}].details`}
                 keyValue={`${InputFields.interestCharges.general}[${i}].value`}
                 keyTitle={`${InputFields.interestCharges.general}[${i}].title`}
+                rightAlign={true}
               />
             ))}
             {line.length > 1 && (

@@ -2,6 +2,8 @@ import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { tax, taxGeneralInfo } from '../lib/messages'
 import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import { format as formatNationalId } from 'kennitala'
+
 import {
   Box,
   Divider,
@@ -39,9 +41,9 @@ export const GeneralInfoScreen = ({ application }: OJOIFieldBaseProps) => {
           />
           <Property
             name={f(taxGeneralInfo.nationalId)}
-            value={
-              externalData.getTaxNationalRegistryData.data.person.nationalId
-            }
+            value={formatNationalId(
+              externalData.getTaxNationalRegistryData.data.person.nationalId.toString(),
+            )}
           />
           <Property
             name={f(taxGeneralInfo.address)}

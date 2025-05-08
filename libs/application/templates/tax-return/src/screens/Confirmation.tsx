@@ -8,9 +8,20 @@ import {
   Text,
 } from '@island.is/island-ui/core'
 import { tax, confirmation } from '../lib/messages'
+import { OJOIFieldBaseProps } from '../lib/types'
+import format from 'date-fns/format'
+import locale from 'date-fns/locale/is'
 
-export const ConfirmationScreen = () => {
+export const ConfirmationScreen = ({ application }: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
+
+  const { externalData } = application
+  const date =
+    externalData.postApplication?.data.timestamp ?? new Date().toISOString()
+
+  const formattedDate = format(new Date(date), 'd.MMM yyyy', { locale })
+  const formattedHours = format(new Date(date), 'HH:mm', { locale })
+  console.log(externalData)
 
   return (
     <FormScreen title={f(tax.confirmationTitle)}>
@@ -19,6 +30,8 @@ export const ConfirmationScreen = () => {
           title={f(confirmation.received)}
           message={f(confirmation.alert, {
             br: <br />,
+            date: `${formattedDate} kl. ${formattedHours}`,
+            number: externalData.postApplication?.data.id,
           })}
           type="success"
         />
