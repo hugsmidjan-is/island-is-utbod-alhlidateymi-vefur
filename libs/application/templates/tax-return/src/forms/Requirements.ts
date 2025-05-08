@@ -12,13 +12,14 @@ import { tax, requirements } from '../lib/messages'
 
 export const Requirements: Form = buildForm({
   id: 'TaxReturnRequirementsForm',
-  title: tax.applicationName,
+  title: '',
   mode: FormModes.NOT_STARTED,
   renderLastScreenButton: true,
   children: [
     buildSection({
       id: Routes.GENERAL_INFO,
       title: tax.generalInfoTitle,
+      draftPageNumber: 1,
       children: [
         buildExternalDataProvider({
           title: requirements.general.title,

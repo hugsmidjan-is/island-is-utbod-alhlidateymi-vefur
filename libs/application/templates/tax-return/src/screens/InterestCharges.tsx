@@ -42,7 +42,7 @@ export const InterestChargesScreen = ({
             .map((line, i) => {
               return (
                 <Box key={line.id}>
-                  <Columns space={3}>
+                  <Columns collapseBelow="md" space={3}>
                     <Column>
                       <DebtInputController
                         label="Staðsetning íbúðarhúsnæðis"
@@ -71,7 +71,7 @@ export const InterestChargesScreen = ({
                     </Column>
                   </Columns>
                   <Box paddingBottom={3} />
-                  <Columns space={3}>
+                  <Columns collapseBelow="md" space={3}>
                     <Column>
                       <DebtInputController
                         label="Lánveitandi"
@@ -100,7 +100,7 @@ export const InterestChargesScreen = ({
                     </Column>
                   </Columns>
                   <Box paddingBottom={3} />
-                  <Columns space={3}>
+                  <Columns collapseBelow="md" space={3}>
                     <Column>
                       <DebtInputController
                         label="Lánstími í árum"
@@ -122,7 +122,7 @@ export const InterestChargesScreen = ({
                   <Box marginTop={4} marginBottom={2}>
                     <Text>{f(taxInterestCharges.disclaimer)}</Text>
                   </Box>
-                  <Columns space={3}>
+                  <Columns collapseBelow="md" space={3}>
                     <Column>
                       <DebtInputController
                         label="Lánshlutfall"
@@ -155,7 +155,7 @@ export const InterestChargesScreen = ({
                     </Column>
                   </Columns>
                   <Box paddingBottom={3} />
-                  <Columns space={3}>
+                  <Columns collapseBelow="md" space={3}>
                     <Column>
                       <DebtInputController
                         label="Afföll"
@@ -186,7 +186,7 @@ export const InterestChargesScreen = ({
                     </Column>
                   </Columns>
                   <Box paddingBottom={3} />
-                  <Columns space={3}>
+                  <Columns collapseBelow="md" space={3}>
                     <Column>{''}</Column>
                     <Column>{''}</Column>
                     <Column>

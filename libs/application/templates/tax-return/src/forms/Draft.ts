@@ -11,7 +11,7 @@ import { tax } from '../lib/messages'
 import logo from '../assets/logo'
 export const Draft: Form = buildForm({
   id: 'OfficialJournalOfIcelandApplication',
-  title: tax.applicationName,
+  title: '',
   mode: FormModes.IN_PROGRESS,
   renderLastScreenBackButton: true,
   logo: logo,
@@ -20,6 +20,7 @@ export const Draft: Form = buildForm({
     buildSection({
       id: Routes.GENERAL_INFO,
       title: tax.generalInfoTitle,
+      draftPageNumber: 1,
       children: [
         buildCustomField({
           id: Routes.GENERAL_INFO,
@@ -30,6 +31,7 @@ export const Draft: Form = buildForm({
     buildSection({
       id: Routes.INCOME_LAST_YEAR,
       title: tax.lastIncomeTitle,
+      draftPageNumber: 2,
       children: [
         buildCustomField({
           id: Routes.INCOME_LAST_YEAR,
@@ -37,19 +39,10 @@ export const Draft: Form = buildForm({
         }),
       ],
     }),
-    // buildSection({
-    //   id: Routes.CAPITAL_INCOME,
-    //   title: tax.capitalIncomeTitle,
-    //   children: [
-    //     buildCustomField({
-    //       id: 'attachments',
-    //       component: 'CapitalIncomeScreen',
-    //     }),
-    //   ],
-    // }),
     buildSection({
       id: Routes.END_OF_YEAR,
       title: tax.endOfYearTitle,
+      draftPageNumber: 3,
       children: [
         buildCustomField({
           id: Routes.END_OF_YEAR,
@@ -60,6 +53,7 @@ export const Draft: Form = buildForm({
     buildSection({
       id: Routes.INTEREST_CHARGES,
       title: tax.interestChargesTitle,
+      draftPageNumber: 4,
 
       children: [
         buildCustomField({
@@ -75,6 +69,7 @@ export const Draft: Form = buildForm({
     buildSection({
       id: Routes.CONFIRMATION,
       title: tax.confirmationTitle,
+      draftPageNumber: 5,
       children: [
         buildMultiField({
           id: 'ConfirmationPreview',
@@ -99,32 +94,5 @@ export const Draft: Form = buildForm({
         }),
       ],
     }),
-    // buildSection({
-    //   id: Routes.SUMMARY,
-    //   title: summary.general.section,
-    //   children: [
-    //     buildMultiField({
-    //       id: Routes.SUMMARY,
-    //       children: [
-    //         buildCustomField({
-    //           id: Routes.SUMMARY,
-    //           component: 'SummaryScreen',
-    //         }),
-    //         buildSubmitField({
-    //           id: 'toComplete',
-    //           placement: 'footer',
-    //           refetchApplicationAfterSubmit: true,
-    //           actions: [
-    //             {
-    //               event: DefaultEvents.SUBMIT,
-    //               name: general.submitApplication,
-    //               type: 'primary',
-    //             },
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // }),
   ],
 })
