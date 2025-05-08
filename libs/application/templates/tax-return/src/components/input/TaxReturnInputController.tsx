@@ -1,7 +1,7 @@
 import { Input, SkeletonLoader } from '@island.is/island-ui/core'
 import { useLocale } from '@island.is/localization'
 import { MessageDescriptor } from 'react-intl'
-import { OJOI_INPUT_HEIGHT } from '../../lib/constants'
+import { TAX_INPUT_HEIGHT } from '../../lib/constants'
 import NumberFormat from 'react-number-format'
 
 type Props = {
@@ -47,7 +47,7 @@ export const TaxReturnInputController = ({
       <SkeletonLoader
         borderRadius="standard"
         display="block"
-        height={OJOI_INPUT_HEIGHT}
+        height={TAX_INPUT_HEIGHT}
       />
     )
   }

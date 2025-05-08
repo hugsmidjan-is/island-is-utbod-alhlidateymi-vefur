@@ -1,7 +1,7 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { taxInterestCharges, taxOverviewConfirmation } from '../lib/messages'
-import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import { InputFields, TaxFieldBaseProps } from '../lib/types'
 import { Box, Column, Columns, Text } from '@island.is/island-ui/core'
 import { DebtInputController } from '../components/input/DebtInputController'
 import { formatDate } from '../lib/utils'
@@ -10,7 +10,7 @@ import { IncomeInterestTable } from '../components/IncomeGroupTable/IncomeIntere
 export const SecondInterestChargesScreen = ({
   application,
   goToScreen,
-}: OJOIFieldBaseProps) => {
+}: TaxFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
   const { externalData } = application
 

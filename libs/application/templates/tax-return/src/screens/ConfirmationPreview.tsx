@@ -1,7 +1,7 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { taxInterestCharges, taxOverviewConfirmation } from '../lib/messages'
-import { OJOIFieldBaseProps } from '../lib/types'
+import { TaxFieldBaseProps } from '../lib/types'
 import { format as formatNationalId } from 'kennitala'
 import {
   formatCurrency,
@@ -17,7 +17,7 @@ import { formatDate } from '../lib/utils'
 export const ConfirmationPreviewScreen = ({
   application,
   goToScreen,
-}: OJOIFieldBaseProps) => {
+}: TaxFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
   const chapterIncomeMap = [

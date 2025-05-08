@@ -1,9 +1,9 @@
 import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { tax } from '../lib/messages'
-import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import { InputFields, TaxFieldBaseProps } from '../lib/types'
 import { IncomeGroupTable } from '../components/IncomeGroupTable/IncomeGroupTable'
-export const IncomeLastYearScreen = ({ application }: OJOIFieldBaseProps) => {
+export const IncomeLastYearScreen = ({ application }: TaxFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
   const { externalData } = application
 

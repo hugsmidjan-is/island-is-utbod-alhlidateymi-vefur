@@ -8,11 +8,11 @@ import {
   Text,
 } from '@island.is/island-ui/core'
 import { tax, confirmation } from '../lib/messages'
-import { OJOIFieldBaseProps } from '../lib/types'
+import { TaxFieldBaseProps } from '../lib/types'
 import format from 'date-fns/format'
 import locale from 'date-fns/locale/is'
 
-export const ConfirmationScreen = ({ application }: OJOIFieldBaseProps) => {
+export const ConfirmationScreen = ({ application }: TaxFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
 
   const { externalData } = application

@@ -1,6 +1,6 @@
 import { Box, SkeletonLoader, Text } from '@island.is/island-ui/core'
 import * as styles from './Property.css'
-import { OJOI_INPUT_HEIGHT } from '../../lib/constants'
+import { TAX_INPUT_HEIGHT } from '../../lib/constants'
 import { TaxReturnInputController } from '../input/TaxReturnInputController'
 
 import cn from 'classnames'
@@ -36,7 +36,7 @@ export const Property = ({
       )}
     >
       {loading ? (
-        <SkeletonLoader height={OJOI_INPUT_HEIGHT} borderRadius="standard" />
+        <SkeletonLoader height={TAX_INPUT_HEIGHT} borderRadius="standard" />
       ) : (
         <>
           <Box className={styles.property}>

@@ -119,7 +119,7 @@ export interface PersonPrefill {
 //   groupedDebt: GroupedDebt[];
 // }
 
-export type OJOIApplication = Override<
+export type TaxApplication = Override<
   Application,
   {
     answers: applicationSchema
@@ -146,10 +146,10 @@ export type OJOIApplication = Override<
   }
 >
 
-export type OJOIFieldBaseProps = Override<
+export type TaxFieldBaseProps = Override<
   FieldBaseProps,
   {
-    application: OJOIApplication
+    application: TaxApplication
     errors: ErrorSchema
   }
 >

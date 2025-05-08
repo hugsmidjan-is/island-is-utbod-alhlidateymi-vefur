@@ -2,7 +2,7 @@ import { useLocale } from '@island.is/localization'
 import { FormScreen } from '../components/form/FormScreen'
 import { format as formatNationalId } from 'kennitala'
 import { taxInterestCharges } from '../lib/messages'
-import { InputFields, OJOIFieldBaseProps } from '../lib/types'
+import { InputFields, TaxFieldBaseProps } from '../lib/types'
 import {
   AlertMessage,
   Box,
@@ -17,7 +17,7 @@ import { formatDate } from '../lib/utils'
 export const InterestChargesScreen = ({
   application,
   goToScreen,
-}: OJOIFieldBaseProps) => {
+}: TaxFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
   const { externalData } = application
 
