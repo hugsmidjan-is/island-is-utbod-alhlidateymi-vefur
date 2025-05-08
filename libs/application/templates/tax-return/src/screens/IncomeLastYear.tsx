@@ -5,9 +5,8 @@ import { InputFields, OJOIFieldBaseProps } from '../lib/types'
 import { IncomeGroupTable } from '../components/IncomeGroupTable/IncomeGroupTable'
 export const IncomeLastYearScreen = ({ application }: OJOIFieldBaseProps) => {
   const { formatMessage: f } = useLocale()
-  const { externalData, answers } = application
+  const { externalData } = application
 
-  console.log('answers', answers)
   return (
     <FormScreen title={f(tax.lastIncomeTitleYr)} intro={f(tax.lastIncomeIntro)}>
       {externalData.getTaxReturnData.data.groupedIncome.map((group) => {
