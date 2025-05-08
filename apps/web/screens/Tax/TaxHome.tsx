@@ -41,7 +41,7 @@ const TaxHome: Screen<TaxProps> = ({ pageProps: { title, article } }) => {
   const breadcrumbItems: Array<BreadCrumbItem> = [
     { title: 'Ísland.is', href: '/' },
     { title: 'Skatturinn', href: '/skattur' },
-    { title: 'Skattaframtal', href: '/skattframtal', isCurrentPage: true },
+    { title: 'Skattframtal', href: '/skattframtal', isCurrentPage: true },
   ]
   const processEntry = {
     processLink: 'http://localhost:4242/umsoknir/skattframtal',
@@ -151,7 +151,7 @@ const TaxHome: Screen<TaxProps> = ({ pageProps: { title, article } }) => {
           skilríkjum eða veflykli.
         </AccordionItem>
         <AccordionItem
-          id="corporate-tax"
+          id="erlendis"
           label={
             <Text variant="h4" as="h3">
               Hvað ef ég er búsettur erlendis?
@@ -502,7 +502,7 @@ const TaxHome: Screen<TaxProps> = ({ pageProps: { title, article } }) => {
           {!inStepperView && subArticle && (
             <Text variant="h2" as="h2" paddingTop={7}>
               <span id={'Skatturinn'} className="rs_read">
-                Skattaframtal
+                Skattframtal
               </span>
             </Text>
           )}
@@ -555,7 +555,7 @@ interface TaxProps {
 
 TaxHome.getProps = async () => {
   const article: SkatturArticle = {
-    title: 'Skattaframtal',
+    title: 'Skattframtal',
     category: { slug: 'skattur', title: 'Skattur' },
     intro:
       'Skattur er nauðsynlegur þáttur í samfélaginu okkar. Hann er notaður til að fjármagna opinberar þjónustur og verkefni sem eru mikilvæg fyrir velferð okkar allra.',
@@ -579,8 +579,9 @@ TaxHome.getProps = async () => {
         publishedMaterialSearchFilterGenericTags: [],
         footerItems: [],
         logo: {
-          url: 'https://www.skatturinn.is/skin/v2/i/fav.png',
+          url: 'https://images.prismic.io/isavia-ans/aByKpidWJ-7kRvu0_skatturlogo.png?auto=format,compress',
           width: 120,
+
           height: 60,
           contentType: 'image/jpeg',
           id: 'logo-id',

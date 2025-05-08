@@ -20,6 +20,7 @@ type IncomeInterestTableRowProps = {
   keyDetails: string
   keyValue: string
   keyTitle: string
+  rightAlign?: boolean
 }
 
 export const IncomeInterestTableRow = ({
@@ -29,6 +30,7 @@ export const IncomeInterestTableRow = ({
   keyDetails,
   keyValue,
   keyTitle,
+  rightAlign = false,
 }: IncomeInterestTableRowProps) => {
   const { setValue } = useFormContext()
 
@@ -47,6 +49,7 @@ export const IncomeInterestTableRow = ({
           type="number"
           size="xs"
           field={keyDetails}
+          rightAlign={rightAlign}
         />
       </Data>
       <Data width={228} style={{ paddingRight: 0 }}>
@@ -56,6 +59,7 @@ export const IncomeInterestTableRow = ({
           type="number"
           size="xs"
           field={keyValue}
+          rightAlign={rightAlign}
         />
       </Data>
     </Row>

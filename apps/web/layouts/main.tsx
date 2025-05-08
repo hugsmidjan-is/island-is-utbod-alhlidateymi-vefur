@@ -533,7 +533,7 @@ Layout.getProps = async ({ locale, req }) => {
   const categories = categoryMock
   const megaMenuData = megamenuDatamock
   const footerMenuData = footerMenuDataMock
-  console.log('erum við hér?')
+
   const alertBannerId = `alert-${stringHash(JSON.stringify(alertBanner))}`
 
   const [asideTopLinksData, asideBottomLinksData] = megaMenuData.menus

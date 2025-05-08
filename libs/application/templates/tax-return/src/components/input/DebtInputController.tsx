@@ -10,6 +10,7 @@ type DebtInputControllerProps = {
   prefix?: string
   suffix?: string
   thousandSeparator?: boolean
+  rightAlign?: boolean
 }
 
 export const DebtInputController = ({
@@ -22,6 +23,7 @@ export const DebtInputController = ({
   suffix = ' kr.',
   size = 'sm',
   thousandSeparator = true,
+  rightAlign = false,
   ...props
 }: DebtInputControllerProps) => {
   const numberProps = {
@@ -42,6 +44,7 @@ export const DebtInputController = ({
       type={type}
       readOnly={readOnly}
       prefix={prefix}
+      rightAlign={rightAlign}
       {...(type === 'number' ? { ...numberProps } : {})}
     />
   )

@@ -7,7 +7,7 @@ export const tax = defineMessages({
   },
   applicationName: {
     id: 'taxReturn.application:general.applicationName',
-    defaultMessage: 'Skil á skattaframtali',
+    defaultMessage: 'Skil á skattframtali',
   },
   applicationOwner: {
     id: 'taxReturn.application:general.applicationOwner',
@@ -333,19 +333,21 @@ export const requirements = {
     },
     taxProviderTitle: {
       id: 'taxReturn.application:requirements.general.taxProviderTitle',
-      defaultMessage: 'Upplýsingar frá Skattinum',
+      defaultMessage:
+        'Upplýsingar verða sóttar frá Þjóðskrá, Ríkisskattstjóra og Útlendingarstofnun',
     },
     taxProviderSubTitle: {
       id: 'taxReturn.application:requirements.general.taxProviderSubTitle',
-      defaultMessage: 'Upplýsingar fyrir skattframtal 2024.',
+      defaultMessage:
+        'Upplýsingar um þig, maka og börn. Upplýsingar um hvar þú ert með skráð lögheimili.',
     },
     taxNatRegProviderTitle: {
       id: 'taxReturn.application:requirements.general.taxNatRegProviderTitle',
-      defaultMessage: 'Upplýsingar frá Þjóðskrá',
+      defaultMessage: 'Upplýsingar verða sóttar frá Skattinum',
     },
     taxNatRegProviderSubTitle: {
       id: 'taxReturn.application:requirements.general.taxNatRegProviderSubTitle',
-      defaultMessage: 'Upplýsingar frá Þjóðskrá íslands.',
+      defaultMessage: 'Upplýsingar úr fyrri framtölum.',
     },
     intro: {
       id: 'taxReturn.application:requirements.general.intro',
@@ -356,7 +358,7 @@ export const requirements = {
       Upplýsingar fyrir skattframtal 2024.
       {brbr}
       Upplýsingar af mínum síðum Ísland.is{br}
-      Upplýsingar um netfang, símanúmer og bankareikning eru sóttar á mínar síður á Ísland.is. 
+      Upplýsingar um netfang, símanúmer og bankareikning eru sóttar á mínar síður á Ísland.is.
       `,
       description: 'Description of requirements form',
     },
@@ -387,8 +389,8 @@ export const confirmation = defineMessages({
   },
   alert: {
     id: 'taxReturn.application:confirmation.alert',
-    defaultMessage: `Skattframtalinu var skilað 8. mars 2024 kl 14:32.{br}
-      Móttökunúmer:1.702
+    defaultMessage: `Skattframtalinu var skilað {date}.{br}
+      Móttökunúmer: {number}
       {br}{br}
       Þú getur alltaf nálgast eintak af kvittuninni inn á Mínum síðum, skoðað bráðabirgðaútreikning og sent inn viðbótargögn eða leiðréttingu.`,
     description: 'Alert message in confirmation form',
@@ -400,7 +402,7 @@ export const confirmation = defineMessages({
   disclaimer: {
     id: 'taxReturn.application:confirmation.disclaimer',
     defaultMessage:
-      'Skatturinn fer yfir framtalið. Ef þörf er a er kallað eftir frekarupplýsingum/gögnum.',
+      'Skatturinn fer yfir framtalið. Ef þörf er á, er kallað eftir frekari upplýsingum/gögnum.',
   },
   results: {
     id: 'taxReturn.application:confirmation.results',

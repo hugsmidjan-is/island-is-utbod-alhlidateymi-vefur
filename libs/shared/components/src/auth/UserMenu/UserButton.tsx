@@ -85,13 +85,13 @@ export const UserButton = ({
           <div translate="no" className={styles.resetButtonPadding}>
             {isDelegation ? (
               <>
-                <div className={styles.delegationName}>{profile.name}</div>
+                <div className={styles.delegationName}>Jökull Þórðarson</div>
                 {profile?.actor?.name && (
-                  <div className={styles.actorName}>{profile.actor.name}</div>
+                  <div className={styles.actorName}>Jökull Þórðarson</div>
                 )}
               </>
             ) : (
-              profile.name
+              'Jökull Þórðarson'
             )}
           </div>
         </Button>
